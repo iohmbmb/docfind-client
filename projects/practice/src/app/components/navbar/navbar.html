@@ -1,0 +1,44 @@
+  <div class="w-full max-w-5xl mx-auto flex items-center justify-between p-4">
+    @if (authService.isAuthenticated()){
+      <a routerLink="/home" class="text-2xl font-bold text-gray-800">DocFind</a>
+      <nav class="flex">
+        <ul class="flex items-center">
+          <li class="ml-6">
+            <button (click)="onSubmit()" class="text-xs font-semibold text-slate-600 hover:text-slate-900 transition">Logout</button>
+          </li>
+        </ul>
+      </nav>
+
+    } @else if (!isLoginPage){
+      <a routerLink="/home" class="text-2xl font-bold text-gray-800">DocFind</a>
+      <nav class="flex">
+        <ul class="flex items-center">
+          <li class="ml-6">
+            <a class="text-xs font-semibold text-slate-600 hover:text-slate-900 transition">Support</a>
+          </li>
+          <li class="ml-6">
+            <a [href]='patientPortalUrl' class="text-xs font-semibold text-slate-600 hover:text-slate-900 transition">I'm a patient</a>
+          </li>
+          <li class="ml-6">
+            <a routerLink="/login" class="text-xs font-semibold text-slate-600 hover:text-slate-900 transition">Log in</a>
+          </li>
+        </ul>
+      </nav>
+    }
+  </div>
+@if (!isLoginPage){
+  <div class="w-full max-w-5xl mx-auto flex justify-end px-24 py-4">
+    <button (click)="onSubmitToRegister()" class="text-xs bg-indigo-600 text-white font-bold rounded-md h-10 hover:bg-indigo-700 transition px-4 py-2">List your practice</button>
+  </div>
+} @else {
+    <nav class="flex justify-between">
+      <a routerLink="/dashboard" class="text-2xl font-bold text-gray-800 ml-4">Dashboard</a>
+      <div class="flex justify-end items-center gap-4">
+        <p class="text-md font-light text-slate-600 hover:text-slate-900 transition">Don't have an account yet?</p>
+        <a routerLink="/home" class="text-md font-semibold text-slate-600 hover:text-slate-900 transition pr-4">Join DocFind</a>
+        <a [href]='patientPortalUrl'>
+          <button class="text-xs bg-indigo-600 text-white font-bold rounded-md h-10 hover:bg-indigo-700 transition px-2 mr-4">I'm a patient</button>
+        </a>
+      </div>
+    </nav>
+}

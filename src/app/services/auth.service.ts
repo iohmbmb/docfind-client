@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable, signal} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {RegisterRequest} from '../models/register.types';
 import {environment} from '../../environments/environment';
@@ -10,6 +10,8 @@ import {LoginRequest, LoginResponse} from '../models/login.types';
   providedIn: 'root',
 })
 export class AuthService {
+
+  public isAuthenticated = signal<boolean>(!!localStorage.getItem('healthcare_jwt'));
 
   constructor(private http: HttpClient) {}
 
@@ -24,11 +26,20 @@ export class AuthService {
   loginRequest(request: LoginRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${environment.apiUrl}/auth/login`, request).pipe(
       tap((response: LoginResponse) => {
-        localStorage.setItem('healthcare_jwt', response.token);
-        localStorage.setItem('user_role', response.user.role.toString());
-        localStorage.setItem('user_name', response.user.firstName);
+        this.setSession(response);
       })
     );
   }
 
+  setSession(response: LoginResponse): void {
+    localStorage.setItem('healthcare_jwt', response.token);
+    localStorage.setItem('user_role', response.user.role.toString());
+    localStorage.setItem('user_name', response.user.firstName);
+    this.isAuthenticated.set(true);
+  }
+
+  logout(): void {
+    localStorage.clear();
+    this.isAuthenticated.set(false);
+  }
 }

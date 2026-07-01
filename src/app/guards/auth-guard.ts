@@ -1,16 +1,23 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 
-export const authGuard: CanActivateFn = (route, state) => {
-  const router = inject(Router);
+export const authGuard = (allowedRoles: string[]): CanActivateFn => {
+  return (route, state) => {
+    const router = inject(Router);
+    const token = localStorage.getItem('healthcare_jwt');
+    const userRole = localStorage.getItem('user_role');
 
-  const isAuthenticated = !!localStorage.getItem('healthcare_jwt');
+    if (!token || !userRole) {
+      router.navigate(['/login']);
+      return false;
+    }
 
-  if (isAuthenticated) {
-    return true;
-  }
+    if (allowedRoles.includes(userRole)) {
+      return true;
+    }
 
-  // No active session token found. Cancel navigation traffic and redirect to login screen
-  router.navigate(['/login']);
-  return false;
+    localStorage.clear();
+    router.navigate(['/login']);
+    return false;
+  };
 };

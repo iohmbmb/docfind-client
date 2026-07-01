@@ -14,7 +14,7 @@
         <input type="password" name="password" [(ngModel)]="credentials.password" required placeholder="" class="border h-10 bg-white border-gray-300 rounded-sm " />
       </div>
       <div class="flex items-center space-x-3 pt-1">
-        <input type="checkbox" id="remember-me" name="remember-me" [ngModel]="rememberMe"
+        <input type="checkbox" id="remember-me" name="remember-me" [checked]="rememberMe"
           class="appearance-none size-5 bg-white border-2 border-slate-300 checked:bg-white checked:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all duration-200 cursor-pointer relative checked:after:content-[''] checked:after:absolute checked:after:left-[5px] checked:after:top-[2px] checked:after:w-[5px] checked:after:h-[10px] checked:after:border-r-2 checked:after:border-b-2 checked:after:border-indigo-700 checked:after:rotate-45" />
         <label for="remember-me" class="text-xs font-medium text-slate-600 cursor-pointer select-none">
           Keep me logged in on this trusted device
@@ -37,7 +37,7 @@
     <span class="text-sm font-semibold text-slate-500">Don't have an account?</span>
     <button
       type="button"
-      routerLink="/register"
+      routerLink="/signup"
       class="w-full bg-white text-slate-700 border border-slate-300 font-bold rounded-sm h-11 px-4 hover:border-indigo-600 hover:text-indigo-700 hover:bg-emerald-50/10 transition shadow-sm">
       Create patient account
     </button>

@@ -1,0 +1,18 @@
+<div class="flex justify-center items-center h-screen">
+  <div class="flex flex-col gap-8">
+    <div class="text-4xl font-light text-center">Welcome</div>
+    <div class="flex flex-col justify-start">
+      <div class="text-sm font-semibold">Email</div>
+      <input class="text-sm font-normal border" type="text" placeholder="" [(ngModel)]="credentials.email">
+      <div class="text-sm font-semibold">Password</div>
+      <input class="text-sm font-normal border" type="text" placeholder="" [(ngModel)]="credentials.password">
+      <div class="flex flex-row mt-4">
+        <div class="flex flex-col">
+          <a class="text-sm font-normal">Forgot your password?</a>
+          <a class="text-sm font-normal">Can't login?</a>
+        </div>
+        <button (click)="onSubmit()" class="text-sm font-normal border ml-6">Login</button>
+      </div>
+    </div>
+  </div>
+</div>

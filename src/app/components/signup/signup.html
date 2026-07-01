@@ -1,1 +1,101 @@
-<p>signup works!</p>
+<div class="flex flex-col justify-start items-center w-full min-h-screen px-6 pt-16 pb-12">
+  <div class="bg-amber-50 rounded-xl p-8 md:p-10 w-full max-w-md space-y-6">
+    <div class="space-y-2">
+      <h1 class="text-xl font-semibold">Create a DocFind account</h1>
+      <p class="text-4xs">Keep on top of your appointments by creating an account</p>
+    </div>
+    <div class="flex flex-col space-y-4">
+      <div class="flex flex-col space-y-1">
+        <span class="text-sm font-normal">Email</span>
+        <input type="text" [formField]="signupForm.email" placeholder="" class="border h-10 bg-white border-gray-300 rounded-sm" />
+        @if (signupForm.email().invalid() && (signupForm.email().dirty() || signupForm.email().touched())) {
+          <div class="text-xs font-medium text-rose-600 mt-1">
+            @for (error of signupForm.email().errors(); track error.kind) {
+              <p>{{ error.message }}</p>
+            }
+          </div>
+        }
+      </div>
+      <div class="flex flex-col space-y-1">
+        <span class="text-sm font-normal">Password</span>
+        <input type="password" [formField]="signupForm.password" placeholder="" class="border h-10 bg-white border-gray-300 rounded-sm " />
+        @if (signupForm.password().invalid() && (signupForm.password().dirty() || signupForm.password().touched())) {
+          <div class="text-xs font-medium text-rose-600 mt-1">
+            @for (error of signupForm.password().errors(); track error.kind) {
+              <p>{{ error.message }}</p>
+            }
+          </div>
+        }
+        <div class="pt-3 px-1 space-y-2">
+          <p class="text-xs font-bold text-slate-600 tracking-wider">Password Requirements</p>
+          <ul class="text-xs font-medium space-y-1.5 transition-all">
+            <li class="flex items-center gap-2 transition" [class.text-emerald-600]="passwordRules().hasMinLength" [class.text-slate-400]="!passwordRules().hasMinLength">
+              <span>{{ passwordRules().hasMinLength ? '✓' : '•' }}</span>
+              <span>At least 8 characters long</span>
+            </li>
+            <li class="flex items-center gap-2 transition" [class.text-emerald-600]="passwordRules().hasUppercase" [class.text-slate-400]="!passwordRules().hasUppercase">
+              <span>{{ passwordRules().hasUppercase ? '✓' : '•' }}</span>
+              <span>At least one uppercase letter (A-Z)</span>
+            </li>
+            <li class="flex items-center gap-2 transition" [class.text-emerald-600]="passwordRules().hasLowercase" [class.text-slate-400]="!passwordRules().hasLowercase">
+              <span>{{ passwordRules().hasLowercase ? '✓' : '•' }}</span>
+              <span>At least one lowercase letter (a-z)</span>
+            </li>
+            <li class="flex items-center gap-2 transition" [class.text-emerald-600]="passwordRules().hasNumber" [class.text-slate-400]="!passwordRules().hasNumber">
+              <span>{{ passwordRules().hasNumber ? '✓' : '•' }}</span>
+              <span>At least one numerical digit (0-9)</span>
+            </li>
+            <li class="flex items-center gap-2 transition" [class.text-emerald-600]="passwordRules().hasSymbol" [class.text-slate-400]="!passwordRules().hasSymbol">
+              <span>{{ passwordRules().hasSymbol ? '✓' : '•' }}</span>
+              <span>At least one special character (&, @, $, !, %)</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="flex flex-col space-y-1">
+        <span class="text-sm font-normal">First name</span>
+        <input type="text" placeholder="" [formField]="signupForm.firstName" class="border h-10 bg-white border-gray-300 rounded-sm" />
+        @if (signupForm.firstName().invalid() && (signupForm.firstName().dirty() || signupForm.firstName().touched())) {
+          <div class="text-xs font-medium text-rose-600 mt-1">
+            @for (error of signupForm.firstName().errors(); track error.kind) {
+              <p>{{ error.message }}</p>
+            }
+          </div>
+        }
+      </div>
+      <div class="flex flex-col space-y-1">
+        <span class="text-sm font-normal">Last name</span>
+        <input type="text" placeholder="" [formField]="signupForm.lastName" class="border h-10 bg-white border-gray-300 rounded-sm" />
+        @if (signupForm.lastName().invalid() && (signupForm.lastName().dirty() || signupForm.lastName().touched())) {
+          <div class="text-xs font-medium text-rose-600 mt-1">
+            @for (error of signupForm.lastName().errors(); track error.kind) {
+              <p>{{ error.message }}</p>
+            }
+          </div>
+        }
+      </div>
+      <div class="flex items-center space-x-3 pt-1">
+        <input type="checkbox" id="remember-me" [checked]="rememberMe"
+          class="appearance-none size-5 bg-white border-2 border-slate-300 checked:bg-white checked:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all duration-200 cursor-pointer relative checked:after:content-[''] checked:after:absolute checked:after:left-[5px] checked:after:top-[2px] checked:after:w-[5px] checked:after:h-[10px] checked:after:border-r-2 checked:after:border-b-2 checked:after:border-indigo-700 checked:after:rotate-45" />
+        <label for="remember-me" class="text-xs font-medium text-slate-600 cursor-pointer select-none">
+          Keep me signed in on this trusted device
+        </label>
+      </div>
+      <button type="submit"
+              (click)="onSubmit()"
+              class="w-full bg-indigo-600 text-white font-bold rounded-md h-11 hover:bg-indigo-700 transition">
+        {{ isLoading() ? 'Registering...' : 'Create account' }}</button>
+    </div>
+    <a routerLink="/resetpassword" class="text-sm underline text-blue-800">Forgot your password?</a>
+  </div>
+  <div class="w-full max-w-md flex flex-col items-start mt-6 space-y-4">
+    <hr class="w-full border-slate-400" />
+    <span class="text-sm font-semibold text-slate-500">Already have an account?</span>
+    <button
+      type="button"
+      routerLink="/login"
+      class="w-full bg-white text-slate-700 border border-slate-300 font-bold rounded-sm h-11 px-4 hover:border-indigo-600 hover:text-indigo-700 hover:bg-emerald-50/10 transition shadow-sm">
+      Log into patient account
+    </button>
+  </div>
+</div>

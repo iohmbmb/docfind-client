@@ -1,12 +1,12 @@
+import {AuthService} from '@shared/services/auth.service';
+import {environment} from '../../../../../../src/environments/environment.development';
 import {Component, inject} from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
-import {AuthService} from '../../services/auth.service';
-import {environment} from '../../../environments/environment.development';
 
 @Component({
   selector: 'app-navbar',
   imports: [
-    RouterLink,
+    RouterLink
   ],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
@@ -14,7 +14,7 @@ import {environment} from '../../../environments/environment.development';
 export class Navbar {
   private router = inject(Router);
   public authService = inject(AuthService);
-  public practicePortalUrl = environment.practicePortalUrl;
+  public patientPortalUrl = environment.patientPortalUrl;
 
   get isLoginPage(): boolean {
     return this.router.url === '/login' || this.router.url === '/signup';
@@ -23,5 +23,10 @@ export class Navbar {
   public async onSubmit() : Promise<void> {
     this.authService.logout();
     this.router.navigate(['/']);
+  }
+
+  public async onSubmitToRegister() : Promise<void> {
+    this.authService.logout();
+    this.router.navigate(['/signup']);
   }
 }

@@ -1,17 +1,13 @@
 import {Component, inject, signal} from '@angular/core';
-import {Router, RouterLink} from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import {AuthService} from '../../services/auth.service';
-import {LoginRequest} from '../../models/login.types';
-import {CommonModule} from '@angular/common';
+import {AuthService} from '@shared/services/auth.service';
+import {Router} from '@angular/router';
+import {LoginRequest} from '@shared/models/login.types';
+import {FormsModule} from '@angular/forms';
 
 @Component({
-  selector: 'login-component',
-  standalone: true,
+  selector: 'app-login',
   imports: [
-    RouterLink,
-    FormsModule,
-    CommonModule
+    FormsModule
   ],
   templateUrl: './login.html',
   styleUrl: './login.css',
@@ -21,7 +17,6 @@ export class LoginComponent {
   private router = inject(Router);
 
   public credentials: LoginRequest = { email: '', password: ''};
-  public rememberMe = false;
 
   public errorMessage = signal<string>('')
   public isLoading = signal<boolean>(false);
@@ -34,11 +29,7 @@ export class LoginComponent {
       next: (response) => {
         this.isLoading.set(false);
 
-        if (this.rememberMe) {
-          localStorage.setItem('remember_user_email', this.credentials.email);
-        }
-
-        this.router.navigate(['/bookings']);
+        this.router.navigate(['/dashboard']);
       },
       error: (err) => {
         this.isLoading.set(false);

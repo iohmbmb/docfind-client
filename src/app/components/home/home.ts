@@ -13,15 +13,5 @@ import {SearchComponent} from '../searchbar/searchbar';
 export class HomeComponent implements OnInit {
   private router = inject(Router);
 
-  ngOnInit(): void {
-    const token = localStorage.getItem('healthcare_jwt');
-    const role = localStorage.getItem('user_role');
-    if (token) {
-      if (role === 'Doctor') {
-        this.router.navigate(['/doctor-dashboard']);
-      } else {
-        this.router.navigate(['/patient-dashboad']);
-      }
-    }
-  }
+  ngOnInit(): void {}
 }
