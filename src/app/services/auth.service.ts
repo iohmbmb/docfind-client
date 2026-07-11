@@ -1,10 +1,10 @@
 import {Injectable, signal} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {RegisterRequest} from '../models/register.types';
-import {environment} from '../../environments/environment';
+import {environment} from '../../environments/environment.development';
 import {Observable, tap} from 'rxjs';
 import {Identity} from '../models/identity.types';
 import {LoginRequest, LoginResponse} from '../models/login.types';
+import {DoctorRegisterRequest, UserRegisterRequest} from '@shared/models/register.types';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +15,11 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  registerUser(request: RegisterRequest) {
+  registerUser(request: UserRegisterRequest) {
+    return this.http.post(`${environment.apiUrl}/auth/register`, request);
+  }
+
+  registerDoctor(request: DoctorRegisterRequest) {
     return this.http.post(`${environment.apiUrl}/auth/register`, request);
   }
 

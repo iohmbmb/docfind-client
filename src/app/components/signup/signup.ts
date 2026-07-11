@@ -3,10 +3,9 @@ import {form, FormField, pattern, required, submit} from '@angular/forms/signals
 import {FormsModule, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import {Router, RouterLink} from '@angular/router';
-import {LoginRequest} from '../../models/login.types';
-import {RegisterRequest} from '../../models/register.types';
 import {UserRole} from '../../models/user.types';
 import {firstValueFrom} from 'rxjs';
+import {UserRegisterRequest} from '@shared/models/register.types';
 
 @Component({
   selector: 'app-signup',
@@ -19,7 +18,7 @@ export class SignupComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  public signupModel = signal<RegisterRequest>({
+  public signupModel = signal<UserRegisterRequest>({
     email: '',
     password: '',
     firstName: '',

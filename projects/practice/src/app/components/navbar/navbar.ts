@@ -17,7 +17,11 @@ export class Navbar {
   public patientPortalUrl = environment.patientPortalUrl;
 
   get isLoginPage(): boolean {
-    return this.router.url === '/login' || this.router.url === '/signup';
+    return this.router.url === '/login';
+  }
+
+  get isSignupPage(): boolean {
+    return this.router.url === '/signup';
   }
 
   public async onSubmit() : Promise<void> {

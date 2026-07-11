@@ -9,6 +9,8 @@ export interface Appointments {
   patientId: string;
   doctorId: string;
   scheduleTime: string;
+  location: string;
+  isNewPatient: boolean;
   status: AppointmentStatus
   symptoms: string;
 }

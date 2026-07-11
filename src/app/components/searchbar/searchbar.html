@@ -1,7 +1,14 @@
 <form class="w-full flex justify-center p-8">
   <div class="w-fit flex items-start gap-0">
     <div class="flex flex-col items-start w-96">
-      <input type="text" placeholder="Service, practice or practitioner" class="border border-slate-300 p-2 w-full shadow-md focus:outline-none">
+      <input type="search" list="practice-specialty" placeholder="Service, practice or practitioner" class="border border-slate-300 p-2 w-full shadow-md focus:outline-none">
+      <datalist id="practice-specialty" class="w-full">
+        @for (data of datalist; track data.name) {
+          <option>
+            {{data.name}}
+          </option>
+        }
+      </datalist>
       <!-- <p class="text-xs font-extrabold text-slate-500 mt-2 px-1">Top searches</p> -->
     </div>
       <input type="text" placeholder="Location" class="border-r border-y border-slate-300 p-2 w-96 shadow-md focus:outline-none">

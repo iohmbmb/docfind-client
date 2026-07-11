@@ -1,13 +1,14 @@
 import {Component, inject, signal} from '@angular/core';
 import {AuthService} from '@shared/services/auth.service';
-import {Router} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {LoginRequest} from '@shared/models/login.types';
 import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   imports: [
-    FormsModule
+    FormsModule,
+    RouterLink
   ],
   templateUrl: './login.html',
   styleUrl: './login.css',

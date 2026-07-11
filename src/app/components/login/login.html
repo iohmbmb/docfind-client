@@ -4,7 +4,7 @@
       <h1 class="text-xl font-semibold">Patient log in</h1>
       <p class="text-4xs">Log in to book your appointments.</p>
     </div>
-    <form (ngSubmit)="onSubmit()" #loginForm="ngForm" class="flex flex-col space-y-4">
+    <div class="flex flex-col space-y-4">
       <div class="flex flex-col space-y-1">
         <span class="text-sm font-normal">Email</span>
         <input type="text" name="email" [(ngModel)]="credentials.email" required email placeholder="" class="border h-10 bg-white border-gray-300 rounded-sm" />
@@ -26,10 +26,10 @@
         </div>
       }
       <button type="submit"
-              [disabled]="!loginForm.valid || isLoading()"
+              (click)="onSubmit()"
               class="bg-indigo-600 text-white font-bold rounded-md h-10 hover:bg-indigo-700 transition"
               >{{isLoading() ? 'Authenticating...' : 'Log in'}}</button>
-    </form>
+    </div>
     <a routerLink="/resetpassword" class="text-sm underline text-blue-800">Forgot your password?</a>
   </div>
   <div class="w-full max-w-md flex flex-col items-start mt-6 space-y-4">

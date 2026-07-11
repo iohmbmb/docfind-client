@@ -1,1 +1,141 @@
-<p>signup works!</p>
+<div class="bg-indigo-950">
+  <div class="flex flex-col justify-center items-center">
+    <div class="flex flex-col text-white">
+      <h1 class="text-5xl font-bold text-center">List your practice</h1>
+      <div class="flex w-fit max-w-xl py-4">
+        <p class="text-xl font-normal text-center">List your practice to get more patients. Make it easy for patients to find and connect with your practice via the DocFind website.</p>
+      </div>
+      <div class="flex flex-row justify-center gap-6">
+        <div class="flex flex-col gap-1.5">
+          <div class="text-sm font-semibold">Firstname</div>
+          <input class="w-64 h-10 text-sm font-normal border rounded-sm bg-white text-black" type="text" placeholder="" [formField]="signupForm.firstName">
+          @if (signupForm.firstName().invalid() && (signupForm.firstName().dirty() || signupForm.firstName().touched())) {
+            <div class="text-xs font-medium text-amber-400 mt-1">
+              @for (error of signupForm.firstName().errors(); track error.kind) {
+                <p>{{ error.message }}</p>
+              }
+            </div>
+          }
+          <div class="text-sm font-semibold">Email</div>
+          <input class="w-64 h-10 text-sm font-normal border rounded-sm bg-white text-black" type="text" placeholder="" [formField]="signupForm.email">
+          @if (signupForm.email().invalid() && (signupForm.email().dirty() || signupForm.email().touched())) {
+            <div class="text-xs font-medium text-amber-400 mt-1">
+              @for (error of signupForm.email().errors(); track error.kind) {
+                <p class="w-64 flex max-w-sm">{{ error.message }}</p>
+              }
+            </div>
+          }
+          <div class="text-sm font-semibold">Practice name</div>
+          <input class="w-64 h-10 text-sm font-normal border rounded-sm bg-white text-black" type="text" placeholder="" [formField]="signupForm.practiceName" >
+          @if (signupForm.practiceName().invalid() && (signupForm.practiceName().dirty() || signupForm.practiceName().touched())) {
+            <div class="text-xs font-medium text-amber-400 mt-1">
+              @for (error of signupForm.practiceName().errors(); track error.kind) {
+                <p>{{ error.message }}</p>
+              }
+            </div>
+          }
+          <div class="text-sm font-semibold">Suburb</div>
+          <input class="w-64 h-10 text-sm font-normal border rounded-sm bg-white text-black" type="text" placeholder="" [formField]="signupForm.practiceSuburb">
+          @if (signupForm.practiceSuburb().invalid() && (signupForm.practiceSuburb().dirty() || signupForm.practiceSuburb().touched())) {
+            <div class="text-xs font-medium text-amber-400 mt-1">
+              @for (error of signupForm.practiceSuburb().errors(); track error.kind) {
+                <p>{{ error.message }}</p>
+              }
+            </div>
+          }
+          <div class="text-sm font-semibold">Postcode</div>
+          <input class="w-64 h-10 text-sm font-normal border rounded-sm bg-white text-black" type="text" placeholder="" [formField]="signupForm.practicePostcode">
+          @if (signupForm.practicePostcode().invalid() && (signupForm.practicePostcode().dirty() || signupForm.practicePostcode().touched())) {
+            <div class="text-xs font-medium text-amber-400 mt-1">
+              @for (error of signupForm.practicePostcode().errors(); track error.kind) {
+                <p>{{ error.message }}</p>
+              }
+            </div>
+          }
+          <div class="text-sm font-semibold">Hourly Rates</div>
+          <input class="w-64 h-10 text-sm font-normal border rounded-sm bg-white text-black" type="number" placeholder="" [formField]="signupForm.hourlyRate">
+          @if (signupForm.hourlyRate().invalid() && (signupForm.hourlyRate().dirty() || signupForm.hourlyRate().touched())) {
+            <div class="text-xs font-medium text-amber-400 mt-1">
+              @for (error of signupForm.hourlyRate().errors(); track error.kind) {
+                <p>{{ error.message }}</p>
+              }
+            </div>
+          }
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <div class="text-sm font-semibold">Lastname</div>
+          <input class="w-64 h-10 text-sm font-normal border rounded-sm bg-white text-black" type="text" placeholder="" [formField]="signupForm.lastName">
+          @if (signupForm.lastName().invalid() && (signupForm.lastName().dirty() || signupForm.lastName().touched())) {
+            <div class="text-xs font-medium text-amber-400 mt-1">
+              @for (error of signupForm.lastName().errors(); track error.kind) {
+                <p>{{ error.message }}</p>
+              }
+            </div>
+          }
+          <div class="text-sm font-semibold">Password</div>
+          <input class="w-64 h-10 text-sm font-normal border rounded-sm bg-white text-black" type="password" placeholder="" [formField]="signupForm.password">
+          @if (signupForm.password().invalid() && (signupForm.password().dirty() || signupForm.password().touched())) {
+            <div class="text-xs font-medium text-amber-400 mt-1">
+              @for (error of signupForm.password().errors(); track error.kind) {
+                <p class="w-64 flex max-w-sm">{{ error.message }}</p>
+              }
+            </div>
+          }
+          <div class="text-sm font-semibold">Phone number</div>
+          <input class="w-64 h-10 text-sm font-normal border rounded-sm bg-white text-black" type="text" placeholder="" [formField]="signupForm.practicePhone"]>
+          @if (signupForm.practicePhone().invalid() && (signupForm.practicePhone().dirty() || signupForm.practicePhone().touched())) {
+            <div class="text-xs font-medium text-amber-400 mt-1">
+              @for (error of signupForm.practicePhone().errors(); track error.kind) {
+                <p>{{ error.message }}</p>
+              }
+            </div>
+          }
+          <div class="text-sm font-semibold">Street address</div>
+          <input class="w-64 h-10 text-sm font-normal border rounded-sm bg-white text-black" type="text" placeholder="" [formField]="signupForm.practiceAddress"]>
+          @if (signupForm.practiceAddress().invalid() && (signupForm.practiceAddress().dirty() || signupForm.practiceAddress().touched())) {
+            <div class="text-xs font-medium text-amber-400 mt-1">
+              @for (error of signupForm.practiceAddress().errors(); track error.kind) {
+                <p>{{ error.message }}</p>
+              }
+            </div>
+          }
+          <div class="text-sm font-semibold">State / Region</div>
+          <input class="w-64 h-10 text-sm font-normal border rounded-sm bg-white text-black" type="text" placeholder="" [formField]="signupForm.practiceState"]>
+          @if (signupForm.practiceState().invalid() && (signupForm.practiceState().dirty() || signupForm.practiceState().touched())) {
+            <div class="text-xs font-medium text-amber-400 mt-1">
+              @for (error of signupForm.practiceState().errors(); track error.kind) {
+                <p>{{ error.message }}</p>
+              }
+            </div>
+          }
+        </div>
+      </div>
+      <div class="flex flex-col gap-1.5 pt-4">
+        <label class="text-sm font-semibold text-slate-700">Practice Specialty</label>
+        <select
+          name="specialty"
+          [(ngModel)]="signupModel().specialty"
+          class="h-10 text-sm font-normal border rounded-sm bg-white text-black px-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition cursor-pointer">
+          <option value="" disabled selected>Choose your medical field...</option>
+          @for (data of datalist; track data.id) {
+            <option [value]="data.id">
+              {{ data.name }}
+            </option>
+          }
+        </select>
+      </div>
+      <div class="flex justify-center items-center pt-8 pb-8 m-4">
+        <button
+          type="submit"
+          (click)="registerDoctor()"
+          class="text-md bg-indigo-600 text-white font-bold rounded-md h-10 hover:bg-indigo-700 transition px-12 mr-4"
+        >{{ isLoading() ? 'Registering...' : 'Submit' }}</button>
+      </div>
+    </div>
+  </div>
+  <div class="bg-white w-full">
+    <div class="w-full max-w-5xl mx-auto flex justify-center p-4">
+      <a routerLink="/home" class="text-xl font-bold text-gray-800">DocFind</a>
+    </div>
+  </div>
+</div>
