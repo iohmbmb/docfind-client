@@ -9,7 +9,7 @@ import {SearchComponent} from '../searchbar/searchbar';
   ],
   templateUrl: './home.html',
   styleUrl: './home.css',
-})
+  })
 export class HomeComponent implements OnInit {
   private router = inject(Router);
 

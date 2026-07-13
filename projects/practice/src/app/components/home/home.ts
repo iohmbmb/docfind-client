@@ -7,6 +7,9 @@ import {Router} from '@angular/router';
   imports: [],
   templateUrl: './home.html',
   styleUrl: './home.css',
+  host: {
+    class: 'flex-1 flex flex-col w-full'
+  }
 })
 export class HomeComponent {
   public authService = inject(AuthService);

@@ -1,7 +1,7 @@
-<form class="w-full flex justify-center p-8">
-  <div class="w-fit flex items-start gap-0">
-    <div class="flex flex-col items-start w-96">
-      <input type="search" list="practice-specialty" placeholder="Service, practice or practitioner" class="border border-slate-300 p-2 w-full shadow-md focus:outline-none">
+<form class="w-full flex justify-center px-4 py-8 md:p-8">
+  <div class="w-full md:w-fit flex flex-col md:flex-row items-stretch md:items-start gap-y-3 md:gap-y-0">
+    <div class="flex flex-col items-start w-full md:w-96">
+      <input type="search" list="practice-specialty" placeholder="Service, practice or practitioner" class="border border-slate-300 p-2 w-full shadow-md focus:outline-none rounded-t-xl md:rounded-l-xl md:rounded-tr-none">
       <datalist id="practice-specialty" class="w-full">
         @for (data of datalist; track data.name) {
           <option>
@@ -9,9 +9,8 @@
           </option>
         }
       </datalist>
-      <!-- <p class="text-xs font-extrabold text-slate-500 mt-2 px-1">Top searches</p> -->
     </div>
-      <input type="text" placeholder="Location" class="border-r border-y border-slate-300 p-2 w-96 shadow-md focus:outline-none">
-      <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-2 h-[42px] shadow-md rounded-r-xl transition">Search</button>
+    <input type="text" placeholder="Location" class="border md:border-r md:border-y border-slate-300 p-2 w-full md:w-96 shadow-md focus:outline-none">
+    <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-2 h-[42px] shadow-md rounded-b-xl md:rounded-r-xl md:rounded-bl-none transition">Search</button>
   </div>
 </form>

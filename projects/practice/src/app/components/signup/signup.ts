@@ -19,6 +19,9 @@ import {AuthService} from '@shared/services/auth.service';
   ],
   templateUrl: './signup.html',
   styleUrl: './signup.css',
+  host: {
+    class: 'flex-1 flex flex-col w-full'
+  }
 })
 export class SignupComponent {
   private authService = inject(AuthService);

@@ -1,40 +1,36 @@
-<div class="flex flex-col w-full">
-  <div class="flex max-w-5xl mx-auto justify-center items-center p-8 gap-48">
-    <div class="flex flex-col items-center text-center gap-8">
-      <h1 class="text-6xl font-bold">Lorem ipsum dolor sit amet, consectetur adipiscing.</h1>
-      <p class="max-w-md text-xl">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl eget egestas mollis, nunc nisl aliquam nisl, eget aliquam nisl nisl eu nunc.
-      </p>
-      <button
-        (click)="onSubmitToSignUp()"
-        class="text-md bg-indigo-600 text-white font-bold rounded-md h-10 hover:bg-indigo-700 transition px-12 mr-4">
-        Get started
-      </button>
-    </div>
-  </div>
-  <div class="flex py-8 bg-gray-100">
-    <div class="flex flex-row w-full max-w-full mx-auto justify-between items-center">
-      <div class="flex flex-col pt-8 m-8 border-r pl-16 border-solid border-b-slate-300">
-        <p class="text-4xl font-normal">Sed id turpis gravida, maximus justo ac</p>
-        <div class="flex flex-row justify-between max-w-sm py-8">
-          <div class="flex flex-col">
-            <p class="text-4xl font-semibold">2 in 3</p>
-            <p class="text-xl font-normal py-2">Nunc fermentum rutrum</p>
-          </div>
-          <div class="flex flex-col">
-            <p class="text-4xl font-semibold">10,000+</p>
-            <p class="text-xl font-normal py-2">In risus odio</p>
-          </div>
+<div class="grid max-w-4xl mx-auto place-items-center text-center pt-16 md:pt-44 px-4 gap-8">
+  <h1 class="text-6xl font-bold">Lorem ipsum dolor sit amet, consectetur adipiscing.</h1>
+  <p class="text-xl">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl eget egestas mollis, nunc nisl aliquam nisl, eget aliquam nisl nisl eu nunc.
+  </p>
+  <button
+    (click)="onSubmitToSignUp()"
+    class="text-md bg-indigo-600 text-white font-bold rounded-md hover:bg-indigo-700 transition w-xs h-12">
+    Get started
+  </button>
+</div>
+<div class="max-w-full bg-gray-100 mt-24 md:mt-auto w-full">
+  <div class="grid grid-flow-row md:grid-flow-col p-4 m-4 place-items-center grid-cols-1 md:grid-cols-2 gap-y-8 md:gap-y-0">
+    <div class="md:row-span-2 flex flex-col items-center">
+      <p class="text-4xl font-normal text-center py-6">Sed id turpis gravida, maximus justo ac</p>
+      <div class="flex flex-row gap-12 justify-centerl">
+        <div>
+          <p class="text-4xl font-semibold">2 in 3</p>
+          <p class="text-xl font-normal ">Nunc fermentum rutrum</p>
+        </div>
+        <div>
+          <p class="text-4xl font-semibold">10,000+</p>
+          <p class="text-xl font-normal ">In risus odio</p>
         </div>
       </div>
-      <div class="flex flex-col text-center pt-8 m-14 max-w-md">
-        <p class="text-xl font-black">
-          "Lorem ipsum dolor sit amet,
-          consectetur adipiscing elit.
-          Phasellus vitae euismod arcu.
-          Suspendisse quis pellentesque tortor, sit amet"
-        </p>
-      </div>
+    </div>
+    <div class="md:row-span-2 md:col-span-2 border-t pt-8 md:border-t-0 md:border-l md:pt-0 md:pl-4 md:ml-4 border-solid pl-4 ml-4 border-gray-700">
+      <p class="text-3xl font-black text-center">
+        "Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit.
+        Phasellus vitae euismod arcu.
+        Suspendisse quis pellentesque tortor, sit amet"
+      </p>
     </div>
   </div>
 </div>

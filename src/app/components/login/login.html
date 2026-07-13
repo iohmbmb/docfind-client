@@ -1,5 +1,5 @@
-<div class="flex flex-col justify-start items-center w-full min-h-screen px-6 pt-16 pb-12">
-  <div class="bg-amber-50 rounded-xl p-8 md:p-10 w-full max-w-md space-y-6">
+<div class="flex flex-col justify-center items-center w-full min-h-[calc(100vh-128px)] px-6 pt-16 pb-12">
+  <div class="bg-amber-50 rounded-xl p-8 md:p-10 w-full max-w-md max-h-fit space-y-6">
     <div class="space-y-2">
       <h1 class="text-xl font-semibold">Patient log in</h1>
       <p class="text-4xs">Log in to book your appointments.</p>
@@ -15,7 +15,7 @@
       </div>
       <div class="flex items-center space-x-3 pt-1">
         <input type="checkbox" id="remember-me" name="remember-me" [checked]="rememberMe"
-          class="appearance-none size-5 bg-white border-2 border-slate-300 checked:bg-white checked:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all duration-200 cursor-pointer relative checked:after:content-[''] checked:after:absolute checked:after:left-[5px] checked:after:top-[2px] checked:after:w-[5px] checked:after:h-[10px] checked:after:border-r-2 checked:after:border-b-2 checked:after:border-indigo-700 checked:after:rotate-45" />
+               class="appearance-none size-5 bg-white border-2 border-slate-300 checked:bg-white checked:border-indigo-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all duration-200 cursor-pointer relative checked:after:content-[''] checked:after:absolute checked:after:left-[5px] checked:after:top-[2px] checked:after:w-[5px] checked:after:h-[10px] checked:after:border-r-2 checked:after:border-b-2 checked:after:border-indigo-700 checked:after:rotate-45" />
         <label for="remember-me" class="text-xs font-medium text-slate-600 cursor-pointer select-none">
           Keep me logged in on this trusted device
         </label>
@@ -28,7 +28,7 @@
       <button type="submit"
               (click)="onSubmit()"
               class="bg-indigo-600 text-white font-bold rounded-md h-10 hover:bg-indigo-700 transition"
-              >{{isLoading() ? 'Authenticating...' : 'Log in'}}</button>
+      >{{isLoading() ? 'Authenticating...' : 'Log in'}}</button>
     </div>
     <a routerLink="/resetpassword" class="text-sm underline text-blue-800">Forgot your password?</a>
   </div>
