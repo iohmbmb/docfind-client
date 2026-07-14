@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
+import {BookingFormsComponent} from '../bookingforms/bookingforms';
 
 @Component({
   selector: 'app-forwhereform',
@@ -6,4 +7,15 @@ import { Component } from '@angular/core';
   templateUrl: './forwhereform.html',
   styleUrl: './forwhereform.css',
 })
-export class Forwhereform {}
+export class Forwhereform {
+  private bookingForm = inject(BookingFormsComponent);
+
+  public onSubmit(isRemote: boolean){
+    if (isRemote) {
+      this.bookingForm.appointmentModel().location = 'Video call';
+    } else {
+      this.bookingForm.appointmentModel().location = this.bookingForm.doctor.practiceAddress;
+    }
+    this.bookingForm.nextStep();
+  };
+}

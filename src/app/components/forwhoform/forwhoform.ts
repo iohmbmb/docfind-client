@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import {BookingFormsComponent} from '../bookingforms/bookingforms';
 
 @Component({
   selector: 'app-forwhoform',
@@ -7,8 +8,10 @@ import { Component } from '@angular/core';
   styleUrl: './forwhoform.css',
 })
 export class Forwhoform {
-  public isNewPatient: boolean = false;
+  private bookingForm = inject(BookingFormsComponent);
+
   public onSubmit(isNew: boolean){
-    this.isNewPatient = isNew;
+    this.bookingForm.appointmentModel().isNewPatient = isNew;
+    this.bookingForm.nextStep();
   };
 }

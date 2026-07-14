@@ -12,5 +12,4 @@ export interface Appointments {
   location: string;
   isNewPatient: boolean;
   status: AppointmentStatus
-  symptoms: string;
 }
