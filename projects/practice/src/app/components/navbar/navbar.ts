@@ -29,6 +29,10 @@ export class Navbar {
     this.router.navigate(['/']);
   }
 
+  public async onPreferences() : Promise<void> {
+    this.router.navigate(['/preferences']);
+  }
+
   public async onSubmitToRegister() : Promise<void> {
     this.authService.logout();
     this.router.navigate(['/signup']);
