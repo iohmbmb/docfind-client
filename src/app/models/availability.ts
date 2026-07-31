@@ -1,4 +1,5 @@
 export enum Availability {
-  Available,
-  Unavailable
+  Available = 'Available',
+  Busy = 'Busy',
+  Away = 'Away'
 }

@@ -6,7 +6,7 @@ export enum AppointmentStatus {
 
 export interface Appointments {
   id?: string;
-  patientId: string;
+  patientId?: string;
   doctorId: string;
   scheduleTime: string;
   location: string;

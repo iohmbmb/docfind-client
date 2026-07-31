@@ -29,7 +29,14 @@ export class BookingFormsComponent {
   public currentStep = signal<number>(1);
 
   // this is temporary to be able to reason about the data that will be passed in
-  public doctor!: Doctor;
+  doctor=  signal<Doctor | undefined>(undefined);
+
+  ngOnInit() {
+    const data = history.state
+    this.doctor.set(data?.doctor)
+    console.log(this.doctor())
+  }
+
   public user: User = {
     id: '',
     firstName: '',

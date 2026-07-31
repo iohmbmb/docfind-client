@@ -33,11 +33,27 @@
           }
         </div>
       }
-      <div class="text-sm font-semibold">Suburb</div>
-      <input class="w-64 h-10 text-sm font-normal border rounded-sm bg-white text-black" type="text" placeholder="" [formField]="signupForm.practiceSuburb">
-      @if (signupForm.practiceSuburb().invalid() && (signupForm.practiceSuburb().dirty() || signupForm.practiceSuburb().touched())) {
+      <div class="text-sm font-semibold">Street address</div>
+      <input class="w-64 h-10 text-sm font-normal border rounded-sm bg-white text-black"
+             matInput
+             type="text"
+             [formField]="signupForm.practiceAddress"
+             [matAutocomplete]="addressAuto"
+             (input)="onAddressInput($any($event.target).value)"
+      >
+
+      <mat-autocomplete #addressAuto="matAutocomplete"
+                        (optionSelected)="selectAddress($event.option.value)">
+
+        @for (location of locations(); track location.id) {
+          <mat-option [value]="location">
+            {{ location.properties.full_address }}
+          </mat-option>
+        }
+      </mat-autocomplete>
+      @if (signupForm.practiceAddress().invalid() && (signupForm.practiceAddress().dirty() || signupForm.practiceAddress().touched())) {
         <div class="text-xs font-medium text-amber-400 mt-1">
-          @for (error of signupForm.practiceSuburb().errors(); track error.kind) {
+          @for (error of signupForm.practiceAddress().errors(); track error.kind) {
             <p>{{ error.message }}</p>
           }
         </div>
@@ -89,11 +105,11 @@
           }
         </div>
       }
-      <div class="text-sm font-semibold">Street address</div>
-      <input class="w-64 h-10 text-sm font-normal border rounded-sm bg-white text-black" type="text" placeholder="" [formField]="signupForm.practiceAddress"]>
-      @if (signupForm.practiceAddress().invalid() && (signupForm.practiceAddress().dirty() || signupForm.practiceAddress().touched())) {
+      <div class="text-sm font-semibold">Suburb</div>
+      <input class="w-64 h-10 text-sm font-normal border rounded-sm bg-white text-black" type="text" placeholder="" [formField]="signupForm.practiceSuburb">
+      @if (signupForm.practiceSuburb().invalid() && (signupForm.practiceSuburb().dirty() || signupForm.practiceSuburb().touched())) {
         <div class="text-xs font-medium text-amber-400 mt-1">
-          @for (error of signupForm.practiceAddress().errors(); track error.kind) {
+          @for (error of signupForm.practiceSuburb().errors(); track error.kind) {
             <p>{{ error.message }}</p>
           }
         </div>
@@ -110,15 +126,15 @@
     </div>
     <div class="col-span-1 md:col-span-2 row-span-2 w-full flex flex-col items-center">
       <div class="flex flex-col gap-1.5 pt-4">
-        <label class="text-sm font-semibold text-slate-700">Practice Specialty</label>
+        <label class="text-sm font-semibold ">Practice Specialty</label>
         <select
           name="specialty"
           [(ngModel)]="signupModel().specialty"
           class="w-64 h-10 text-sm font-normal border rounded-sm bg-white text-black px-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition cursor-pointer">
           <option value="" disabled selected>Choose your medical field...</option>
-          @for (data of datalist; track data.id) {
-            <option [value]="data.id">
-              {{ data.name }}
+          @for (specialty of specialties; track specialty) {
+            <option [ngValue]="specialty">
+              {{ this.formatSpecialty(specialty) }}
             </option>
           }
         </select>

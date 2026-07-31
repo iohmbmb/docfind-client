@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {PreferencesGeneral} from '../preferences-general/preferences-general';
 
 @Component({
   selector: 'app-preferences',
-  imports: [],
+  imports: [
+    PreferencesGeneral,
+  ],
   templateUrl: './preferences.html',
   styleUrl: './preferences.css',
 })

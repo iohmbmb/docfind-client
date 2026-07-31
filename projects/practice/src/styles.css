@@ -1,3 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import 'tailwindcss';
+.mat-mdc-datepicker-content {
+  @apply bg-white rounded-xl shadow-xl;
+}
+
+.mat-calendar {
+  @apply bg-white rounded-xl shadow-xl;
+}
+
+.mat-mdc-autocomplete-panel {
+  background-color: white !important;
+}
+
+.mat-mdc-option {
+  background-color: white !important;
+  color: black !important;
+}
+
+.mat-mdc-option:hover {
+  background-color: #f1f5f9 !important;
+}

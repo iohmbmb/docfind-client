@@ -7,15 +7,22 @@ import {Router, RouterLink} from '@angular/router';
 import {PracticeSpecialty} from '@shared/models/practice-specialty';
 import {Availability} from '@shared/models/availability';
 import {LocationPreference} from '@shared/models/location-preference';
-import {firstValueFrom} from 'rxjs';
+import {debounceTime, distinctUntilChanged, firstValueFrom, of, Subject, switchMap} from 'rxjs';
 import {AuthService} from '@shared/services/auth.service';
+import {MatAutocomplete, MatAutocompleteTrigger, MatOption} from '@angular/material/autocomplete';
+import {MapboxService} from '@shared/services/mapbox.service';
+import {MatInput} from '@angular/material/input';
 
 @Component({
   selector: 'app-signup',
   imports: [
     FormsModule,
     FormField,
-    RouterLink
+    RouterLink,
+    MatAutocompleteTrigger,
+    MatAutocomplete,
+    MatOption,
+    MatInput
   ],
   templateUrl: './signup.html',
   styleUrl: './signup.css',
@@ -25,30 +32,29 @@ import {AuthService} from '@shared/services/auth.service';
 })
 export class SignupComponent {
   private authService = inject(AuthService);
+  private mapboxService = inject(MapboxService);
   private router = inject(Router);
 
-  public datalist : Array<any> = []
-  constructor() {
-    this.datalist = [
-      {id: 0, name: PracticeSpecialty[PracticeSpecialty.GeneralPractice]},
-      {id: 1, name: PracticeSpecialty[PracticeSpecialty.Physiotherapy]},
-      {id: 2, name: PracticeSpecialty[PracticeSpecialty.Dentistry]},
-      {id: 3, name: PracticeSpecialty[PracticeSpecialty.Radiology]},
-      {id: 4, name: PracticeSpecialty[PracticeSpecialty.Podiatry]},
-      {id: 5, name: PracticeSpecialty[PracticeSpecialty.Optometry]},
-      {id: 6, name: PracticeSpecialty[PracticeSpecialty.Chiropractor]},
-      {id: 7, name: PracticeSpecialty[PracticeSpecialty.Osteopathic]},
-      {id: 8, name: PracticeSpecialty[PracticeSpecialty.Dietitian]},
-      {id: 9, name: PracticeSpecialty[PracticeSpecialty.Nutritionist]},
-      {id: 10, name: PracticeSpecialty[PracticeSpecialty.Surgeon]},
-      {id: 11, name: PracticeSpecialty[PracticeSpecialty.Cardiology]},
-      {id: 12, name: PracticeSpecialty[PracticeSpecialty.Neurology]},
-      {id: 13, name: PracticeSpecialty[PracticeSpecialty.Orthopedics]},
-      {id: 14, name: PracticeSpecialty[PracticeSpecialty.Pediatrics]},
-      {id: 15, name: PracticeSpecialty[PracticeSpecialty.Psychology]},
-      {id: 16, name: PracticeSpecialty[PracticeSpecialty.Psychiatry]},
-      {id: 17, name: PracticeSpecialty[PracticeSpecialty.Urology]}
-    ];
+  specialties = Object.values(PracticeSpecialty);
+  errorMessage = signal<string>('');
+  isLoading = signal<boolean>(false);
+
+  private searchSubject = new Subject<string>();
+  locations = signal<any[]>([]);
+
+  ngOnInit() {
+    this.searchSubject.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap(value => {
+        if (!value) {
+          return of({ features: [] });
+        }
+        return this.mapboxService.queryAddress(value);
+      })
+    ).subscribe(result => {
+        this.locations.set(result.features);
+      });
   }
 
   public signupModel = signal<DoctorRegisterRequest>({
@@ -67,11 +73,11 @@ export class SignupComponent {
     hourlyRate: 0.0,
     specialty: PracticeSpecialty.GeneralPractice,
     status: Availability.Available,
-    preference: LocationPreference.Hybrid
-  });
+    preference: LocationPreference.Hybrid,
+    longitude: 0.0,
+    latitude: 0.0
 
-  public errorMessage = signal<string>('')
-  public isLoading = signal<boolean>(false);
+  });
 
   public signupForm = form(this.signupModel, (schemaPath) => {
     required(schemaPath.email, { message: 'Email is required' });
@@ -96,24 +102,43 @@ export class SignupComponent {
     );
   })
 
+  onAddressInput(value: string) {
+    this.searchSubject.next(value);
+  }
+
+  selectAddress(feature: any) {
+    const context = feature.properties.context;
+
+    this.signupModel.update(model => ({
+      ...model,
+      practiceAddress: feature.properties.name,
+      practiceSuburb: context.place?.name ?? '',
+      practiceState: context.region?.name ?? '',
+      practicePostcode: context.postcode?.name ?? '',
+      longitude: feature.geometry.coordinates[0],
+      latitude: feature.geometry.coordinates[1]
+    }));
+  }
+
   public registerDoctor(){
     this.errorMessage.set('');
-
     submit(this.signupForm, async () => {
       this.isLoading.set(true);
-      const registrationPayload = this.signupModel();
-
       try {
-        await firstValueFrom(this.authService.registerDoctor(registrationPayload));
-
-        this.isLoading.set(false);
-        await this.router.navigate(['/dashboard']);
+        await firstValueFrom(this.authService.registerDoctor(this.signupModel()));
+        await this.router.navigate(['/login']);
       }
       catch (err) {
-        this.isLoading.set(false);
         this.errorMessage.set('User already exists or registration rejected.');
         console.error(err);
       }
+      finally {
+        this.isLoading.set(false);
+      }
     });
+  }
+
+  formatSpecialty(value: string): string {
+    return value.replace(/([A-Z])/g, ' $1').trim();
   }
 }

@@ -5,6 +5,8 @@ import {Observable, tap} from 'rxjs';
 import {Identity} from '../models/identity.types';
 import {LoginRequest, LoginResponse} from '../models/login.types';
 import {DoctorRegisterRequest, UserRegisterRequest} from '@shared/models/register.types';
+import {Doctor} from '@shared/models/doctor.types';
+import {PasswordRequest} from '@shared/models/password-request.types';
 
 @Injectable({
   providedIn: 'root',
@@ -35,9 +37,15 @@ export class AuthService {
     );
   }
 
+  updatePassword(request: PasswordRequest): Observable<any> {
+    return this.http.put(`${environment.apiUrl}/auth/update/password`, request);
+  }
+
   setSession(response: LoginResponse): void {
     localStorage.setItem('healthcare_jwt', response.token);
-    localStorage.setItem('user_role', response.user.role.toString());
+    if(response.user.role != undefined){
+      localStorage.setItem('user_role', response.user.role.toString());
+    }
     localStorage.setItem('user_name', response.user.firstName);
     this.isAuthenticated.set(true);
   }

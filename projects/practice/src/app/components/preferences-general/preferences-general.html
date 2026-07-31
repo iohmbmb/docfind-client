@@ -1,0 +1,137 @@
+  <form (submit)="onSave()" class="grid place-items-start gap-7">
+      <div class="grid grid-flow-row grid-cols-4">
+        <label class="text-sm font-semibold" for="firstname">First Name</label>
+        <input type="text" id="firstname" [formField]="doctorProfileForm.firstName" class="text-slate-700">
+        <label class="text-sm font-semibold" for="lastname">Last Name</label>
+        <input type="text" id="lastname" [formField]="doctorProfileForm.lastName" class="text-slate-700">
+      </div>
+      <div class="grid grid-flow-row grid-cols-4">
+        <label class="text-sm font-semibold" for="email">Email</label>
+        <input type="email" id="email" [formField]="doctorProfileForm.email" class="text-slate-700">
+      </div>
+      <div class="grid grid-flow-row grid-cols-4">
+        <label class="text-sm font-semibold" for="">Password</label>
+        <button
+          type="button"
+          (click)="onChangePassword()"
+          class="border rounded-sm p-1.5 flex flex-row gap-2 border-slate-300 hover:border-slate-500 cursor-pointer text-sm">
+          <i data-feather="edit" stroke-width="1"></i>
+          Change Password
+        </button>
+      </div>
+      <div class="border-b w-full border-slate-300"></div>
+      <div class="grid grid-flow-row grid-cols-4 gap-4 items-center">
+        <label class="text-sm font-semibold" for="address">Address</label>
+        <input type="text" id="address" [formField]="doctorProfileForm.practiceAddress" class="text-slate-700">
+        <label class="text-sm font-semibold" for="suburb">Suburb</label>
+        <input type="text" id="suburb" [formField]="doctorProfileForm.practiceSuburb" class="text-slate-700">
+        <label class="text-sm font-semibold" for="state">State</label>
+        <input type="text" id="state" [formField]="doctorProfileForm.practiceState" class="text-slate-700">
+        <label class="text-sm font-semibold" for="postcode">Postcode</label>
+        <input type="text" id="postcode" [formField]="doctorProfileForm.practicePostcode" class="text-slate-700">
+        <label class="text-sm font-semibold" for="phone">Phone</label>
+        <input type="tel" id="phone" [formField]="doctorProfileForm.practicePhone" class="text-slate-700">
+      </div>
+    <div class="border-b w-full border-b-slate-300"></div>
+    <h1 class="text-sm font-semibold">Consultation Mode</h1>
+    <div class="grid grid-flow-row grid-cols-2 gap-4 items-center">
+      <select id="consultation-mode"
+              [ngModel]="doctorProfileModel().preference"
+              [ngModelOptions]="{standalone: true}"
+              (ngModelChange)="updateLocation($event)">
+          @for (location of locations; track location) {
+            <option [ngValue]="location">
+              {{ formatSpecialty(location) }}
+            </option>
+          }
+      </select>
+    </div>
+    <div class="border-b w-full border-b-slate-300"></div>
+    <h1 class="text-sm font-semibold">Working Hours</h1>
+    <div class="grid grid-flow-row gap-4 items-center">
+      @for (hour of doctorProfileModel().workDays; track $index) {
+        <div class="flex flex-row gap-2">
+          <select
+            [ngModel]="hour.day"
+            [ngModelOptions]="{standalone: true}"
+            (ngModelChange)="updateWorkDay($index,{day: $event})">
+            @for (day of days; track day) {
+              <option [ngValue]="day">
+                {{ day }}
+              </option>
+            }
+          </select>
+          <input type="time"
+                 [ngModel]="hour.startTime"
+                 [ngModelOptions]="{standalone: true}"
+                 (ngModelChange)="updateWorkDay($index,{startTime: $event})">
+          <input type="time"
+                 [ngModel]="hour.endTime"
+                 [ngModelOptions]="{standalone: true}"
+                 (ngModelChange)="updateWorkDay($index,{endTime: $event})">
+          <div class="flex items-center justify-center">
+            <button
+              type="button"
+              (click)="removeWorkingHour($index)"
+              class="cursor-pointer border rounded-sm p-1.5 border-slate-300 hover:border-slate-500">
+              <i data-feather="minus" stroke-width="0.5"></i>
+            </button>
+          </div>
+          </div>
+      }
+      <div class="flex items-center justify-center">
+        <button
+          type="button"
+          (click)="addWorkingHour()"
+          class="cursor-pointer border rounded-sm p-1.5 border-slate-300 hover:border-slate-500">
+          <i data-feather="plus" stroke-width="1"></i>
+        </button>
+      </div>
+    </div>
+    <div class="border-b w-full border-b-slate-300"></div>
+    <h1 class="text-sm font-semibold">Availability Status</h1>
+    <div class="grid grid-flow-row gap-4 items-center">
+      <select id="availability" [formField]="doctorProfileForm.status">
+          @for (status of statuses; track status) {
+            <option [ngValue]="status">
+              {{ formatSpecialty(status) }}
+            </option>
+          }
+      </select>
+      @if(isAway()){
+        <mat-form-field>
+          <mat-label>Enter a date range</mat-label>
+          <mat-date-range-input [rangePicker]="picker">
+            <input [formField]="doctorProfileForm.absenceStartDate" matStartDate placeholder="Start date">
+            <input [formField]="doctorProfileForm.absenceEndDate" matEndDate placeholder="End date">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker  #picker></mat-date-range-picker>
+        </mat-form-field>
+      }
+    </div>
+    <div class="border-b w-full border-b-slate-300"></div>
+      <div class="grid grid-flow-row grid-cols-2 gap-4 items-center">
+        <label class="text-sm font-semibold" for="rate">Hourly Rate</label>
+        <input type="number" id="rate" [formField]="doctorProfileForm.hourlyRate" class="text-slate-700">
+        <label class="text-sm font-semibold" for="specialty">Specialty</label>
+        <select
+          id="specialty"
+          [ngModel]="doctorProfileModel().specialty"
+          [ngModelOptions]="{standalone: true}"
+          (ngModelChange)="updateSpecialty($event)"
+          class="w-64 h-10 text-sm font-normal border rounded-sm bg-white text-black px-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition cursor-pointer">
+          @for (specialty of specialties; track specialty) {
+            <option [ngValue]="specialty">
+              {{ formatSpecialty(specialty) }}
+            </option>
+          }
+        </select>
+      </div>
+    <div class="w-full flex justify-end items-end gap-4">
+      <button
+        type="submit"
+        class="border rounded-md p-2 bg-indigo-500 text-white font-bold hover:bg-indigo-600 transition cursor-pointer"
+      >Save</button>
+    </div>
+  </form>

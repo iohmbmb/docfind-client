@@ -19,8 +19,11 @@ export class Dashboard {
   ngOnInit() {
     this.appointmentService.getAppointmentsFor(this.currentDoctorId).subscribe({
       next: (response) => {
-        this.pageData = response;
+        if(response.length > 0){
+          this.pageData = response;
+        }
         this.isLoading.set(false);
+        this.errorMessage = 'No appointments';
       },
       error: (err) => {
         this.errorMessage = 'No appointments';

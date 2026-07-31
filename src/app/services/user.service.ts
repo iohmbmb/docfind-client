@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { environment } from '../../environments/environment.development';
 import {User} from '../models/user.types';
 import { Observable } from 'rxjs';
 import {Doctor} from '../models/doctor.types';
@@ -15,12 +15,20 @@ export class UserService {
     return this.http.get<User[]>(`${environment.apiUrl}/get/users`);
   }
 
+  getDoctor(id: string): Observable<Doctor> {
+    return this.http.get<Doctor>(`${environment.apiUrl}/get/doctor/${id}`);
+  }
+
   getDoctors(): Observable<Doctor[]> {
     return this.http.get<Doctor[]>(`${environment.apiUrl}/get/doctors`);
   }
 
   getDoctorsBy(specialty: string): Observable<Doctor[]> {
     return this.http.get<Doctor[]>(`${environment.apiUrl}/get/doctors/${specialty}`);
+  }
+
+  updateDoctor(id: string, updatedDoctor:Doctor): Observable<any> {
+    return this.http.put(`${environment.apiUrl}/update/doctor/${id}`, updatedDoctor);
   }
 
   deleteUsers(id: string): Observable<User[]> {

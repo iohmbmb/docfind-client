@@ -17,9 +17,9 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [guestGuard] },
   { path: 'signup', component: SignupComponent, canActivate: [guestGuard] },
   { path: 'search', component: SearchComponent },
-  { path: 'booking', component: BookingFormsComponent, canActivate:[guestGuard]},
 
   // Protected Routes (Strictly locked down by the session filter)
+  { path: 'booking', component: BookingFormsComponent, canActivate:[authGuard(['Patient'])]},
   { path: 'bookings', component: BookingsComponent, canActivate: [authGuard(['Patient'])] },
 
   // Catch-all safety boundary routing

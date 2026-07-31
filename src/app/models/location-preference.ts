@@ -1,5 +1,5 @@
 export enum LocationPreference {
-  Remote,
-  InPerson,
-  Hybrid
+  Remote = 'Remote',
+  InPerson= 'InPerson',
+  Hybrid= 'Hybrid'
 }

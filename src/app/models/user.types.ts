@@ -3,10 +3,10 @@ export enum UserRole {
   doctor
 }
 export interface User {
-  id: string;
+  id?: string;
   email: string;
-  passwordHash: string;
+  passwordHash?: string;
   firstName: string;
   lastName: string;
-  role: UserRole;
+  role?: UserRole;
 }

@@ -29,7 +29,7 @@ export class Navbar {
     this.router.navigate(['/']);
   }
 
-  public async onPreferences() : Promise<void> {
+  public async onSettings() : Promise<void> {
     this.router.navigate(['/preferences']);
   }
 

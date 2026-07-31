@@ -14,7 +14,10 @@ export class Forwhereform {
     if (isRemote) {
       this.bookingForm.appointmentModel().location = 'Video call';
     } else {
-      this.bookingForm.appointmentModel().location = this.bookingForm.doctor.practiceAddress;
+      this.bookingForm.appointmentModel.update(model =>({
+        ...model,
+        location: this.bookingForm.doctor()?.practiceAddress!
+      }));
     }
     this.bookingForm.nextStep();
   };

@@ -12,7 +12,9 @@ export interface Doctor extends User {
   practicePhone: string;
   biography?: string;
   hourlyRate: number;
-  status?: Availability
-  preference?: LocationPreference;
-  specialty?: PracticeSpecialty;
+  status: Availability
+  preference: LocationPreference;
+  specialty: PracticeSpecialty;
+  latitude?: number;
+  longitude?: number;
 }
