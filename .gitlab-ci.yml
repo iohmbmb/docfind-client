@@ -10,8 +10,8 @@ lint-format:
   stage: lint
   image: $NODE_IMAGE
   script:
-    - npm ci
-    - 'npx prettier --check "**/*.{ts,html,css,scss,md,json,scss.d.ts}"'
+    - npm --no-audit --no-fund
+    - 'npx prettier --list-different "**/*.{ts,html,css,scss,md,json,scss.d.ts}"'
     - npx eslint src/**/*.ts --max-warnings=0
   rules:
     - if: >-
