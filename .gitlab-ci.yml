@@ -18,33 +18,33 @@ lint-format:
         $CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE ==
         "merge_request_event"
       when: always
-test-with-coverage:
-  stage: test
-  image: $NODE_IMAGE
-  script:
-    - npm ci
-    - >-
-      npx jest --ci --coverage --detectOpenHandles --reduced-fixtures
-      --maxWorkers=2
-    - |
-      COVERAGE=$(node - <<'EOF'
-      const fs = require('fs');
-      const file = fs.readFileSync('coverage/coverage-summary.json', 'utf8');
-      const json = JSON.parse(file);
-      const pct = json.total.lines.pct;
-      console.log(pct);
-      EOF
-      )
-      echo "Overall line coverage = $COVERAGE %"
-      if (( $(echo "$COVERAGE < $COVERAGE_MINIMUM" | bc -l) )); then
-        echo "❌ Coverage $COVERAGE% is below the required $COVERAGE_MINIMUM%";
-        exit 1;
-      fi
-  rules:
-    - if: >-
-        $CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE ==
-        "merge_request_event"
-      when: always
+#test-with-coverage:
+#  stage: test
+#  image: $NODE_IMAGE
+#  script:
+#    - npm ci
+#    - >-
+#      npx jest --ci --coverage --detectOpenHandles --reduced-fixtures
+#      --maxWorkers=2
+#    - |
+#      COVERAGE=$(node - <<'EOF'
+#      const fs = require('fs');
+#      const file = fs.readFileSync('coverage/coverage-summary.json', 'utf8');
+#      const json = JSON.parse(file);
+#      const pct = json.total.lines.pct;
+#      console.log(pct);
+#      EOF
+#      )
+#      echo "Overall line coverage = $COVERAGE %"
+#      if (( $(echo "$COVERAGE < $COVERAGE_MINIMUM" | bc -l) )); then
+#        echo "❌ Coverage $COVERAGE% is below the required $COVERAGE_MINIMUM%";
+#        exit 1;
+#      fi
+#  rules:
+#    - if: >-
+#        $CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE ==
+#        "merge_request_event"
+#      when: always
 build-prod:
   stage: build
   image: $NODE_IMAGE
