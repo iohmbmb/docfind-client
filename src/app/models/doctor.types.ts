@@ -2,6 +2,7 @@ import {User} from './user.types';
 import {PracticeSpecialty} from '@shared/models/practice-specialty';
 import {Availability} from '@shared/models/availability';
 import {LocationPreference} from '@shared/models/location-preference';
+import {ConsultationType} from '@shared/models/consultation-type.types';
 
 export interface Doctor extends User {
   practiceName: string;
@@ -17,4 +18,5 @@ export interface Doctor extends User {
   specialty: PracticeSpecialty;
   latitude?: number;
   longitude?: number;
+  consultationType?: ConsultationType;
 }

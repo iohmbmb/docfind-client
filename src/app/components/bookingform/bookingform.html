@@ -1,0 +1,57 @@
+<div class="w-full flex flex-col items-center px-4 py-8 max-w-xl mx-auto min-h-[calc(100vh-128px)] justify-center">
+  <div class="flex flex-col justify-center text-slate-400">
+    <div class="flex gap-1 pb-6">
+      @for (step of STEPS_CONFIG; track step.id) {
+        <div
+          class="h-1.5 w-8 rounded-full transition"
+          [class.bg-indigo-600]="currentStepIndex() >= $index"
+          [class.bg-slate-200]="currentStepIndex() < $index">
+        </div>
+      }
+    </div>
+    <div class="flex flex-col md:flex-row gap-12">
+      <div class="w-fit bg-white border border-slate-200 rounded-xl p-6 shadow-sm min-h-80 flex flex-col">
+        @switch (currentStepIndex()) {
+          @case (0) {
+            <booking-for-who></booking-for-who>
+          }
+          @case (1) {
+            <booking-for-new></booking-for-new>
+          }
+          @case (2) {
+            <booking-for-what></booking-for-what>
+          }
+          @case (3) {
+            <booking-for-when></booking-for-when>
+          }
+        }
+        <div class="flex justify-between items-center pt-8 border-t border-slate-100 mt-8">
+          <button
+            type="button"
+            (click)="this.bookingWizardService.previousStep()"
+            [class.invisible]="currentStepIndex() === 0"
+            class="text-sm font-semibold text-slate-600 hover:text-slate-900 transition px-4 py-2">
+            Back
+          </button>
+        </div>
+      </div>
+      <div class="pt-16 pr-12 flex flex-col items-center relative">
+        <div class="border rounded-full size-24 border-gray-300 bg-white z-10 absolute top-13 flex justify-center items-center">
+          <i data-feather="user" stroke-width="0.5" width="72" height="72"></i>
+        </div>
+        <div class="border border-gray-300 pt-12 mt-12 text-center w-64 flex flex-col">
+          <div class="flex justify-center gap-2">
+            <span class="text-md font-semibold">{{'Dr. '+doctor.firstName }}</span>
+            <span class="text-md font-semibold">{{ doctor.lastName }}</span>
+          </div>
+          <p class="text-sm font-normal">{{formatSpecialty(doctor.specialty)}}</p>
+          <p class="m-4 text-sm font-normal">{{doctor.practiceAddress+', '
+          +doctor.practiceSuburb+', '
+          +doctor.practiceState+', '
+          +doctor.practicePostcode }}</p>
+          <p class="mb-2 text-sm font-normal">for the 12th, may</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -4,9 +4,10 @@ import {LoginComponent} from './components/login/login';
 import {HomeComponent} from './components/home/home';
 import {SignupComponent} from './components/signup/signup';
 import {SearchComponent} from './components/searchbar/searchbar';
-import {BookingsComponent} from './components/bookings/bookings';
+import {DashboardComponent} from './components/dashboard/dashboard';
+import {BookingFormComponent} from './components/bookingform/bookingform';
+import {bookingGuard} from '@shared/guards/booking-guard';
 import {guestGuard} from './guards/guest-guard';
-import {BookingFormsComponent} from './components/bookingforms/bookingforms';
 
 
 export const routes: Routes = [
@@ -19,8 +20,8 @@ export const routes: Routes = [
   { path: 'search', component: SearchComponent },
 
   // Protected Routes (Strictly locked down by the session filter)
-  { path: 'booking', component: BookingFormsComponent, canActivate:[authGuard(['Patient'])]},
-  { path: 'bookings', component: BookingsComponent, canActivate: [authGuard(['Patient'])] },
+  { path: 'booking', component: BookingFormComponent, canActivate:[authGuard(['Patient']), bookingGuard]},
+  { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard(['Patient'])] },
 
   // Catch-all safety boundary routing
   { path: '**', redirectTo: '' }

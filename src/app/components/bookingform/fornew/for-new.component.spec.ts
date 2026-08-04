@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Forwhereform } from './forwhereform';
+import { ForNew } from './for-new.component';
 
-describe('Forwhereform', () => {
-  let component: Forwhereform;
-  let fixture: ComponentFixture<Forwhereform>;
+describe('ForNew', () => {
+  let component: ForNew;
+  let fixture: ComponentFixture<ForNew>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Forwhereform],
+      imports: [ForNew],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Forwhereform);
+    fixture = TestBed.createComponent(ForNew);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Forwhenform } from './forwhenform';
+import { ForWhen } from './for-when.component';
 
 describe('Forwhenform', () => {
-  let component: Forwhenform;
-  let fixture: ComponentFixture<Forwhenform>;
+  let component: ForWhen;
+  let fixture: ComponentFixture<ForWhen>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Forwhenform],
+      imports: [ForWhen],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Forwhenform);
+    fixture = TestBed.createComponent(ForWhen);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

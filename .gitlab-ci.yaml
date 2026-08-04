@@ -1,0 +1,75 @@
+# ---------- Stages ----------
+stages:
+  - lint # Prettier + ESLint
+  - test # Jest unit tests + coverage gate
+  - build # Optional production bundle (runs only on `main`)
+
+# ---------- Global variables ----------
+variables:
+  NODE_ENV: "ci"
+  NODE_IMAGE: "node:20-bullseye" # contains npm 10, works with Angular 21
+  # Adjust the coverage threshold to whatever you need
+  COVERAGE_MINIMUM: "85"
+
+# ---------- 1️⃣ Lint & Format ----------
+lint-format:
+  stage: lint
+  image: $NODE_IMAGE
+  script:
+    # Install everything defined in package.json (lockfile respected)
+    - npm ci
+
+    # ---- Prettier – fail if any file is not correctly formatted ----
+    - npx prettier --check "**/*.{ts,html,css,scss,md,json,scss.d.ts}"
+
+    # ---- ESLint – any warning/error aborts the job ----
+    - npx eslint src/**/*.ts --max-warnings=0
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: always # run on every push / MR
+
+# ---------- 2️⃣ Unit tests + Coverage ----------
+test-with-coverage:
+  stage: test
+  image: $NODE_IMAGE
+  script:
+    - npm ci
+
+    # Run Jest in CI mode and generate an LCOV‑style coverage report.
+    - npx jest --ci --coverage --detectOpenHandles \
+        --reduced-fixtures --maxWorkers=2
+
+    # Extract the “All lines” percentage from Jest’s summary and compare it.
+    # If it is below $COVERAGE_MINIMUM the step will exit with a non‑zero code.
+    - |
+      COVERAGE=$(node - <<'EOF'
+      const fs = require('fs');
+      const file = fs.readFileSync('coverage/coverage-summary.json', 'utf8');
+      const json = JSON.parse(file);
+      const pct = json.total.lines.pct;
+      console.log(pct);
+      EOF
+      )
+      echo "Overall line coverage = $COVERAGE %"
+      if (( $(echo "$COVERAGE < $COVERAGE_MINIMUM" | bc -l) )); then
+        echo "❌ Coverage $COVERAGE% is below the required $COVERAGE_MINIMUM%";
+        exit 1;
+      fi
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: always
+
+# ---------- 3️⃣ Build production bundle (optional) ----------
+build-prod:
+  stage: build
+  image: $NODE_IMAGE
+  script:
+    - npm ci
+    - npx ng build --configuration production # Angular‑CLI 21
+  artifacts:
+    paths:
+      - dist/ # <-- whatever folder your build outputs
+    expire_in: 1 week
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
+      when: on_success

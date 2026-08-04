@@ -9,8 +9,9 @@ import {debounceTime, distinctUntilChanged, firstValueFrom, Observable, of, Subj
 import {SearchService} from '@shared/services/search.service';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {ActivatedRoute, Router} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
 import {Doctor} from '@shared/models/doctor.types';
+import {BookingStateService} from '@shared/services/booking-state-service';
+import {ScheduleService} from '@shared/services/schedule';
 
 declare var feather: any
 
@@ -36,9 +37,12 @@ export class SearchComponent {
   showShadow = input(true);
   private mapBoxService = inject(MapboxService)
   private router = inject(Router)
-  searchService = inject(SearchService)
+  private bookingStateService = inject(BookingStateService);
+  private searchService = inject(SearchService)
+  private scheduleService = inject(ScheduleService);
+
   specialties = Object.values(PracticeSpecialty)
-  doctors = signal<Doctor[]>([]);
+  doctors = signal<Doctor[]>([])
   isLoading = signal<boolean>(false);
   isError = signal<boolean>(false);
   locations = signal<any[]>([]);
@@ -138,8 +142,7 @@ export class SearchComponent {
           latitude
         )
       );
-
-      this.doctors.set(doctors);
+      this.doctors.set(doctors)
     } catch (err) {
       this.errorMessage.set("No doctors found.");
       this.isError.set(true);
@@ -179,11 +182,26 @@ export class SearchComponent {
     return value.replace(/([A-Z])/g, ' $1').trim();
   }
 
-  book(doctor: any){
-    this.router.navigate(['/booking'], {
-      state: {
-        doctor: doctor
-      }
-    })
+  async book(doctor: Doctor){
+    this.bookingStateService.updateDoctorModel(({
+      id: doctor.id,
+      email: doctor.email,
+      firstName: doctor.firstName,
+      lastName: doctor.lastName,
+      practiceName: doctor.practiceName,
+      practiceAddress: doctor.practiceAddress,
+      practiceSuburb: doctor.practiceSuburb,
+      practiceState: doctor.practiceState,
+      practicePostcode: doctor.practicePostcode,
+      practicePhone: doctor.practicePhone,
+      hourlyRate: doctor.hourlyRate,
+      status: doctor.status,
+      preference: doctor.preference,
+      specialty: doctor.specialty,
+      consultationType: doctor.consultationType
+    }))
+    const workHours = await firstValueFrom(this.scheduleService.getWorkHours(doctor.id!))
+    this.bookingStateService.updateDoctorWorkHours(workHours)
+    this.router.navigate(['/booking'])
   }
 }

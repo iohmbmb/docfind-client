@@ -6,7 +6,9 @@ import {RouterLink} from '@angular/router';
   imports: [
     RouterLink
   ],
-  templateUrl: './bookings.html',
-  styleUrl: './bookings.css',
+  templateUrl: './dashboard.html',
+  styleUrl: './dashboard.css',
 })
-export class BookingsComponent {}
+export class DashboardComponent {
+
+}

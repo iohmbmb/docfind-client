@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Forwhoform } from './forwhoform';
+import { ForWhat } from './for-what.component';
 
-describe('Forwhoform', () => {
-  let component: Forwhoform;
-  let fixture: ComponentFixture<Forwhoform>;
+describe('Forwhatform', () => {
+  let component: ForWhat;
+  let fixture: ComponentFixture<ForWhat>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Forwhoform],
+      imports: [ForWhat],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Forwhoform);
+    fixture = TestBed.createComponent(ForWhat);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

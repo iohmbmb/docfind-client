@@ -44,6 +44,7 @@ export class PreferencesGeneral implements  AfterViewInit {
   private snackBar : MatSnackBar = new MatSnackBar()
   private dialog : MatDialog = new MatDialog()
 
+
   specialties = Object.values(PracticeSpecialty)
   statuses = Object.values(Availability)
   locations = Object.values(LocationPreference)
@@ -76,7 +77,7 @@ export class PreferencesGeneral implements  AfterViewInit {
       day: DayOfWeek.Monday,
       startTime: '09:00',
       endTime: '5:00'
-    }]
+    }],
   });
 
   public doctorProfileForm = form(this.doctorProfileModel);

@@ -11,5 +11,7 @@ export interface Appointments {
   scheduleTime: string;
   location: string;
   isNewPatient: boolean;
+  isForSomeone: boolean;
+  consultationType: string;
   status: AppointmentStatus
 }
