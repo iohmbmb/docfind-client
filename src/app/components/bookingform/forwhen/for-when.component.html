@@ -1,16 +1,27 @@
-<div class="flex max-w-4xl mx-auto">
-  <div class="p-8 flex flex-col gap-4 text-center">
+<div class="max-w-4xl mx-auto w-full px-4">
+  <div class="py-8 flex flex-col gap-4 text-center items-center">
     <h1 class="font-bold text-2xl text-slate-700">Choose a time.</h1>
     @for(day of days(); track day){
-      <mat-expansion-panel>
+      <mat-expansion-panel class="w-96 max-w-full">
         <mat-expansion-panel-header>
-          <mat-panel-title>{{day | date:'EEEE, d, MMMM' }}</mat-panel-title>
+          <mat-panel-title class="text-slate-700 font-medium">
+            {{ day | date:'EEEE, d MMMM' }}
+          </mat-panel-title>
         </mat-expansion-panel-header>
-        <div class="text-center">
-          <button
-            type="submit"
-            class="w-sm bg-white text-slate-700 border border-slate-300 font-bold rounded-sm h-11 px-4 hover:border-slate-500 hover:text-slate-900 hover:bg-emerald-50/10 transition shadow-sm cursor-pointer"
-          >Grid of time and dates</button>
+        <div class="flex flex-wrap -mx-1 pt-2">
+          @for (hour of scheduleMap().get(day.toDateString()); track hour) {
+            <div class="w-1/3 px-1 mb-3">
+              <button
+                (click)="onSelect(day, hour)"
+              class="w-full h-11 border font-bold rounded-md transition shadow-sm cursor-pointer text-center text-sm truncate"
+              [class]="this.bookingStateService.isTimeSelected(day, hour)
+              ? 'bg-emerald-600 text-white border-emerald-600 hover:bg-emerald-700'
+              : 'bg-white text-slate-700 border-slate-300 hover:border-slate-500 hover:text-slate-900 hover:bg-emerald-50/10'"
+              >
+                {{ hour | date:'HH:mm' }}
+              </button>
+            </div>
+          }
         </div>
       </mat-expansion-panel>
     }

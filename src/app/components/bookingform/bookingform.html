@@ -24,6 +24,9 @@
           @case (3) {
             <booking-for-when></booking-for-when>
           }
+          @case (4) {
+            <app-booking-summary></app-booking-summary>
+          }
         }
         <div class="flex justify-between items-center pt-8 border-t border-slate-100 mt-8">
           <button
@@ -32,6 +35,13 @@
             [class.invisible]="currentStepIndex() === 0"
             class="text-sm font-semibold text-slate-600 hover:text-slate-900 transition px-4 py-2">
             Back
+          </button>
+          <button
+            type="button"
+            [class.invisible] = "!this.bookingStateService.isSelected() || currentStepIndex() === 4"
+            (click)="this.bookingWizardService.nextStep()"
+            class="text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 transition px-4 py-2 rounded-md">
+            Next
           </button>
         </div>
       </div>
@@ -49,7 +59,7 @@
           +doctor.practiceSuburb+', '
           +doctor.practiceState+', '
           +doctor.practicePostcode }}</p>
-          <p class="mb-2 text-sm font-normal">for the 12th, may</p>
+          <p class="mb-2 text-sm font-normal"></p>
         </div>
       </div>
     </div>

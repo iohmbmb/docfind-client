@@ -12,7 +12,7 @@ export class ForWhat {
   private bookingWizardService = inject(BookingWizardService);
   private bookingStateService = inject(BookingStateService);
 
-  isNew : boolean = this.bookingStateService.getAppointmentModel().isNewPatient;
+  isNew : boolean = this.bookingStateService.getAppointmentModel().isNewPatient!;
   newConsultations = signal<string[]>([])
   existingConsultations = signal<string[]>([])
 

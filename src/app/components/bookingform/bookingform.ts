@@ -7,6 +7,7 @@ import {ForWhat} from './forwhat/for-what.component';
 import {ForWhen} from './forwhen/for-when.component';
 import {BookingWizardService} from '@shared/services/booking-wizard-service';
 import {BookingStateService} from '@shared/services/booking-state-service';
+import {BookingSummary} from './booking-summary/booking-summary';
 
 declare var feather: any
 
@@ -31,14 +32,14 @@ const STEPS_CONFIG: WizardStep[] = [
     ForNew,
     ForWhat,
     ForWhen,
+    BookingSummary,
   ],
   templateUrl: './bookingform.html',
   styleUrl: './bookingform.css',
 })
 export class BookingFormComponent {
 
-  private appointmentService = inject(AppointmentService);
-  private bookingStateService = inject(BookingStateService);
+  public bookingStateService = inject(BookingStateService);
   public bookingWizardService = inject(BookingWizardService);
 
   currentStepIndex = this.bookingWizardService.currentStepIndex;
@@ -55,18 +56,6 @@ export class BookingFormComponent {
 
   ngAfterViewInit() {
     feather.replace();
-  }
-
-  private errorMessage = signal<string>('');
-
-  public async onSubmit() {
-    this.errorMessage.set('')
-    try {
-      await firstValueFrom(this.appointmentService.createAppointment(this.appointment))
-    } catch(err) {
-      this.errorMessage.set('Failed to create appointment');
-      console.log(err)
-    }
   }
 
   formatSpecialty(value: string): string {

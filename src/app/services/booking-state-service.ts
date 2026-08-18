@@ -1,10 +1,11 @@
-import {effect, Injectable, signal} from '@angular/core';
+import {computed, effect, Injectable, signal} from '@angular/core';
 import {Appointments, AppointmentStatus} from '@shared/models/appointment.types';
 import {Doctor} from '@shared/models/doctor.types';
 import {Availability} from '@shared/models/availability';
 import {LocationPreference} from '@shared/models/location-preference';
 import {PracticeSpecialty} from '@shared/models/practice-specialty';
-import {DoctorWorkHours} from '@shared/models/doctor-work.hours';
+import {DayOfWeek, DoctorWorkHours} from '@shared/models/doctor-work.hours';
+import {addMinutes, isBefore} from 'date-fns';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,7 @@ export class BookingStateService {
     this.loadFromStorage(this.APPOINTMENT_KEY) ?? {
     patientId: '',
     doctorId:'',
-    scheduleTime:'',
+    scheduleTime: new Date(),
     location:'',
     isNewPatient:true,
     isForSomeone:false,
@@ -50,6 +51,9 @@ export class BookingStateService {
     });
 
   private doctorWorkHours = signal<DoctorWorkHours[]>([]);
+
+  public selectedAppointment = signal<Date | undefined>(undefined);
+  public isSelected = computed(() => this.selectedAppointment() !== undefined);
 
   constructor() {
     effect(() => {
@@ -100,6 +104,24 @@ export class BookingStateService {
     return date.sort((a, b) => a.getTime() - b.getTime());
   }
 
+  getDoctorWorkHours(day : DayOfWeek | undefined){
+    const dayWorkHours = this.doctorWorkHours().find(workHours => workHours.day === day);
+    if(!dayWorkHours) return undefined;
+    const startHour : Date = this.parseTimeToDate(dayWorkHours.startTime);
+    const endHour : Date = this.parseTimeToDate(dayWorkHours.endTime);
+    const result : Date[] = [];
+
+    let current : Date = startHour;
+    while(isBefore(current, endHour)){
+      result.push(new Date(current));
+      current = addMinutes(current, 15);
+    }
+    result.push(endHour);
+
+    return result;
+  }
+
+  // TODO : Move it outside of here
   patientId() {
     return localStorage.getItem('user_id')!;
   }
@@ -133,6 +155,39 @@ export class BookingStateService {
     return result;
   }
 
+  private parseTimeToDate(timeStr: string): Date {
+    const [hours, minutes] = timeStr.split(':').map(Number);
+    const date = new Date();
+    date.setHours(hours, minutes, 0, 0);
+    return date;
+  }
+
+  public convertDayToDayOfWeek(day : number) {
+    switch(day){
+      case 1:
+        return DayOfWeek.Monday;
+      case 2:
+        return DayOfWeek.Tuesday;
+      case 3:
+        return DayOfWeek.Wednesday;
+      case 4:
+        return DayOfWeek.Thursday;
+      case 5:
+        return DayOfWeek.Friday;
+      default:
+        return undefined
+    }
+  }
+
+  isTimeSelected(day: Date, hour: Date): boolean {
+    const current = this.selectedAppointment();
+    if (!current) return false;
+    return current.getDate() === day.getDate() &&
+      current.getMonth() === day.getMonth() &&
+      current.getFullYear() === day.getFullYear() &&
+      current.getHours() === hour.getHours() &&
+      current.getMinutes() === hour.getMinutes();
+  }
 
   private loadFromStorage<T>(key: string): T | null {
     try {

@@ -3,10 +3,30 @@
     <div class="font-semibold text-md text-slate-700 tracking-tight">See my past bookings</div>
   </div>
   <div class="border-l border-solid border-b-slate-300 pl-16 flex-1 pt-8 flex flex-col gap-4 justify-center items-center">
-    <h1 class="font-bold text-2xl text-slate-700">No incoming booking</h1>
-    <p class="text-sm text-slate-500 max-w-sm text-center">
-      Schedule a medical consultation session with our practitioners.
-    </p>
+    @if(appointments().length > 0) {
+      <div>
+        <div class="flex flex-row gap-9 p-2">
+          <div class="border rounded-full size-16 shrink-0 border-gray-300 bg-white flex justify-center items-center">
+            <i data-feather="user" stroke-width="1" width="40" height="40"></i>
+          </div>
+          <div class="flex flex-col justify-center items-start">
+            <div>{{'Dr. '+doctor.firstName+' '+doctor.lastName}}</div>
+            <div>{{doctor.practiceAddress+', '
+            +doctor.practiceSuburb+', '
+            +doctor.practiceState+', '
+            +doctor.practicePostcode}}</div>
+          </div>
+          <div class="ml-auto">
+            <i data-feather="chevron-right" stroke-width="2"></i>
+          </div>
+        </div>
+      </div>
+    }@else {
+      <h1 class="font-bold text-2xl text-slate-700">No incoming booking</h1>
+      <p class="text-sm text-slate-500 max-w-sm text-center">
+        Schedule a medical consultation session with our practitioners.
+      </p>
+    }
     <div>
       <button
         type="button"
