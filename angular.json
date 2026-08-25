@@ -69,7 +69,13 @@
           "defaultConfiguration": "development"
         },
         "test": {
-          "builder": "@angular/build:unit-test"
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "tsconfig.spec.json",
+            "reporters": ["default", "junit"],
+            "outputFile": "junit/test-results.xml",
+            "coverage": true
+          }
         }
       }
     },
@@ -130,7 +136,12 @@
           "defaultConfiguration": "development"
         },
         "test": {
-          "builder": "@angular/build:unit-test"
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "reporters": ["default", "junit"],
+            "outputFile": "junit/practice-tests-results.xml",
+            "coverage": true
+          }
         }
       }
     }

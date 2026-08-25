@@ -24,7 +24,7 @@ export class ForWhen {
   public days = signal<Date[]>([]);
 
 
-  async ngOnInit() {
+  ngOnInit() {
     this.days.set(this.bookingStateService.getDoctorNextWorkDays())
   }
 

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="10" failures="7" errors="0" time="1.187827922">
+    <testsuite name="projects/practice/src/app/app.spec.ts" timestamp="2026-08-25T13:18:29.724Z" hostname="aegis" tests="2" failures="1" errors="0" skipped="0" time="0.119032941">
+        <testcase classname="projects/practice/src/app/app.spec.ts" name="App &gt; should create the app" time="0.088183724">
+        </testcase>
+        <testcase classname="projects/practice/src/app/app.spec.ts" name="App &gt; should render title" time="0.028035203">
+            <system-err>
+ERROR ɵNotFound: NG0201: No provider found for `ActivatedRoute`. Source: DynamicTestModule. Find more at https://v21.angular.dev/errors/NG0201
+    at createRuntimeError [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_effect-chunk2.mjs:602:17[90m)[39m
+    at NullInjector.get [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_effect-chunk2.mjs:883:21[90m)[39m
+    at R3Injector.get [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_effect-chunk2.mjs:1208:27[90m)[39m
+    at R3Injector.get [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_effect-chunk2.mjs:1208:27[90m)[39m
+    at ChainedInjector.get [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_debug_node-chunk.mjs:7804:32[90m)[39m
+    at lookupTokenUsingModuleInjector [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_debug_node-chunk.mjs:890:31[90m)[39m
+    at getOrCreateInjectable [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_debug_node-chunk.mjs:913:10[90m)[39m
+    at ɵɵdirectiveInject [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_debug_node-chunk.mjs:7838:17[90m)[39m
+    at NodeInjectorFactory.RouterLink_Factory [as factory] (ng:///RouterLink/ɵfac.js:6:7)
+    at getNodeInjectable [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_debug_node-chunk.mjs:1044:38[90m)[39m {
+  code: [33m-201[39m,
+  ngErrorCode: [33m-201[39m,
+  ngErrorMessage: [32m&apos;No provider found for `ActivatedRoute`.&apos;[39m,
+  ngTokenPath: [ [32m&apos;ActivatedRoute&apos;[39m ]
+}
+
+            </system-err>
+            <failure message="NG0201: No provider found for `ActivatedRoute`. Source: DynamicTestModule. Find more at https://v21.angular.dev/errors/NG0201" type="ɵNotFound">
+ɵNotFound: NG0201: No provider found for `ActivatedRoute`. Source: DynamicTestModule. Find more at https://v21.angular.dev/errors/NG0201
+ ❯ createRuntimeError ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/errors_di.ts:130:16
+ ❯ createRuntimeError ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/di/null_injector.ts:20:20
+ ❯ get ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/di/r3_injector.ts:383:26
+ ❯ get ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/di/r3_injector.ts:383:26
+ ❯ get ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/chained_injector.ts:43:31
+ ❯ get ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/di.ts:426:63
+ ❯ lookupTokenUsingModuleInjector ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/di.ts:493:9
+ ❯ getOrCreateInjectable ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/instructions/di.ts:58:16
+ ❯ NodeInjectorFactory.RouterLink_Factory [as factory] ng:/RouterLink/ɵfac.js:6:7
+ ❯ factory ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/di.ts:785:37
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { code: -201, ngErrorCode: -201, ngErrorMessage: &apos;No provider found for `ActivatedRoute`.&apos;, ngTokenPath: [ &apos;ActivatedRoute&apos; ] }
+            </failure>
+        </testcase>
+    </testsuite>
+    <testsuite name="projects/practice/src/app/components/dashboard/dashboard.spec.ts" timestamp="2026-08-25T13:18:29.727Z" hostname="aegis" tests="1" failures="0" errors="0" skipped="0" time="0.137679784">
+        <testcase classname="projects/practice/src/app/components/dashboard/dashboard.spec.ts" name="Dashboard &gt; should create" time="0.134713991">
+            <system-err>
+Page load error:  HttpErrorResponse {
+  headers: HttpHeaders {
+    headers: Map(0) {},
+    normalizedNames: Map(0) {},
+    lazyInit: [90mundefined[39m,
+    lazyUpdate: [1mnull[22m
+  },
+  status: [33m0[39m,
+  statusText: [32m&apos;Unknown Error&apos;[39m,
+  url: [32m&apos;https://localhost:7173/api/get/user/8fb99128-de23-4463-818b-9e883de63a1c/appointments&apos;[39m,
+  ok: [33mfalse[39m,
+  type: [90mundefined[39m,
+  redirected: [90mundefined[39m,
+  responseType: [90mundefined[39m,
+  name: [32m&apos;HttpErrorResponse&apos;[39m,
+  message: [32m&apos;Http failure response for https://localhost:7173/api/get/user/8fb99128-de23-4463-818b-9e883de63a1c/appointments: 0 Unknown Error&apos;[39m,
+  error: ProgressEvent { isTrusted: [36m[Getter][39m }
+}
+
+            </system-err>
+        </testcase>
+    </testsuite>
+    <testsuite name="projects/practice/src/app/components/home/home.spec.ts" timestamp="2026-08-25T13:18:29.727Z" hostname="aegis" tests="1" failures="0" errors="0" skipped="0" time="0.075337517">
+        <testcase classname="projects/practice/src/app/components/home/home.spec.ts" name="Home &gt; should create" time="0.07247424">
+        </testcase>
+    </testsuite>
+    <testsuite name="projects/practice/src/app/components/login/login.spec.ts" timestamp="2026-08-25T13:18:29.728Z" hostname="aegis" tests="1" failures="1" errors="0" skipped="0" time="0.08562251">
+        <testcase classname="projects/practice/src/app/components/login/login.spec.ts" name="Login &gt; should create" time="0.083434724">
+            <failure message="NG0201: No provider found for `ActivatedRoute`. Source: Standalone[_LoginComponent]. Find more at https://v21.angular.dev/errors/NG0201" type="ɵNotFound">
+ɵNotFound: NG0201: No provider found for `ActivatedRoute`. Source: Standalone[_LoginComponent]. Find more at https://v21.angular.dev/errors/NG0201
+ ❯ createRuntimeError ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/errors_di.ts:130:16
+ ❯ createRuntimeError ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/di/null_injector.ts:20:20
+ ❯ get ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/di/r3_injector.ts:383:26
+ ❯ get ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/di/r3_injector.ts:383:26
+ ❯ get ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/di/r3_injector.ts:383:26
+ ❯ get ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/chained_injector.ts:43:31
+ ❯ get ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/di.ts:426:63
+ ❯ lookupTokenUsingModuleInjector ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/di.ts:493:9
+ ❯ getOrCreateInjectable ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/instructions/di.ts:58:16
+ ❯ NodeInjectorFactory.RouterLink_Factory [as factory] ng:/RouterLink/ɵfac.js:6:7
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { code: -201, ngErrorCode: -201, ngErrorMessage: &apos;No provider found for `ActivatedRoute`.&apos;, ngTokenPath: [ &apos;ActivatedRoute&apos; ] }
+            </failure>
+        </testcase>
+    </testsuite>
+    <testsuite name="projects/practice/src/app/components/navbar/navbar.spec.ts" timestamp="2026-08-25T13:18:29.729Z" hostname="aegis" tests="1" failures="1" errors="0" skipped="0" time="0.092147562">
+        <testcase classname="projects/practice/src/app/components/navbar/navbar.spec.ts" name="Navbar &gt; should create" time="0.089302479">
+            <system-err>
+ERROR ɵNotFound: NG0201: No provider found for `ActivatedRoute`. Source: DynamicTestModule. Find more at https://v21.angular.dev/errors/NG0201
+    at createRuntimeError [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_effect-chunk2.mjs:602:17[90m)[39m
+    at NullInjector.get [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_effect-chunk2.mjs:883:21[90m)[39m
+    at R3Injector.get [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_effect-chunk2.mjs:1208:27[90m)[39m
+    at R3Injector.get [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_effect-chunk2.mjs:1208:27[90m)[39m
+    at ChainedInjector.get [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_debug_node-chunk.mjs:7804:32[90m)[39m
+    at lookupTokenUsingModuleInjector [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_debug_node-chunk.mjs:890:31[90m)[39m
+    at getOrCreateInjectable [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_debug_node-chunk.mjs:913:10[90m)[39m
+    at ɵɵdirectiveInject [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_debug_node-chunk.mjs:7838:17[90m)[39m
+    at NodeInjectorFactory.RouterLink_Factory [as factory] (ng:///RouterLink/ɵfac.js:6:7)
+    at getNodeInjectable [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_debug_node-chunk.mjs:1044:38[90m)[39m {
+  code: [33m-201[39m,
+  ngErrorCode: [33m-201[39m,
+  ngErrorMessage: [32m&apos;No provider found for `ActivatedRoute`.&apos;[39m,
+  ngTokenPath: [ [32m&apos;ActivatedRoute&apos;[39m ]
+}
+
+            </system-err>
+            <failure message="NG0201: No provider found for `ActivatedRoute`. Source: DynamicTestModule. Find more at https://v21.angular.dev/errors/NG0201" type="ɵNotFound">
+ɵNotFound: NG0201: No provider found for `ActivatedRoute`. Source: DynamicTestModule. Find more at https://v21.angular.dev/errors/NG0201
+ ❯ createRuntimeError ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/errors_di.ts:130:16
+ ❯ createRuntimeError ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/di/null_injector.ts:20:20
+ ❯ get ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/di/r3_injector.ts:383:26
+ ❯ get ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/di/r3_injector.ts:383:26
+ ❯ get ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/chained_injector.ts:43:31
+ ❯ get ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/di.ts:426:63
+ ❯ lookupTokenUsingModuleInjector ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/di.ts:493:9
+ ❯ getOrCreateInjectable ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/instructions/di.ts:58:16
+ ❯ NodeInjectorFactory.RouterLink_Factory [as factory] ng:/RouterLink/ɵfac.js:6:7
+ ❯ factory ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/di.ts:785:37
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { code: -201, ngErrorCode: -201, ngErrorMessage: &apos;No provider found for `ActivatedRoute`.&apos;, ngTokenPath: [ &apos;ActivatedRoute&apos; ] }
+            </failure>
+        </testcase>
+    </testsuite>
+    <testsuite name="projects/practice/src/app/components/preferences/preferences.spec.ts" timestamp="2026-08-25T13:18:29.730Z" hostname="aegis" tests="1" failures="1" errors="0" skipped="0" time="0.264858546">
+        <testcase classname="projects/practice/src/app/components/preferences/preferences.spec.ts" name="Preferences &gt; should create" time="0.263028951">
+            <system-err>
+ERROR ReferenceError: feather is not defined
+    at _PreferencesGeneral.ngAfterViewInit [90m(/home/iohannes/Projects/angular/HealthcareClient/[39mprojects/practice/src/app/components/preferences-general/preferences-general.ts:143:5[90m)[39m
+    at callHookInternal [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_debug_node-chunk.mjs:555:10[90m)[39m
+    at callHook [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_debug_node-chunk.mjs:570:7[90m)[39m
+    at callHooks [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_debug_node-chunk.mjs:544:9[90m)[39m
+    at executeInitAndCheckHooks [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_debug_node-chunk.mjs:513:5[90m)[39m
+    at refreshView [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_debug_node-chunk.mjs:5857:11[90m)[39m
+    at detectChangesInView [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_debug_node-chunk.mjs:5940:5[90m)[39m
+    at detectChangesInViewIfAttached [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_debug_node-chunk.mjs:5923:3[90m)[39m
+    at detectChangesInComponent [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_debug_node-chunk.mjs:5914:5[90m)[39m
+    at detectChangesInChildComponents [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_debug_node-chunk.mjs:5962:5[90m)[39m
+
+            </system-err>
+            <failure message="feather is not defined" type="ReferenceError">
+ReferenceError: feather is not defined
+ ❯ _PreferencesGeneral.ngAfterViewInit projects/practice/src/app/components/preferences-general/preferences-general.ts:143:5
+ ❯ call ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/hooks.ts:290:9
+ ❯ callHookInternal ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/hooks.ts:319:6
+ ❯ callHook ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/hooks.ts:270:8
+ ❯ callHooks ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/hooks.ts:205:4
+ ❯ executeInitAndCheckHooks ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/instructions/change_detection.ts:319:10
+ ❯ refreshView ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/instructions/change_detection.ts:497:4
+ ❯ detectChangesInView ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/instructions/change_detection.ts:445:2
+ ❯ detectChangesInViewIfAttached ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/instructions/change_detection.ts:430:4
+ ❯ detectChangesInComponent ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/instructions/change_detection.ts:526:4
+            </failure>
+        </testcase>
+    </testsuite>
+    <testsuite name="projects/practice/src/app/components/preferences-general/preferences-general.spec.ts" timestamp="2026-08-25T13:18:29.731Z" hostname="aegis" tests="1" failures="1" errors="0" skipped="0" time="0.272187184">
+        <testcase classname="projects/practice/src/app/components/preferences-general/preferences-general.spec.ts" name="PreferencesGeneral &gt; should create" time="0.270347349">
+            <system-err>
+ERROR ReferenceError: feather is not defined
+    at _PreferencesGeneral.ngAfterViewInit [90m(/home/iohannes/Projects/angular/HealthcareClient/[39mprojects/practice/src/app/components/preferences-general/preferences-general.ts:143:5[90m)[39m
+    at callHookInternal [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_debug_node-chunk.mjs:555:10[90m)[39m
+    at callHook [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_debug_node-chunk.mjs:570:7[90m)[39m
+    at callHooks [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_debug_node-chunk.mjs:544:9[90m)[39m
+    at executeInitAndCheckHooks [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_debug_node-chunk.mjs:513:5[90m)[39m
+    at refreshView [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_debug_node-chunk.mjs:5857:11[90m)[39m
+    at detectChangesInView [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_debug_node-chunk.mjs:5940:5[90m)[39m
+    at detectChangesInViewWhileDirty [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_debug_node-chunk.mjs:5749:5[90m)[39m
+    at detectChangesInternal [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_debug_node-chunk.mjs:5738:5[90m)[39m
+    at ApplicationRef.synchronizeOnce [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_debug_node-chunk.mjs:12489:9[90m)[39m
+
+            </system-err>
+            <failure message="feather is not defined" type="ReferenceError">
+ReferenceError: feather is not defined
+ ❯ _PreferencesGeneral.ngAfterViewInit projects/practice/src/app/components/preferences-general/preferences-general.ts:143:5
+ ❯ call ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/hooks.ts:290:9
+ ❯ callHookInternal ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/hooks.ts:319:6
+ ❯ callHook ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/hooks.ts:270:8
+ ❯ callHooks ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/hooks.ts:205:4
+ ❯ executeInitAndCheckHooks ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/instructions/change_detection.ts:319:10
+ ❯ refreshView ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/instructions/change_detection.ts:497:4
+ ❯ detectChangesInView ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/instructions/change_detection.ts:106:4
+ ❯ detectChangesInViewWhileDirty ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/instructions/change_detection.ts:94:4
+ ❯ detectChangesInternal ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/application/application_ref.ts:690:8
+            </failure>
+        </testcase>
+    </testsuite>
+    <testsuite name="projects/practice/src/app/components/signup/signup.spec.ts" timestamp="2026-08-25T13:18:29.732Z" hostname="aegis" tests="1" failures="1" errors="0" skipped="0" time="0.095925898">
+        <testcase classname="projects/practice/src/app/components/signup/signup.spec.ts" name="Signup &gt; should create" time="0.093914748">
+            <failure message="&quot;]&quot; did not match the Name production" type="InvalidCharacterError">
+InvalidCharacterError: &quot;]&quot; did not match the Name production
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { code: 5, INDEX_SIZE_ERR: 1, DOMSTRING_SIZE_ERR: 2, HIERARCHY_REQUEST_ERR: 3, WRONG_DOCUMENT_ERR: 4, INVALID_CHARACTER_ERR: 5, NO_DATA_ALLOWED_ERR: 6, NO_MODIFICATION_ALLOWED_ERR: 7, NOT_FOUND_ERR: 8, NOT_SUPPORTED_ERR: 9, INUSE_ATTRIBUTE_ERR: 10, INVALID_STATE_ERR: 11, SYNTAX_ERR: 12, INVALID_MODIFICATION_ERR: 13, NAMESPACE_ERR: 14, INVALID_ACCESS_ERR: 15, VALIDATION_ERR: 16, TYPE_MISMATCH_ERR: 17, SECURITY_ERR: 18, NETWORK_ERR: 19, ABORT_ERR: 20, URL_MISMATCH_ERR: 21, QUOTA_EXCEEDED_ERR: 22, TIMEOUT_ERR: 23, INVALID_NODE_TYPE_ERR: 24, DATA_CLONE_ERR: 25 }
+            </failure>
+        </testcase>
+    </testsuite>
+    <testsuite name="projects/practice/src/app/components/update-password/update-password.spec.ts" timestamp="2026-08-25T13:18:29.733Z" hostname="aegis" tests="1" failures="1" errors="0" skipped="0" time="0.04503598">
+        <testcase classname="projects/practice/src/app/components/update-password/update-password.spec.ts" name="UpdatePassword &gt; should create" time="0.0430715">
+            <failure message="NG0201: No provider found for `MatDialogRef`. Source: Standalone[_UpdatePassword]. Find more at https://v21.angular.dev/errors/NG0201" type="ɵNotFound">
+ɵNotFound: NG0201: No provider found for `MatDialogRef`. Source: Standalone[_UpdatePassword]. Find more at https://v21.angular.dev/errors/NG0201
+ ❯ createRuntimeError ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/errors_di.ts:130:16
+ ❯ createRuntimeError ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/di/null_injector.ts:20:20
+ ❯ get ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/di/r3_injector.ts:383:26
+ ❯ get ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/di/r3_injector.ts:383:26
+ ❯ get ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/di/r3_injector.ts:383:26
+ ❯ get ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/chained_injector.ts:43:31
+ ❯ get ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/di.ts:426:63
+ ❯ lookupTokenUsingModuleInjector ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/di.ts:493:9
+ ❯ getOrCreateInjectable ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/instructions/di.ts:58:16
+ ❯ NodeInjectorFactory.UpdatePassword_Factory [as factory] projects/practice/src/app/components/update-password/update-password.ts:18:28
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { code: -201, ngErrorCode: -201, ngErrorMessage: &apos;No provider found for `MatDialogRef`.&apos;, ngTokenPath: [ &apos;MatDialogRef&apos; ] }
+            </failure>
+        </testcase>
+    </testsuite>
+</testsuites>

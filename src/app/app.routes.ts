@@ -5,7 +5,7 @@ import {HomeComponent} from './components/home/home';
 import {SignupComponent} from './components/signup/signup';
 import {SearchComponent} from './components/searchbar/searchbar';
 import {DashboardComponent} from './components/dashboard/dashboard';
-import {BookingFormComponent} from './components/bookingform/bookingform';
+import {BookingFormComponent} from './components/booking-form/bookingform';
 import {bookingGuard} from '@shared/guards/booking-guard';
 import {guestGuard} from './guards/guest-guard';
 

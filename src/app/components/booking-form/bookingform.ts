@@ -1,7 +1,5 @@
-import {Component, inject, signal} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {ForWho} from './forwho/for-who.component';
-import {firstValueFrom} from 'rxjs';
-import {AppointmentService} from '@shared/services/appointment.service';
 import {ForNew} from './fornew/for-new.component';
 import {ForWhat} from './forwhat/for-what.component';
 import {ForWhen} from './forwhen/for-when.component';

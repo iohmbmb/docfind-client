@@ -30,6 +30,7 @@ declare var feather: any
   templateUrl: './searchbar.html',
   styleUrl: './searchbar.css',
 })
+
 export class SearchComponent {
 
   constructor(private route: ActivatedRoute) {}
@@ -57,6 +58,7 @@ export class SearchComponent {
     latitude: 0
   })
 
+  // TODO: Rework entirely this logic
   ngOnInit() {
     this.searchSubject.pipe(
       debounceTime(300),

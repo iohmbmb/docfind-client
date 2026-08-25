@@ -30,6 +30,7 @@
         }
         <div class="flex justify-between items-center pt-8 border-t border-slate-100 mt-8">
           <button
+            data-testid="btn-previous"
             type="button"
             (click)="this.bookingWizardService.previousStep()"
             [class.invisible]="currentStepIndex() === 0"
@@ -37,6 +38,7 @@
             Back
           </button>
           <button
+            data-testid="btn-next"
             type="button"
             [class.invisible] = "!this.bookingStateService.isSelected() || currentStepIndex() === 4"
             (click)="this.bookingWizardService.nextStep()"
