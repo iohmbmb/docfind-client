@@ -5,6 +5,7 @@
     <div class="relative w-full md:w-96">
       <input
         type="text"
+        data-testid="specialty-input"
         [formField]="searchForm.specialty"
         placeholder="Service, practice or practitioner"
         (focus)="showSpecialties.set(true)"
@@ -13,10 +14,12 @@
       >
       @if (showSpecialties() && filteredSpecialties().length > 0) {
         <div
+          data-testid="specialty-dropdown"
           class="absolute left-0 top-full z-50 mt-1 w-full max-h-28 overflow-y-auto bg-white border border-slate-200 rounded-xl shadow-md"
         >
           @for (specialty of filteredSpecialties(); track specialty) {
             <button
+              data-testid="specialty-button"
               type="button"
               (mousedown)="selectSpecialty(specialty)"
               class="w-full text-left px-3 py-2 hover:bg-slate-100"
@@ -30,6 +33,7 @@
     <input
       type="text"
       matInput
+      data-testid="location-input"
       [formField]="searchForm.address"
       [matAutocomplete]="addressAuto"
       (input)="onLocationInput($any($event.target).value)"
@@ -39,7 +43,7 @@
                       (optionSelected)="selectLocation($event.option.value)">
       @for (location of this.locations(); track location.id) {
         <mat-option [value]="location">
-          {{ location.properties.full_address }}
+          {{ location?.properties?.full_address }}
         </mat-option>
       }
     </mat-autocomplete>
@@ -51,7 +55,7 @@
 </form>
 
 @if(this.isLoading()) {
-  <div class="w-full flex justify-center px-4 py-8 md:p-8">
+  <div data-testid="loading-spinner" class="w-full flex justify-center px-4 py-8 md:p-8">
     <div class="w-full md:w-xl p-2">
       <div class="flex flex-row gap-9 p-2 justify-center">
         <mat-spinner></mat-spinner>
@@ -59,7 +63,7 @@
     </div>
   </div>
 } @else if(this.isError()) {
-  <div class="w-full flex justify-center px-4 py-8 md:p-8">
+  <div data-testid="search-error" class="w-full flex justify-center px-4 py-8 md:p-8">
     <div class="w-full md:w-xl p-2">
       <div class="flex flex-row gap-9 p-2 justify-center">
         <div>{{errorMessage()}}</div>
@@ -67,10 +71,11 @@
     </div>
   </div>
 } @else{
-  @if (this.doctors()){
-    <div class="w-full flex flex-col items-center justify-center px-4 py-12 gap-6">
+  @if (this.doctors().length > 0){
+    <div data-testid="doctor-list" class="w-full flex flex-col items-center justify-center px-4 py-12 gap-6">
     @for (doctor of this.doctors(); track doctor.id) {
         <button
+          data-testid="doctor-button"
           (click)="book(doctor)"
           class="w-full md:w-xl border border-slate-300 p-2 shadow-sm rounded-lg cursor-pointer hover:shadow-md transition">
           <div class="flex flex-row gap-9 p-2">

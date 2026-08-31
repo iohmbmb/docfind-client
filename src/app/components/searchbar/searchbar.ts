@@ -104,12 +104,12 @@ export class SearchComponent {
   }
 
   selectLocation(feature: any){
-    const context = feature.properties.context;
+    const context = feature?.properties?.context;
     this.searchModel.update(model => ({
       ...model,
-      address: context.place?.name ?? '',
-      longitude: feature.geometry.coordinates[0],
-      latitude: feature.geometry.coordinates[1]
+      address: context?.place?.name ?? '',
+      longitude: feature?.geometry?.coordinates[0],
+      latitude: feature?.geometry?.coordinates[1]
     }))
   }
 
