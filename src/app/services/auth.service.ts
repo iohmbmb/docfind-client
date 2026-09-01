@@ -5,7 +5,6 @@ import {Observable, tap} from 'rxjs';
 import {Identity} from '../models/identity.types';
 import {LoginRequest, LoginResponse} from '../models/login.types';
 import {DoctorRegisterRequest, UserRegisterRequest} from '@shared/models/register.types';
-import {Doctor} from '@shared/models/doctor.types';
 import {PasswordRequest} from '@shared/models/password-request.types';
 
 @Injectable({
