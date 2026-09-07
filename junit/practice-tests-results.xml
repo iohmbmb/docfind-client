@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuites name="vitest tests" tests="10" failures="7" errors="0" time="0.922553492">
-    <testsuite name="projects/practice/src/app/app.spec.ts" timestamp="2026-09-07T15:11:51.471Z" hostname="aegis" tests="2" failures="1" errors="0" skipped="0" time="0.070152744">
-        <testcase classname="projects/practice/src/app/app.spec.ts" name="App &gt; should create the app" time="0.050613878">
+<testsuites name="vitest tests" tests="10" failures="7" errors="0" time="1.080867238">
+    <testsuite name="projects/practice/src/app/app.spec.ts" timestamp="2026-09-07T21:07:55.578Z" hostname="aegis" tests="2" failures="1" errors="0" skipped="0" time="0.085240878">
+        <testcase classname="projects/practice/src/app/app.spec.ts" name="App &gt; should create the app" time="0.060904379">
         </testcase>
-        <testcase classname="projects/practice/src/app/app.spec.ts" name="App &gt; should render title" time="0.017572328">
+        <testcase classname="projects/practice/src/app/app.spec.ts" name="App &gt; should render title" time="0.021648092">
             <system-err>
 ERROR ɵNotFound: NG0201: No provider found for `ActivatedRoute`. Source: DynamicTestModule. Find more at https://v21.angular.dev/errors/NG0201
     at createRuntimeError [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_effect-chunk2.mjs:602:17[90m)[39m
@@ -41,8 +41,8 @@ Serialized Error: { code: -201, ngErrorCode: -201, ngErrorMessage: &apos;No prov
             </failure>
         </testcase>
     </testsuite>
-    <testsuite name="projects/practice/src/app/components/dashboard/dashboard.spec.ts" timestamp="2026-09-07T15:11:51.473Z" hostname="aegis" tests="1" failures="0" errors="0" skipped="0" time="0.099294662">
-        <testcase classname="projects/practice/src/app/components/dashboard/dashboard.spec.ts" name="Dashboard &gt; should create" time="0.097390161">
+    <testsuite name="projects/practice/src/app/components/dashboard/dashboard.spec.ts" timestamp="2026-09-07T21:07:55.580Z" hostname="aegis" tests="1" failures="0" errors="0" skipped="0" time="0.141831521">
+        <testcase classname="projects/practice/src/app/components/dashboard/dashboard.spec.ts" name="Dashboard &gt; should create" time="0.138897547">
             <system-err>
 Page load error:  HttpErrorResponse {
   headers: HttpHeaders {
@@ -66,8 +66,12 @@ Page load error:  HttpErrorResponse {
             </system-err>
         </testcase>
     </testsuite>
-    <testsuite name="projects/practice/src/app/components/login/login.spec.ts" timestamp="2026-09-07T15:11:51.473Z" hostname="aegis" tests="1" failures="1" errors="0" skipped="0" time="0.068423056">
-        <testcase classname="projects/practice/src/app/components/login/login.spec.ts" name="Login &gt; should create" time="0.066614599">
+    <testsuite name="projects/practice/src/app/components/home/home.spec.ts" timestamp="2026-09-07T21:07:55.581Z" hostname="aegis" tests="1" failures="0" errors="0" skipped="0" time="0.07552088">
+        <testcase classname="projects/practice/src/app/components/home/home.spec.ts" name="Home &gt; should create" time="0.073190333">
+        </testcase>
+    </testsuite>
+    <testsuite name="projects/practice/src/app/components/login/login.spec.ts" timestamp="2026-09-07T21:07:55.581Z" hostname="aegis" tests="1" failures="1" errors="0" skipped="0" time="0.064776657">
+        <testcase classname="projects/practice/src/app/components/login/login.spec.ts" name="Login &gt; should create" time="0.062251318">
             <failure message="NG0201: No provider found for `ActivatedRoute`. Source: Standalone[_LoginComponent]. Find more at https://v21.angular.dev/errors/NG0201" type="ɵNotFound">
 ɵNotFound: NG0201: No provider found for `ActivatedRoute`. Source: Standalone[_LoginComponent]. Find more at https://v21.angular.dev/errors/NG0201
  ❯ createRuntimeError ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/errors_di.ts:130:16
@@ -86,12 +90,8 @@ Serialized Error: { code: -201, ngErrorCode: -201, ngErrorMessage: &apos;No prov
             </failure>
         </testcase>
     </testsuite>
-    <testsuite name="projects/practice/src/app/components/home/home.spec.ts" timestamp="2026-09-07T15:11:51.474Z" hostname="aegis" tests="1" failures="0" errors="0" skipped="0" time="0.055885467">
-        <testcase classname="projects/practice/src/app/components/home/home.spec.ts" name="Home &gt; should create" time="0.053648516">
-        </testcase>
-    </testsuite>
-    <testsuite name="projects/practice/src/app/components/navbar/navbar.spec.ts" timestamp="2026-09-07T15:11:51.474Z" hostname="aegis" tests="1" failures="1" errors="0" skipped="0" time="0.066218376">
-        <testcase classname="projects/practice/src/app/components/navbar/navbar.spec.ts" name="Navbar &gt; should create" time="0.064354904">
+    <testsuite name="projects/practice/src/app/components/navbar/navbar.spec.ts" timestamp="2026-09-07T21:07:55.582Z" hostname="aegis" tests="1" failures="1" errors="0" skipped="0" time="0.071838183">
+        <testcase classname="projects/practice/src/app/components/navbar/navbar.spec.ts" name="Navbar &gt; should create" time="0.069327072">
             <system-err>
 ERROR ɵNotFound: NG0201: No provider found for `ActivatedRoute`. Source: DynamicTestModule. Find more at https://v21.angular.dev/errors/NG0201
     at createRuntimeError [90m(file:///home/iohannes/Projects/angular/HealthcareClient/[39mnode_modules/[4m@angular/core[24m/fesm2022/_effect-chunk2.mjs:602:17[90m)[39m
@@ -129,8 +129,8 @@ Serialized Error: { code: -201, ngErrorCode: -201, ngErrorMessage: &apos;No prov
             </failure>
         </testcase>
     </testsuite>
-    <testsuite name="projects/practice/src/app/components/preferences/preferences.spec.ts" timestamp="2026-09-07T15:11:51.476Z" hostname="aegis" tests="1" failures="1" errors="0" skipped="0" time="0.223422561">
-        <testcase classname="projects/practice/src/app/components/preferences/preferences.spec.ts" name="Preferences &gt; should create" time="0.221910607">
+    <testsuite name="projects/practice/src/app/components/preferences/preferences.spec.ts" timestamp="2026-09-07T21:07:55.583Z" hostname="aegis" tests="1" failures="1" errors="0" skipped="0" time="0.252879113">
+        <testcase classname="projects/practice/src/app/components/preferences/preferences.spec.ts" name="Preferences &gt; should create" time="0.251265257">
             <system-err>
 ERROR ReferenceError: feather is not defined
     at _PreferencesGeneral.ngAfterViewInit [90m(/home/iohannes/Projects/angular/HealthcareClient/[39mprojects/practice/src/app/components/preferences-general/preferences-general.ts:143:5[90m)[39m
@@ -160,8 +160,8 @@ ReferenceError: feather is not defined
             </failure>
         </testcase>
     </testsuite>
-    <testsuite name="projects/practice/src/app/components/preferences-general/preferences-general.spec.ts" timestamp="2026-09-07T15:11:51.476Z" hostname="aegis" tests="1" failures="1" errors="0" skipped="0" time="0.220311287">
-        <testcase classname="projects/practice/src/app/components/preferences-general/preferences-general.spec.ts" name="PreferencesGeneral &gt; should create" time="0.218773745">
+    <testsuite name="projects/practice/src/app/components/preferences-general/preferences-general.spec.ts" timestamp="2026-09-07T21:07:55.584Z" hostname="aegis" tests="1" failures="1" errors="0" skipped="0" time="0.254016664">
+        <testcase classname="projects/practice/src/app/components/preferences-general/preferences-general.spec.ts" name="PreferencesGeneral &gt; should create" time="0.252322316">
             <system-err>
 ERROR ReferenceError: feather is not defined
     at _PreferencesGeneral.ngAfterViewInit [90m(/home/iohannes/Projects/angular/HealthcareClient/[39mprojects/practice/src/app/components/preferences-general/preferences-general.ts:143:5[90m)[39m
@@ -191,8 +191,8 @@ ReferenceError: feather is not defined
             </failure>
         </testcase>
     </testsuite>
-    <testsuite name="projects/practice/src/app/components/signup/signup.spec.ts" timestamp="2026-09-07T15:11:51.477Z" hostname="aegis" tests="1" failures="1" errors="0" skipped="0" time="0.078281002">
-        <testcase classname="projects/practice/src/app/components/signup/signup.spec.ts" name="Signup &gt; should create" time="0.076643089">
+    <testsuite name="projects/practice/src/app/components/signup/signup.spec.ts" timestamp="2026-09-07T21:07:55.585Z" hostname="aegis" tests="1" failures="1" errors="0" skipped="0" time="0.087639286">
+        <testcase classname="projects/practice/src/app/components/signup/signup.spec.ts" name="Signup &gt; should create" time="0.085970165">
             <failure message="&quot;]&quot; did not match the Name production" type="InvalidCharacterError">
 InvalidCharacterError: &quot;]&quot; did not match the Name production
 ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
@@ -200,8 +200,8 @@ Serialized Error: { code: 5, INDEX_SIZE_ERR: 1, DOMSTRING_SIZE_ERR: 2, HIERARCHY
             </failure>
         </testcase>
     </testsuite>
-    <testsuite name="projects/practice/src/app/components/update-password/update-password.spec.ts" timestamp="2026-09-07T15:11:51.478Z" hostname="aegis" tests="1" failures="1" errors="0" skipped="0" time="0.040564337">
-        <testcase classname="projects/practice/src/app/components/update-password/update-password.spec.ts" name="UpdatePassword &gt; should create" time="0.038715593">
+    <testsuite name="projects/practice/src/app/components/update-password/update-password.spec.ts" timestamp="2026-09-07T21:07:55.586Z" hostname="aegis" tests="1" failures="1" errors="0" skipped="0" time="0.047124056">
+        <testcase classname="projects/practice/src/app/components/update-password/update-password.spec.ts" name="UpdatePassword &gt; should create" time="0.045246559">
             <failure message="NG0201: No provider found for `MatDialogRef`. Source: Standalone[_UpdatePassword]. Find more at https://v21.angular.dev/errors/NG0201" type="ɵNotFound">
 ɵNotFound: NG0201: No provider found for `MatDialogRef`. Source: Standalone[_UpdatePassword]. Find more at https://v21.angular.dev/errors/NG0201
  ❯ createRuntimeError ../k8-fastbuild-ST-fdfa778d11ba/bin/packages/core/src/render3/errors_di.ts:130:16
