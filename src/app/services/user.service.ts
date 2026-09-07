@@ -19,19 +19,7 @@ export class UserService {
     return this.http.get<Doctor>(`${environment.apiUrl}/get/doctor/${id}`);
   }
 
-  getDoctors(): Observable<Doctor[]> {
-    return this.http.get<Doctor[]>(`${environment.apiUrl}/get/doctors`);
-  }
-
-  getDoctorsBy(specialty: string): Observable<Doctor[]> {
-    return this.http.get<Doctor[]>(`${environment.apiUrl}/get/doctors/${specialty}`);
-  }
-
   updateDoctor(id: string, updatedDoctor:Doctor): Observable<any> {
     return this.http.put(`${environment.apiUrl}/update/doctor/${id}`, updatedDoctor);
-  }
-
-  deleteUsers(id: string): Observable<User[]> {
-    return this.http.delete<User[]>(`${environment.apiUrl}/delete/user/${id}`);
   }
 }
