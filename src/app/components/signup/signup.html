@@ -7,9 +7,9 @@
     <div class="flex flex-col space-y-4">
       <div class="flex flex-col space-y-1">
         <span class="text-sm font-normal">Email</span>
-        <input type="text" [formField]="signupForm.email" placeholder="" class="border h-10 bg-white border-gray-300 rounded-sm" />
+        <input data-testid="email-field" type="text" [formField]="signupForm.email" placeholder="" class="border h-10 bg-white border-gray-300 rounded-sm" />
         @if (signupForm.email().invalid() && (signupForm.email().dirty() || signupForm.email().touched())) {
-          <div class="text-xs font-medium text-rose-600 mt-1">
+          <div data-testid="email-error" class="text-xs font-medium text-rose-600 mt-1">
             @for (error of signupForm.email().errors(); track error.kind) {
               <p>{{ error.message }}</p>
             }
@@ -18,9 +18,9 @@
       </div>
       <div class="flex flex-col space-y-1">
         <span class="text-sm font-normal">Password</span>
-        <input type="password" [formField]="signupForm.password" placeholder="" class="border h-10 bg-white border-gray-300 rounded-sm " />
+        <input data-testid="password-field" type="password" [formField]="signupForm.password" placeholder="" class="border h-10 bg-white border-gray-300 rounded-sm " />
         @if (signupForm.password().invalid() && (signupForm.password().dirty() || signupForm.password().touched())) {
-          <div class="text-xs font-medium text-rose-600 mt-1">
+          <div data-testid="password-error" class="text-xs font-medium text-rose-600 mt-1">
             @for (error of signupForm.password().errors(); track error.kind) {
               <p>{{ error.message }}</p>
             }
@@ -30,23 +30,23 @@
           <p class="text-xs font-bold text-slate-600 tracking-wider">Password Requirements</p>
           <ul class="text-xs font-medium space-y-1.5 transition-all">
             <li class="flex items-center gap-2 transition" [class.text-emerald-600]="passwordRules().hasMinLength" [class.text-slate-400]="!passwordRules().hasMinLength">
-              <span>{{ passwordRules().hasMinLength ? '✓' : '•' }}</span>
+              <span data-testid="pass-rule-1">{{ passwordRules().hasMinLength ? '✓' : '•' }}</span>
               <span>At least 8 characters long</span>
             </li>
             <li class="flex items-center gap-2 transition" [class.text-emerald-600]="passwordRules().hasUppercase" [class.text-slate-400]="!passwordRules().hasUppercase">
-              <span>{{ passwordRules().hasUppercase ? '✓' : '•' }}</span>
+              <span data-testid="pass-rule-2">{{ passwordRules().hasUppercase ? '✓' : '•' }}</span>
               <span>At least one uppercase letter (A-Z)</span>
             </li>
             <li class="flex items-center gap-2 transition" [class.text-emerald-600]="passwordRules().hasLowercase" [class.text-slate-400]="!passwordRules().hasLowercase">
-              <span>{{ passwordRules().hasLowercase ? '✓' : '•' }}</span>
+              <span data-testid="pass-rule-3">{{ passwordRules().hasLowercase ? '✓' : '•' }}</span>
               <span>At least one lowercase letter (a-z)</span>
             </li>
             <li class="flex items-center gap-2 transition" [class.text-emerald-600]="passwordRules().hasNumber" [class.text-slate-400]="!passwordRules().hasNumber">
-              <span>{{ passwordRules().hasNumber ? '✓' : '•' }}</span>
+              <span data-testid="pass-rule-4">{{ passwordRules().hasNumber ? '✓' : '•' }}</span>
               <span>At least one numerical digit (0-9)</span>
             </li>
             <li class="flex items-center gap-2 transition" [class.text-emerald-600]="passwordRules().hasSymbol" [class.text-slate-400]="!passwordRules().hasSymbol">
-              <span>{{ passwordRules().hasSymbol ? '✓' : '•' }}</span>
+              <span data-testid="pass-rule-5">{{ passwordRules().hasSymbol ? '✓' : '•' }}</span>
               <span>At least one special character (&, @, $, !, %)</span>
             </li>
           </ul>
@@ -54,9 +54,9 @@
       </div>
       <div class="flex flex-col space-y-1">
         <span class="text-sm font-normal">First name</span>
-        <input type="text" placeholder="" [formField]="signupForm.firstName" class="border h-10 bg-white border-gray-300 rounded-sm" />
+        <input data-testid="firstname-field" type="text" placeholder="" [formField]="signupForm.firstName" class="border h-10 bg-white border-gray-300 rounded-sm" />
         @if (signupForm.firstName().invalid() && (signupForm.firstName().dirty() || signupForm.firstName().touched())) {
-          <div class="text-xs font-medium text-rose-600 mt-1">
+          <div data-testid="firstname-error" class="text-xs font-medium text-rose-600 mt-1">
             @for (error of signupForm.firstName().errors(); track error.kind) {
               <p>{{ error.message }}</p>
             }
@@ -65,9 +65,9 @@
       </div>
       <div class="flex flex-col space-y-1">
         <span class="text-sm font-normal">Last name</span>
-        <input type="text" placeholder="" [formField]="signupForm.lastName" class="border h-10 bg-white border-gray-300 rounded-sm" />
+        <input data-testid="lastname-field" type="text" placeholder="" [formField]="signupForm.lastName" class="border h-10 bg-white border-gray-300 rounded-sm" />
         @if (signupForm.lastName().invalid() && (signupForm.lastName().dirty() || signupForm.lastName().touched())) {
-          <div class="text-xs font-medium text-rose-600 mt-1">
+          <div data-testid="lastname-error" class="text-xs font-medium text-rose-600 mt-1">
             @for (error of signupForm.lastName().errors(); track error.kind) {
               <p>{{ error.message }}</p>
             }
@@ -82,9 +82,10 @@
         </label>
       </div>
       <button type="submit"
+              data-testid="btn-submit"
               (click)="onSubmit()"
               class="w-full bg-indigo-600 text-white font-bold rounded-md h-11 hover:bg-indigo-700 transition">
-        {{ isLoading() ? 'Registering...' : 'Create account' }}</button>
+        {{ isLoading() ? 'Registering...' :'Create account' }}</button>
     </div>
     <a routerLink="/resetpassword" class="text-sm underline text-blue-800">Forgot your password?</a>
   </div>
