@@ -15,6 +15,10 @@ cache:
   before_script:
     - npm install --cache .npm --prefer-offline
     - npm install -g @angular/cli@21.0.4 
+    - mkdir -p environment
+    - echo "$ENV_DEVELOPMENT" > environment/environment.development.ts
+    - echo "$ENV_DEVELOPMENT" > environment/environment.ts
+    
     - mkdir -p src/environments
     - echo "$ENV_DEVELOPMENT" > src/environments/environment.development.ts
     - echo "$ENV_DEVELOPMENT" > src/environments/environment.ts
