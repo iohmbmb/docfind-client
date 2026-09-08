@@ -14,15 +14,16 @@ cache:
 
   before_script:
     - npm install --cache .npm --prefer-offline
+    - npm install -g @angular/cli@21.0.4 
 
   script:
     # --- Project 1 ---
     - echo "Testing Project 1 with Vitest..."
-    - npx ng test project1 --watch=false
+    - ng test project1 --watch=false
 
     # --- Project 2 ---
     - echo "Testing Project 2 with Vitest..."
-    - npx ng test project2 --watch=false
+    - ng test project2 --watch=false
 
   artifacts:
     name: "test-results-$CI_COMMIT_REF_SLUG"
