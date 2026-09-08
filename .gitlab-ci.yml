@@ -19,11 +19,11 @@ cache:
   script:
     # --- Project 1 ---
     - echo "Testing Project 1 with Vitest..."
-    - ng test project1 --watch=false
+    - ng test project1
 
     # --- Project 2 ---
     - echo "Testing Project 2 with Vitest..."
-    - ng test project2 --watch=false
+    - ng test project2
 
   artifacts:
     name: "test-results-$CI_COMMIT_REF_SLUG"
