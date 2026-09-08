@@ -10,6 +10,7 @@ import {addMinutes, isBefore} from 'date-fns';
 @Injectable({
   providedIn: 'root',
 })
+// TODO: this is a mess, should be refactored
 export class BookingStateService {
 
   private readonly APPOINTMENT_KEY = 'booking_appointment_state';
@@ -51,7 +52,6 @@ export class BookingStateService {
     });
 
   private doctorWorkHours = signal<DoctorWorkHours[]>([]);
-
   public selectedAppointment = signal<Date | undefined>(undefined);
   public isSelected = computed(() => this.selectedAppointment() !== undefined);
 
@@ -155,7 +155,7 @@ export class BookingStateService {
     return result;
   }
 
-  private parseTimeToDate(timeStr: string): Date {
+  public parseTimeToDate(timeStr: string): Date {
     const [hours, minutes] = timeStr.split(':').map(Number);
     const date = new Date();
     date.setHours(hours, minutes, 0, 0);
