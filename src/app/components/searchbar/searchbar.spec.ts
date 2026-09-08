@@ -58,6 +58,9 @@ describe('Searchbar', () => {
 
   afterEach(() => {
     window.feather = undefined;
+    if(fixture){
+      fixture.destroy();
+    }
   });
 
   it('should create', () => {
