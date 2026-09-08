@@ -35,11 +35,12 @@ describe('SignupComponent', () => {
     expect(emailError.textContent).toContain('Email is required');
   });
 
-  it('should display password error messages', () =>{
+  it('should display password error messages', async () =>{
     const passwordInput = fixture.nativeElement.querySelector('[data-testid="password-field"]');
     let passwordError = fixture.nativeElement.querySelector('[data-testid="password-error"]');
     passwordInput.dispatchEvent(new Event('blur'));
     fixture.detectChanges();
+    await new Promise(resolve => setTimeout(resolve, 0));
     passwordError = fixture.nativeElement.querySelector('[data-testid="password-error"]');
     expect(passwordError).toBeTruthy();
     expect(passwordError.textContent).toContain('Password is required');
