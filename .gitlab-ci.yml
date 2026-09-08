@@ -1,39 +1,44 @@
 stages:
-- test
+  - test
 
 cache:
-    key:
-        files:
-        - package-lock.json
-    paths:
-        - .npm/
+  key:
+    files:
+      - package-lock.json
+  paths:
+    - .npm/
+
 .test_template: &test_definition
-stage: test
-image: node:20-alpine
-before_script:
-- npm ci --cache .npm --prefer-offline
-script:
-# --- Project 1 ---
-- echo "Testing Project 1 with Vitest..."
-- ng test project1 --watch=false
-# --- Project 2 ---
-- echo "Testing Project 2 with Vitest..."
-- ng test project2 --watch=false
-artifacts:
-name: "test-results-$CI_COMMIT_REF_SLUG"
-when: always
-paths:
-- coverage/
-- junit/
-reports:
-junit: junit/*.xml
+  stage: test
+  image: node:20-alpine
+
+  before_script:
+    - npm ci --cache .npm --prefer-offline
+
+  script:
+    # --- Project 1 ---
+    - echo "Testing Project 1 with Vitest..."
+    - ng test project1 --watch=false
+
+    # --- Project 2 ---
+    - echo "Testing Project 2 with Vitest..."
+    - ng test project2 --watch=false
+
+  artifacts:
+    name: "test-results-$CI_COMMIT_REF_SLUG"
+    when: always
+    paths:
+      - coverage/
+      - junit/
+    reports:
+      junit: junit/*.xml
 
 test:mr:
-    <<: *test_definition
-    rules:
-        - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+  <<: *test_definition
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 
 test:master:
-    <<: *test_definition
-    rules:
-        - if: $CI_COMMIT_BRANCH == "master"
+  <<: *test_definition
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
