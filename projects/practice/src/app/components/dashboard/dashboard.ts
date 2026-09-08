@@ -1,6 +1,6 @@
 import {Component, inject, signal} from '@angular/core';
 import {AppointmentService} from '@shared/services/appointment.service';
-import {Router} from '@angular/router';
+import {firstValueFrom} from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,20 +16,20 @@ export class Dashboard {
   errorMessage : string | null = null;
   isLoading = signal<boolean>(true);
 
-  ngOnInit() {
-    this.appointmentService.getAppointmentsFor(this.currentDoctorId).subscribe({
-      next: (response) => {
-        if(response.length > 0){
-          this.pageData = response;
-        }
-        this.isLoading.set(false);
-        this.errorMessage = 'No appointments';
-      },
-      error: (err) => {
-        this.errorMessage = 'No appointments';
-        this.isLoading.set(false);
-        console.error('Page load error: ', err);
+  async ngOnInit() {
+    try{
+      const appointments = await firstValueFrom(this.appointmentService.getAppointmentsFor(this.currentDoctorId));
+      if(appointments.length > 0){
+        this.pageData = appointments;
       }
-    })
+      else{
+        this.errorMessage = 'No appointments';
+      }
+      this.isLoading.set(false);
+    }
+    catch (err) {
+      this.errorMessage = 'No appointments';
+      this.isLoading.set(false);
+    }
   }
 }

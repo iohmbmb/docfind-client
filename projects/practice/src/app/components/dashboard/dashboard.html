@@ -10,12 +10,12 @@
     <div>Loading your data</div>
   }
   @else if(errorMessage){
-    <div class="grid max-w-4xl mx-auto place-items-center text-center pt-16 md:pt-28 px-4 gap-8">
+    <div data-testid="error-msg" class="grid max-w-4xl mx-auto place-items-center text-center pt-16 md:pt-28 px-4 gap-8">
       <div class="text-xl font-extralight italic text-gray-400">{{errorMessage}}</div>
     </div>
   }
   @else{
-    <div class="p-2 grid grid-flow-row gap-4">
+    <div data-testid="template" class="p-2 grid grid-flow-row gap-4">
       <div class="border-b border-b-gray-200 grid grid-flow-row grid-cols-5 gap-4 place-items-center">
         <div class="row-span-1 text-center">Igor Schlor</div>
         <div class="row-span-1 text-center text-sm">
