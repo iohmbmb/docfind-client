@@ -22,7 +22,7 @@ export class LoginComponent {
   private router = inject(Router);
 
   public credentials: LoginRequest = { email: '', password: ''};
-  public rememberMe = false;
+  public rememberMe = signal<boolean>(false);
 
   public errorMessage = signal<string>('')
   public isLoading = signal<boolean>(false);
@@ -35,10 +35,10 @@ export class LoginComponent {
       const me = await firstValueFrom(this.authService.getId())
       if(response){
         this.isLoading.set(false);
-        if (this.rememberMe) {
+        if (this.rememberMe()) {
           localStorage.setItem('remember_user_email', this.credentials.email);
         }
-        this.router.navigate(['/bookings']);
+        await this.router.navigate(['/bookings']);
       }
       localStorage.setItem('user_id', me.id);
     }
