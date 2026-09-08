@@ -1,6 +1,6 @@
 import {AuthService} from '@shared/services/auth.service';
 import {environment} from '../../../../../../src/environments/environment.development';
-import {Component, inject} from '@angular/core';
+import {Component, inject, computed, signal} from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
 
 @Component({
@@ -12,28 +12,28 @@ import {Router, RouterLink} from '@angular/router';
   styleUrl: './navbar.css',
 })
 export class Navbar {
-  private router = inject(Router);
   public authService = inject(AuthService);
   public patientPortalUrl = environment.patientPortalUrl;
 
-  get isLoginPage(): boolean {
-    return this.router.url === '/login';
-  }
+  public currentPath = signal<string>('');
 
-  get isSignupPage(): boolean {
-    return this.router.url === '/signup';
-  }
+  public isLoginPage = computed(() => this.currentPath() === '/login');
+  public isSignupPage = computed(() => this.currentPath() === '/signup');
 
-  public async onSubmit() : Promise<void> {
+  public onSubmit() {
     this.authService.logout();
     this.router.navigate(['/']);
   }
 
-  public async onSettings() : Promise<void> {
+  constructor(private router: Router) {
+    this.currentPath.set(this.router.url);
+  }
+
+  public onSettings(){
     this.router.navigate(['/preferences']);
   }
 
-  public async onSubmitToRegister() : Promise<void> {
+  public onSubmitToRegister(){
     this.authService.logout();
     this.router.navigate(['/signup']);
   }
