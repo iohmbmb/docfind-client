@@ -124,11 +124,12 @@ describe('Searchbar', () => {
     expect(component.showSpecialties()).toBeFalsy();
   })
 
-  it('should write a location to the subject', () =>{
+  it('should write a location to the subject', async () =>{
     const inputSpy = vi.spyOn(component, 'onLocationInput');
     const locationInput = fixture.nativeElement.querySelector('[data-testid="location-input"]');
     locationInput.value = 'Toulouse';
     locationInput.dispatchEvent(new Event('input'));
+    await new Promise(resolve => setTimeout(resolve, 300));
     fixture.detectChanges();
     expect(inputSpy).toHaveBeenCalledWith('Toulouse');
   })
