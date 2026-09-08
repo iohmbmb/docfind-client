@@ -12,6 +12,10 @@ describe('BookingStateService', () => {
     service = TestBed.inject(BookingStateService);
   });
 
+  afterEach(() =>{
+    localStorage.clear();
+  })
+
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
