@@ -2,12 +2,11 @@ stages:
 - test
 
 cache:
-key:
-files:
-- package-lock.json
-paths:
-- .npm/
-
+    key:
+        files:
+        - package-lock.json
+    paths:
+        - .npm/
 .test_template: &test_definition
 stage: test
 image: node:20-alpine
@@ -30,12 +29,11 @@ reports:
 junit: junit/*.xml
 
 test:mr:
-<<: *test_definition
-rules:
-- if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    <<: *test_definition
+    rules:
+        - if: $CI_PIPELINE_SOURCE == "merge_request_event"
 
 test:master:
-<<: *test_definition
-rules:
-- if: $CI_COMMIT_BRANCH == "master"
-
+    <<: *test_definition
+    rules:
+        - if: $CI_COMMIT_BRANCH == "master"
