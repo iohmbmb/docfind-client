@@ -138,6 +138,7 @@
         "test": {
           "builder": "@angular/build:unit-test",
           "options": {
+            "tsConfig": "projects/practice/tsconfig.spec.json",
             "reporters": ["default", "junit"],
             "outputFile": "junit/practice-tests-results.xml",
             "coverage": true
