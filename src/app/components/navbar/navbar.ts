@@ -20,7 +20,7 @@ export class Navbar {
     return this.router.url === '/login' || this.router.url === '/signup';
   }
 
-  public async onSubmit() : Promise<void> {
+  public onSubmit(){
     this.authService.logout();
     this.router.navigate(['/']);
   }
