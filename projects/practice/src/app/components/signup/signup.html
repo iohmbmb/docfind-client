@@ -97,7 +97,7 @@
         </div>
       }
       <div class="text-sm font-semibold">Phone number</div>
-      <input class="w-64 h-10 text-sm font-normal border rounded-sm bg-white text-black" type="text" placeholder="" [formField]="signupForm.practicePhone"]>
+      <input class="w-64 h-10 text-sm font-normal border rounded-sm bg-white text-black" type="text" placeholder="" [formField]="signupForm.practicePhone">
       @if (signupForm.practicePhone().invalid() && (signupForm.practicePhone().dirty() || signupForm.practicePhone().touched())) {
         <div class="text-xs font-medium text-amber-400 mt-1">
           @for (error of signupForm.practicePhone().errors(); track error.kind) {
@@ -115,7 +115,7 @@
         </div>
       }
       <div class="text-sm font-semibold">State / Region</div>
-      <input class="w-64 h-10 text-sm font-normal border rounded-sm bg-white text-black" type="text" placeholder="" [formField]="signupForm.practiceState"]>
+      <input class="w-64 h-10 text-sm font-normal border rounded-sm bg-white text-black" type="text" placeholder="" [formField]="signupForm.practiceState">
       @if (signupForm.practiceState().invalid() && (signupForm.practiceState().dirty() || signupForm.practiceState().touched())) {
         <div class="text-xs font-medium text-amber-400 mt-1">
           @for (error of signupForm.practiceState().errors(); track error.kind) {

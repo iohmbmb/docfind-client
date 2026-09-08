@@ -39,7 +39,7 @@ export class SignupComponent {
   errorMessage = signal<string>('');
   isLoading = signal<boolean>(false);
 
-  private searchSubject = new Subject<string>();
+  searchSubject = new Subject<string>();
   locations = signal<any[]>([]);
 
   ngOnInit() {
