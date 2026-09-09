@@ -49,7 +49,7 @@ describe('Searchbar', () => {
         MatAutocompleteModule,
         ReactiveFormsModule,
       ],
-      providers: [provideRouter([]), provideHttpClientTesting()]
+      providers: [provideRouter([])]
     }).compileComponents();
 
     fixture = TestBed.createComponent(SearchComponent);
