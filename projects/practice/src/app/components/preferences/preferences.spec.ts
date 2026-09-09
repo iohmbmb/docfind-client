@@ -27,8 +27,12 @@ describe('Preferences', () => {
     await fixture.whenStable();
   });
 
-  afterEach(() => {
+  afterEach( async () => {
     window.feather = undefined;
+    await new Promise(resolve => setTimeout(resolve, 20));
+    if (fixture) {
+      fixture.destroy();
+    }
   })
 
   it('should create', () => {
