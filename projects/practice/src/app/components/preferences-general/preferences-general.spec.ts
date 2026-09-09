@@ -4,6 +4,9 @@ import {of} from 'rxjs';
 import {AuthService} from '@shared/services/auth.service';
 import {UserService} from '@shared/services/user.service';
 import {ScheduleService} from '@shared/services/schedule';
+import { PracticeSpecialty } from "@shared/models/practice-specialty";
+import { Availability } from "@shared/models/availability";
+import { LocationPreference } from "@shared/models/location-preference";
 
 declare global {
   interface Window {
@@ -32,8 +35,17 @@ describe('PreferencesGeneral', () => {
     mockUserService.getDoctor.mockReturnValue(of({
       firstName: 'John',
       lastName: 'Doe',
-      email: 'john@example.com',
-      status: 'Available'
+      email: 'doctor@example.com',
+      practiceName: 'Clinic',
+      practiceAddress: '123 Main St',
+      practicePhone: '555-1234',
+      practicePostcode: '12345',
+      practiceState: 'State',
+      practiceSuburb: 'Suburb',
+      hourlyRate: 150.0,
+      specialty: PracticeSpecialty.GeneralPractice,
+      status: Availability.Available,
+      preference: LocationPreference.Hybrid
     }));
     mockScheduleService.getWorkHours.mockReturnValue(of([]));
 
