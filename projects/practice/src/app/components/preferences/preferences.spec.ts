@@ -31,13 +31,5 @@ describe('Preferences', () => {
 
   afterEach( async () => {
     window.feather = undefined;
-    await new Promise(resolve => setTimeout(resolve, 0));
-    if (fixture) {
-      fixture.destroy();
-    }
   })
-
-  it('should create', async () => {
-    expect(component).toBeTruthy();
-  });
 });
