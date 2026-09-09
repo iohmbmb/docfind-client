@@ -20,6 +20,7 @@ declare global {
 describe('Searchbar', () => {
   let component: SearchComponent;
   let fixture: ComponentFixture<SearchComponent>;
+
   const mockLocation = {
     id: 'loc-123',
     features: {
@@ -48,7 +49,7 @@ describe('Searchbar', () => {
         MatAutocompleteModule,
         ReactiveFormsModule,
       ],
-      providers: [provideRouter([])]
+      providers: [provideRouter([]), provideHttpClientTesting()]
     }).compileComponents();
 
     fixture = TestBed.createComponent(SearchComponent);
@@ -129,8 +130,8 @@ describe('Searchbar', () => {
     const locationInput = fixture.nativeElement.querySelector('[data-testid="location-input"]');
     locationInput.value = 'Toulouse';
     locationInput.dispatchEvent(new Event('input'));
-    await new Promise(resolve => setTimeout(resolve, 300));
     fixture.detectChanges();
+    await new Promise(resolve => setTimeout(resolve, 10));
     expect(inputSpy).toHaveBeenCalledWith('Toulouse');
   })
 
