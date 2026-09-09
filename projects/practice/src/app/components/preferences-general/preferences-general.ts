@@ -94,19 +94,19 @@ export class PreferencesGeneral implements  AfterViewInit {
 
       this.doctorProfileModel.update(model => ({
         ...model,
-        firstName: doctor.firstName,
-        lastName: doctor.lastName,
-        email: doctor.email,
-        practiceName: doctor.practiceName,
-        practiceAddress: doctor.practiceAddress,
-        practicePhone: doctor.practicePhone,
-        practicePostcode: doctor.practicePostcode,
-        practiceState: doctor.practiceState,
-        practiceSuburb: doctor.practiceSuburb,
-        hourlyRate: doctor.hourlyRate,
-        specialty: doctor.specialty,
-        status: doctor.status,
-        preference: doctor.preference
+        firstName: doctor.firstName ?? '',
+        lastName: doctor.lastName ?? '',
+        email: doctor.email ?? '',
+        practiceName: doctor.practiceName ?? '',
+        practiceAddress: doctor.practiceAddress ?? '',
+        practicePhone: doctor.practicePhone ?? '',
+        practicePostcode: doctor.practicePostcode ?? '',
+        practiceState: doctor.practiceState ?? '',
+        practiceSuburb: doctor.practiceSuburb ?? '',
+        hourlyRate: doctor.hourlyRate ?? 0,
+        specialty: doctor.specialty ?? PracticeSpecialty.GeneralPractice,
+        status: doctor.status ?? Availability.Available,
+        preference: doctor.preference ?? LocationPreference.InPerson
       }));
 
       const workHours = await firstValueFrom(
@@ -126,8 +126,8 @@ export class PreferencesGeneral implements  AfterViewInit {
         if (period.startDate && period.endDate) {
           this.doctorProfileModel.update(model => ({
             ...model,
-            absenceStartDate: period.startDate,
-            absenceEndDate: period.endDate
+            absenceStartDate: period.startDate ?? '',
+            absenceEndDate: period.endDate ?? ''
           }));
         }
       }
