@@ -1,4 +1,4 @@
-import {Component, computed, inject, input, Input, signal, Signal} from '@angular/core';
+import {Component, computed, DestroyRef, inject, input, Input, signal, Signal} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {PracticeSpecialty} from '@shared/models/practice-specialty';
 import {MapboxService} from '@shared/services/mapbox.service';
@@ -12,6 +12,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Doctor} from '@shared/models/doctor.types';
 import {BookingStateService} from '@shared/services/booking-state-service';
 import {ScheduleService} from '@shared/services/schedule';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 declare var feather: any
 
@@ -41,7 +42,7 @@ export class SearchComponent {
   private bookingStateService = inject(BookingStateService);
   private searchService = inject(SearchService)
   private scheduleService = inject(ScheduleService);
-
+  private destroyRef = inject(DestroyRef);
   specialties = Object.values(PracticeSpecialty)
   doctors = signal<Doctor[]>([])
   isLoading = signal<boolean>(false);
@@ -68,7 +69,8 @@ export class SearchComponent {
           return of({ features: [] });
         }
         return this.mapBoxService.queryPlaceAndLocality(value);
-      })
+      }),
+      takeUntilDestroyed(this.destroyRef)
     ).subscribe(result => {
       this.locations.set(result.features);
     });
