@@ -71,6 +71,8 @@
         "test": {
           "builder": "@angular/build:unit-test",
           "options": {
+            "runner": "vitest",
+            "runnerConfig": "vitest.config.ts",
             "tsConfig": "tsconfig.spec.json",
             "reporters": ["default", "junit"],
             "outputFile": "junit/test-results.xml",
@@ -138,6 +140,8 @@
         "test": {
           "builder": "@angular/build:unit-test",
           "options": {
+            "runner": "vitest",
+            "runnerConfig": "vitest.config.ts",
             "tsConfig": "projects/practice/tsconfig.spec.json",
             "reporters": ["default", "junit"],
             "outputFile": "junit/practice-tests-results.xml",
