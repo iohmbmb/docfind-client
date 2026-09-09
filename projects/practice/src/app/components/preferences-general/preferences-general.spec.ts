@@ -73,7 +73,7 @@ describe('PreferencesGeneral', () => {
   it('should create', async () => {
     fixture.detectChanges();
     await fixture.whenStable();
-    await new Promise(resolve => setTimeout(resolve, 0));
+    await new Promise(resolve => setTimeout(resolve, 20));
     expect(component).toBeTruthy();
   });
 });
