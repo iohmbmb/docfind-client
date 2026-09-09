@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Preferences } from './preferences';
-import {HttpTestingController, provideHttpClientTesting} from '@angular/common/http/testing';
+import { NO_ERRORS_SCHEMA } from "@angular/core";
 
 declare global {
   interface Window {
@@ -13,7 +13,6 @@ declare global {
 describe('Preferences', () => {
   let component: Preferences;
   let fixture: ComponentFixture<Preferences>;
-  let httpTestingController: HttpTestingController;
 
   beforeEach(async () => {
     window.feather = {
@@ -22,10 +21,9 @@ describe('Preferences', () => {
 
     await TestBed.configureTestingModule({
       imports: [Preferences],
-      providers: [provideHttpClientTesting() ],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
-    httpTestingController = TestBed.inject(HttpTestingController);
     fixture = TestBed.createComponent(Preferences);
     component = fixture.componentInstance;
     await fixture.whenStable();
@@ -33,12 +31,7 @@ describe('Preferences', () => {
 
   afterEach( async () => {
     window.feather = undefined;
-    try {
-      const pendingRequests = httpTestingController.match(() => true);
-      pendingRequests.forEach(req => req.flush({}));
-    } catch (e) {
-    }
-    await new Promise(resolve => setTimeout(resolve, 10));
+    await new Promise(resolve => setTimeout(resolve, 0));
     if (fixture) {
       fixture.destroy();
     }
