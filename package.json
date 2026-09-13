@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test:p1": "ng test HealthcareClient --watch=false",
+    "test:p2": "ng test practice --watch=false"
   },
   "private": true,
   "packageManager": "npm@11.12.1",

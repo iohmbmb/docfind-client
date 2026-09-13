@@ -1,36 +1,37 @@
 stages:
   - test
 
-cache:
-  key:
-    files:
-      - package-lock.json
-  paths:
-    - .npm/
-
 .test_template: &test_definition
   stage: test
-  image: node:20-alpine
+
+  image: docker:27-cli
+
+  services:
+    - name: docker:27-dind
+      alias: docker
+
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
 
   before_script:
-    - npm install --cache .npm --prefer-offline
-    - npm install -g @angular/cli@21.0.4 
+    - docker info
+
+    # Create Angular environment files before building the test image
     - mkdir -p environment
     - echo "$ENV_DEVELOPMENT" > environment/environment.development.ts
     - echo "$ENV_DEVELOPMENT" > environment/environment.ts
-    
+
     - mkdir -p src/environments
     - echo "$ENV_DEVELOPMENT" > src/environments/environment.development.ts
     - echo "$ENV_DEVELOPMENT" > src/environments/environment.ts
 
   script:
-    # --- Project 1 ---
-    - echo "Testing Project 1 with Vitest..."
-    - ng test HealthcareClient --watch=false || true
+    - echo "Building Angular test image..."
+    - docker build --network=host -f Dockerfile.angular -t angular-tests .
 
-    # --- Project 2 ---
-    - echo "Testing Project 2 with Vitest..."
-    - ng test practice --watch=false || true
+    - echo "Running Angular tests..."
+    - docker run --rm angular-tests
 
   artifacts:
     name: "test-results-$CI_COMMIT_REF_SLUG"
