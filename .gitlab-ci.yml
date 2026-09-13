@@ -29,13 +29,8 @@ stages:
   script:
     - echo "Building Angular test image..."
     - docker build --network=host -f Dockerfile.angular -t angular-tests .
-
-    - echo "Running Angular tests..."
     - mkdir -p coverage junit
-    - docker run --rm \
-        -v "$CI_PROJECT_DIR/coverage:/app/coverage" \
-        -v "$CI_PROJECT_DIR/junit:/app/junit" \
-        angular-tests
+    - docker run --rm -v "$CI_PROJECT_DIR/coverage:/app/coverage" -v "$CI_PROJECT_DIR/junit:/app/junit" angular-tests
 
   artifacts:
     name: "test-results-$CI_COMMIT_REF_SLUG"
