@@ -43,7 +43,7 @@ search results.
 
 | Patient Dashboard                  | Doctor Profile Setup              |
 | ---------------------------------- | --------------------------------- |
-| ![Link](link-to-image.png) | ![Link](link-to-image.png) |
+| ![Link](screenshots/docfind-patient-home.png) | ![Link](screenshots/docfind-doctor-register.png) |
 |                                    |                                   |
 
 ## ⚙️ Getting Started
