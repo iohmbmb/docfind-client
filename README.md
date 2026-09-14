@@ -43,7 +43,7 @@ search results.
 
 | Patient Dashboard                  | Doctor Profile Setup              |
 | ---------------------------------- | --------------------------------- |
-| ![Patient Link](link-to-image.png) | ![Doctor Link](link-to-image.png) |
+| ![Link](link-to-image.png) | ![Link](link-to-image.png) |
 |                                    |                                   |
 
 ## ⚙️ Getting Started
