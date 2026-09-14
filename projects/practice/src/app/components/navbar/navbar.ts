@@ -14,7 +14,6 @@ import {filter} from 'rxjs';
   styleUrl: './navbar.css',
 })
 export class Navbar {
-  private router = inject(Router);
   public authService = inject(AuthService);
   public patientPortalUrl = environment.patientPortalUrl;
 
@@ -22,15 +21,6 @@ export class Navbar {
 
   public isLoginPage = computed(() => this.currentPath() === '/login');
   public isSignupPage = computed(() => this.currentPath() === '/signup');
-
-  constructor() {
-    this.router.events.pipe(
-      filter((event): event is NavigationEnd => event instanceof NavigationEnd),
-      takeUntilDestroyed(inject(DestroyRef))
-    ).subscribe(() => {
-      this.currentPath.set(this.router.url);
-    });
-  }
 
   public onSubmit() {
     this.authService.logout();
