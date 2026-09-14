@@ -1,6 +1,7 @@
 # DocFind
 
 [![Status](https://img.shields.io/badge/Status-Active-success)]() 
+
 *A comprehensive healthcare platform connecting patients with doctors 
 seamlessly.*
 
@@ -124,4 +125,4 @@ Distributed under the [MIT] License. See `LICENSE` for more information.
 Ioh - iohannes.mboumba@pm.me
 
 Project Link: 
-[https://github.com/iohmbmb/docfind-client](https://gthub.com/iohmbmb/docfind-client)
+[https://github.com/iohmbmb/docfind-client](https://github.com/iohmbmb/docfind-client)
