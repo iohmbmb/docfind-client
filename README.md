@@ -1,59 +1,128 @@
-# HealthcareClient
+# DocFind
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.11.
+[![Status](https://img.shields.io/badge/Status-Active-success)]() 
 
-## Development server
+*A comprehensive healthcare platform connecting patients with doctors 
+seamlessly.*
 
-To start a local development server, run:
+## 📖 Overview
+Docfind is a dual-portal web application designed to bridge the 
+gap between medical professionals and patients. The platform allows 
+patients to find doctors based on their needs and book appointments, 
+while providing doctors with a dedicated dashboard to manage their 
+schedules, profiles, and patient interactions.
 
-```bash
-ng serve
+## 🚀 Features
+
+### 👤 Patient Portal
+*   **User Authentication:** Secure Registration and Login system.
+*   **Doctor Discovery:** A searchable directory of doctors (filter by 
+specialty, location, etc.).
+*   **Appointment Booking:** Easy booking flow for selecting time slots.
+*   **Booking Management:** A personal dashboard to view, reschedule, or 
+cancel upcoming appointments.
+
+### 🩺 Doctor Portal
+*   **Professional Profile:** Doctors can set up their profile, 
+including specialties, experience, and bio (customizable layout).
+*   **Dashboard Management:** View a list of all upcoming bookings from 
+patients.
+*   **Availability Management:** Control which time slots are available 
+for booking.
+*   **Profile Customization:** Tools to manage how they appear in the 
+search results.
+
+## 🛠 Tech Stack
+*   **Frontend:** Angular
+*   **Styling:** Tailwind CSS / Material UI
+*   **Backend:** C# .NET 9.0 - [here](https://github.com/iohmbmb/docfind-server)
+*   **Database:** Sqlite
+*   **Authentication:** JWT 
+
+## 📸 Screenshots (Optional)
+
+| Patient Dashboard                  | Doctor Profile Setup              |
+| ---------------------------------- | --------------------------------- |
+| ![Link](screenshots/docfind-patient-home.png) | ![Link](screenshots/docfind-doctor-register.png) |
+|                                    |                                   |
+
+## ⚙️ Getting Started
+
+### Prerequisites
+*   **Node.js** (v24.x or higher recommended)
+*   **npm** or **yarn**
+*   **Angular CLI** (Optional, but recommended: `npm install -g 
+@angular/cli`)
+
+### Installation
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/iohmbmb/docfind-client.git
+    ```
+2.  **Navigate to the project directory:**
+    ```bash
+    cd docfind-client
+    ```
+3.  **Install dependencies:**
+    ```bash
+    npm install
+    # OR if using yarn
+    yarn install
+    ```
+
+### 🛠 Configuration (Required)
+Since this is a frontend-only repository, you need to configure the 
+environment variables to connect it to your backend API. 
+
+Because local environment files are excluded from the repo for security, 
+you need to update your configuration:
+
+1.  Navigate to `src/environments/`.
+2.  Create the file `environment.development.ts`.
+3.  Add the following configuration (replace the values with your local 
+backend info):
+
+```typescript
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:7173/api', 
+  patientPortalUrl: 'http://localhost:4200',
+  practicePortalUrl: 'http://localhost:4300',
+  mapBoxAPI: 'https://api.mapbox.com/search/geocode/v6/forward?q=',
+  mapBoxToken: ''
+};
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+The mapbox token can obtain by creating a [mapbox account](https://account.mapbox.com/auth/signup/?page=/).
 
-## Code scaffolding
+4.  **Run the application:**
+    ```bash
+    ng serve
+    # Or if not using global Angular CLI:
+    npm start
+    ```
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🛣 Roadmap
+- [ ] Add a "Reminder" system (Email/SMS notifications).
+- [ ] Implement a Video Consultation feature.
+- [ ] Add an admin panel to verify doctor credentials.
+- [ ] Multi-language support.
 
-```bash
-ng generate component component-name
-```
+## 🤝 Contributing
+Contributions are welcome! Please follow these steps:
+1. Fork the Project.
+2. Create your Feature Branch (`git checkout -b 
+feature/AmazingFeature`).
+3. Commit your Changes (`git commit -m 'Add 
+some AmazingFeature'`).
+4. Push to the Branch (`git push origin feature/AmazingFeature`).
+5. Open a Pull Request.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 📄 License
+Distributed under the [MIT] License. See `LICENSE` for more information.
 
-```bash
-ng generate --help
-```
+## 📧 Contact
+Ioh - iohannes.mboumba@pm.me
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Project Link: 
+[https://github.com/iohmbmb/docfind-client](https://github.com/iohmbmb/docfind-client)
