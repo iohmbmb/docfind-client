@@ -31,16 +31,17 @@ export class DashboardComponent {
   results: Appointments[] = [];
 
  async ngOnInit() {
-   var now = new Date();
+   const now = new Date();
    if(this.bookingStateService.patientId() != null){
      this.results = await firstValueFrom(this.appointmentService.getAppointmentsFor(this.bookingStateService.patientId()));
-     for(let appoints of this.results){
-       let doctor = await firstValueFrom(this.doctorService.getDoctor(appoints.doctorId))
-       if(+appoints.scheduleTime > +now){
+     for(let appointment of this.results){
+       let doctor = await firstValueFrom(this.doctorService.getDoctor(appointment.doctorId))
+       const scheduledTime = new Date(appointment.scheduleTime);
+       if( scheduledTime > now){
          this.current_bookings.update(model => [
            ...model,
            {
-             schedule: appoints.scheduleTime,
+             schedule: appointment.scheduleTime,
              doctor_name: doctor.firstName+" "+doctor.lastName,
              doctor_address: doctor.practiceAddress+', '+doctor.practiceSuburb+', '+doctor.practiceState+', '+doctor.practicePostcode
            }]);
@@ -48,7 +49,7 @@ export class DashboardComponent {
          this.past_bookings.update(model => [
            ...model,
            {
-             schedule: appoints.scheduleTime,
+             schedule: appointment.scheduleTime,
              doctor_name: doctor.firstName+" "+doctor.lastName,
              doctor_address: doctor.practiceAddress+', '+doctor.practiceSuburb+', '+doctor.practiceState+', '+doctor.practicePostcode
            }
@@ -56,5 +57,6 @@ export class DashboardComponent {
        }
      }
    }
+   console.log(this.current_bookings().length);
   }
 }

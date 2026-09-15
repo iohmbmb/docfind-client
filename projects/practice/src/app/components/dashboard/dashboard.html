@@ -9,39 +9,41 @@
   @if(isLoading()){
     <div>Loading your data</div>
   }
-  @else if(errorMessage){
+  @else if(errorMessage && dashboardInfos().length === 0){
     <div data-testid="error-msg" class="grid max-w-4xl mx-auto place-items-center text-center pt-16 md:pt-28 px-4 gap-8">
       <div class="text-xl font-extralight italic text-gray-400">{{errorMessage}}</div>
     </div>
   }
   @else{
     <div data-testid="template" class="p-2 grid grid-flow-row gap-4">
-      <div class="border-b border-b-gray-200 grid grid-flow-row grid-cols-5 gap-4 place-items-center">
-        <div class="row-span-1 text-center">Igor Schlor</div>
-        <div class="row-span-1 text-center text-sm">
-          <div class="flex flex-row">
-            +33 723 39 48 29
+      @for (info of dashboardInfos(); track info){
+        <div class="border-b border-b-gray-200 grid grid-flow-row grid-cols-5 gap-4 place-items-center">
+          <div class="row-span-1 text-center">{{info.name}}</div>
+          <div class="row-span-1 text-center text-sm">
+            <div class="flex flex-row italic text-slate-400">
+              nº -- -- -- --
+            </div>
+            <div class="flex flex-row text-gray-500">
+              {{info.email}}
+            </div>
           </div>
-          <div class="flex flex-row text-gray-500">
-            igor.schloratmail.com
+          <div class="row-span-1 text-center">{{info.visitType}}</div>
+          <div class="row-span-1 text-center text-sm">
+            <div class="flex flex-row">
+              {{info.date | date: 'shortTime'}}
+            </div>
+            <div class="flex flex-row text-gray-500">
+              {{info.date | date: 'mediumDate'}}
+            </div>
+          </div>
+          <div class="row-span-1 text-center">
+            <div class="flex flex-row border rounded-3xl bg-blue-300 border-blue-300 items-center justify-center gap-2 p-1">
+              <div class="rounded-2xl bg-blue-700 h-2 w-2"></div>
+              <div class="text-sm">{{info.status}}</div>
+            </div>
           </div>
         </div>
-        <div class="row-span-1 text-center">Consultation</div>
-        <div class="row-span-1 text-center text-sm">
-          <div class="flex flex-row">
-            9:00 AM
-          </div>
-          <div class="flex flex-row text-gray-500">
-            16/02
-          </div>
-        </div>
-        <div class="row-span-1 text-center">
-          <div class="flex flex-row border rounded-3xl bg-green-300 border-green-300 items-center justify-center gap-2 p-1">
-            <div class="rounded-2xl bg-green-700 h-2 w-2"></div>
-            <div class="text-sm">Completed</div>
-          </div>
-        </div>
-      </div>
+      }
     </div>
   }
 </div>
