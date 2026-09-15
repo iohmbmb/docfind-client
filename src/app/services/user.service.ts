@@ -11,6 +11,10 @@ import {Doctor} from '../models/doctor.types';
 export class UserService {
   constructor(private http: HttpClient) {}
 
+  getUser(id: string): Observable<User> {
+    return this.http.get<User>(`${environment.apiUrl}/get/user/${id}`);
+  }
+
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${environment.apiUrl}/get/users`);
   }

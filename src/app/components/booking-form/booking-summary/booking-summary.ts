@@ -25,7 +25,7 @@ export class BookingSummary {
     try {
       await firstValueFrom(this.appointmentService.createAppointment(this.bookingStateService.getAppointmentModel()))
       this.bookingStateService.clearBookingState()
-      this.router.navigate(['/dashboard'])
+      await this.router.navigate(['/dashboard'])
     } catch(err) {
       this.errorMessage.set('Failed to create appointment');
       console.log(err)
