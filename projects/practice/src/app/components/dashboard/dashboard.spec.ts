@@ -1,22 +1,44 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 import { Dashboard } from './dashboard';
-import {HttpTestingController, provideHttpClientTesting} from '@angular/common/http/testing';
-import {environment} from '../../../../../../src/environments/environment.development';
+import {of} from 'rxjs';
+import {AuthService} from '@shared/services/auth.service';
+import {AppointmentStatus} from '@shared/models/appointment.types';
+import {UserService} from "@shared/services/user.service";
+import {AppointmentService} from '@shared/services/appointment.service';
 
 describe('Dashboard', () => {
   let component: Dashboard;
   let fixture: ComponentFixture<Dashboard>;
-  let httpTestingController: HttpTestingController;
+  let mockAuthService: {
+    getId: ReturnType<typeof vi.fn>;
+  }
+  let mockUserService: {
+    getUser: ReturnType<typeof vi.fn>;
+  }
+  let mockAppointmentService: {
+    getAppointmentsFor: ReturnType<typeof vi.fn>;
+  }
 
   beforeEach(async () => {
+    mockAuthService = {
+      getId: vi.fn()
+    }
+    mockUserService = {
+      getUser: vi.fn()
+    }
+    mockAppointmentService = {
+      getAppointmentsFor: vi.fn()
+    }
     await TestBed.configureTestingModule({
       imports: [Dashboard],
-      providers: [provideHttpClientTesting()]
+      providers: [
+        { provide: AuthService, useValue: mockAuthService },
+        { provide: UserService, useValue: mockUserService },
+        { provide: AppointmentService, useValue: mockAppointmentService}]
     }).compileComponents();
 
     fixture = TestBed.createComponent(Dashboard);
     component = fixture.componentInstance;
-    httpTestingController = TestBed.inject(HttpTestingController);
     await fixture.whenStable();
   });
 
@@ -25,61 +47,34 @@ describe('Dashboard', () => {
   });
 
   it('should have data', async () =>{
-    const req = httpTestingController.expectOne(`${environment.apiUrl}/get/user/8fb99128-de23-4463-818b-9e883de63a1c/appointments`);
-    expect(req.request.method).toBe('GET');
-
-    const mockAppointments = [{ id: 1, name: 'Checkup' }];
-    req.flush(mockAppointments);
-
-    await fixture.whenStable();
-
-    expect(component.pageData).toEqual(mockAppointments);
+    mockAuthService.getId.mockReturnValue(of({ id: '8fb99128-de23-4463-818b-9e883de63a1c' }));
+    mockUserService.getUser.mockReturnValue(of({ firstName: 'John', lastName: 'Doe', email: 'mail@mail.com'}));
+    mockAppointmentService.getAppointmentsFor.mockReturnValue(of([{consultationType:'CheckUp', date: new Date(), status: AppointmentStatus.Pending}]))
+    await component.ngOnInit();
+    expect(component.dashboardInfos().length).not.toEqual(0);
     expect(component.isLoading()).toEqual(false);
   });
 
 
   it('should catch an error', async () =>{
-    const req = httpTestingController.expectOne(`${environment.apiUrl}/get/user/8fb99128-de23-4463-818b-9e883de63a1c/appointments`);
-    expect(req.request.method).toBe('GET');
-
-    const mockAppointments = [{ id: 1, name: 'Checkup' }];
-    req.error(new ErrorEvent('Error'), { status: 404 });
-
-    await fixture.whenStable();
-
-    expect(component.pageData).not.toEqual(mockAppointments);
+    await component.ngOnInit();
+    expect(component.dashboardInfos().length).toEqual(0);
     expect(component.isLoading()).toEqual(false);
     expect(component.errorMessage).toEqual('No appointments');
   });
 
   it('should display error message', async () => {
-    const req = httpTestingController.expectOne(`${environment.apiUrl}/get/user/8fb99128-de23-4463-818b-9e883de63a1c/appointments`);
-    expect(req.request.method).toBe('GET');
-
-    const mockAppointments = [{ id: 1, name: 'Checkup' }];
-    req.error(new ErrorEvent('Error'), { status: 404 });
-
-    await fixture.whenStable();
-
+    await component.ngOnInit();
     fixture.detectChanges();
-
     let errorElement = fixture.nativeElement.querySelector('[data-testid="error-msg"]');
     expect(component.isLoading()).toEqual(false);
     expect(errorElement).toBeTruthy();
   })
 
-  it('should display template if data', async () =>{
-    const req = httpTestingController.expectOne(`${environment.apiUrl}/get/user/8fb99128-de23-4463-818b-9e883de63a1c/appointments`);
-    expect(req.request.method).toBe('GET');
-
-    const mockAppointments = [{ id: 1, name: 'Checkup' }];
-    req.flush(mockAppointments);
-
-    await fixture.whenStable();
-
+  it('should display template if data', () =>{
+    component.dashboardInfos.set([{ name:'Bart', email: 'mail@mail.com', visitType: 'CheckUp', date: new Date(), status: AppointmentStatus.Pending }]);
     fixture.detectChanges();
-
-    const appointmentCard = fixture.nativeElement.querySelector('[data-testid="template"]');
+    let appointmentCard = fixture.nativeElement.querySelector('[data-testid="template"]');
     expect(appointmentCard).toBeTruthy();
   })
 });
