@@ -5,7 +5,7 @@ import {BookingStateService} from '@shared/services/booking-state-service';
 import {firstValueFrom} from 'rxjs';
 import {DatePipe} from '@angular/common';
 import {UserService} from '@shared/services/user.service';
-import {Appointments} from '@shared/models/appointment.types';
+import {Appointments, AppointmentStatus} from '@shared/models/appointment.types';
 
 export type AppointmentData = {
   schedule: Date;
@@ -37,7 +37,7 @@ export class DashboardComponent {
      for(let appointment of this.results){
        let doctor = await firstValueFrom(this.doctorService.getDoctor(appointment.doctorId))
        const scheduledTime = new Date(appointment.scheduleTime);
-       if( scheduledTime > now){
+       if( scheduledTime > now && appointment.status != AppointmentStatus.Cancelled){
          this.current_bookings.update(model => [
            ...model,
            {
