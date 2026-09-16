@@ -36,10 +36,56 @@
               {{info.date | date: 'mediumDate'}}
             </div>
           </div>
-          <div class="row-span-1 text-center">
-            <div class="flex flex-row border rounded-3xl bg-blue-300 border-blue-300 items-center justify-center gap-2 p-1">
-              <div class="rounded-2xl bg-blue-700 h-2 w-2"></div>
-              <div class="text-sm">{{info.status}}</div>
+          <div class="row-span-1 flex flex-column place-items-center gap-1 text-center">
+            <div class="flex flex-row border rounded-3xl items-center justify-center gap-2 p-1 text-gray-800"
+                 [class.bg-green-100]="info.status === AppointmentStatus.Confirmed"
+                 [class.border-green-300]="info.status === AppointmentStatus.Confirmed"
+                 [class.text-green-800]="info.status === AppointmentStatus.Confirmed"
+
+                 [class.bg-red-100]="info.status === AppointmentStatus.Cancelled"
+                 [class.border-red-300]="info.status === AppointmentStatus.Cancelled"
+                 [class.text-red-800]="info.status === AppointmentStatus.Cancelled"
+
+                 [class.bg-yellow-100]="info.status === AppointmentStatus.Pending"
+                 [class.border-yellow-300]="info.status === AppointmentStatus.Pending"
+                 [class.text-yellow-800]="info.status === AppointmentStatus.Pending">
+
+              <div class="rounded-2xl h-2 w-2"
+                   [class.bg-green-600]="info.status === AppointmentStatus.Confirmed"
+                   [class.bg-red-600]="info.status === AppointmentStatus.Cancelled"
+                   [class.bg-yellow-600]="info.status === AppointmentStatus.Pending">
+              </div>
+              <div class="text-sm font-medium">{{info.status}}</div>
+            </div>
+            @if(info.status === 'Pending'){
+              <div>
+                <button class="text-gray-500 hover:text-gray-700
+                transition cursor-pointer"
+                        (click)="onConfirm(info)"
+                        [matTooltip]="'Confirm this booking.'"
+                >
+                  <i data-feather="check-circle"  height="16"></i>
+                </button>
+              </div>
+            } @else if(info.status === 'Confirmed'){
+              <div>
+                <button class="text-gray-500 hover:text-gray-700
+                transition cursor-pointer"
+                        (click)="onCancel(info)"
+                        [matTooltip]="'Cancel this booking.'"
+                >
+                  <i data-feather="x-circle"  height="16"></i>
+                </button>
+              </div>
+            }
+            <div>
+              <button class="text-gray-500 hover:text-gray-700
+                transition cursor-pointer"
+                      (click)="onDelete(info)"
+                      [matTooltip]="'Delete this booking.'"
+              >
+                <i data-feather="trash-2"  height="16"></i>
+              </button>
             </div>
           </div>
         </div>

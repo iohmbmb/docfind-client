@@ -6,6 +6,15 @@ import {AppointmentStatus} from '@shared/models/appointment.types';
 import {UserService} from "@shared/services/user.service";
 import {AppointmentService} from '@shared/services/appointment.service';
 
+
+declare global {
+  interface Window {
+    feather: {
+      replace: () => void;
+    } | undefined;
+  }
+}
+
 describe('Dashboard', () => {
   let component: Dashboard;
   let fixture: ComponentFixture<Dashboard>;
@@ -20,6 +29,9 @@ describe('Dashboard', () => {
   }
 
   beforeEach(async () => {
+    window.feather = {
+      replace: () =>{}
+    }
     mockAuthService = {
       getId: vi.fn()
     }
@@ -42,15 +54,27 @@ describe('Dashboard', () => {
     await fixture.whenStable();
   });
 
-  it('should create', () => {
+  afterEach(() => {
+    window.feather = undefined;
+    if (fixture) {
+      fixture.destroy();
+    }
+  })
+
+  it('should create', async () => {
+    await new Promise(resolve => setTimeout(resolve, 20));
     expect(component).toBeTruthy();
   });
 
   it('should have data', async () =>{
     mockAuthService.getId.mockReturnValue(of({ id: '8fb99128-de23-4463-818b-9e883de63a1c' }));
     mockUserService.getUser.mockReturnValue(of({ firstName: 'John', lastName: 'Doe', email: 'mail@mail.com'}));
-    mockAppointmentService.getAppointmentsFor.mockReturnValue(of([{consultationType:'CheckUp', date: new Date(), status: AppointmentStatus.Pending}]))
+    //TODO: fix this test
+    const today = new Date();
+    today.setHours(10, 0, 0);
+    mockAppointmentService.getAppointmentsFor.mockReturnValue(of([{consultationType:'CheckUp', date: today.toLocaleString(), status: AppointmentStatus.Pending}]))
     await component.ngOnInit();
+    await new Promise(resolve => setTimeout(resolve, 20));
     expect(component.dashboardInfos().length).not.toEqual(0);
     expect(component.isLoading()).toEqual(false);
   });
@@ -58,6 +82,7 @@ describe('Dashboard', () => {
 
   it('should catch an error', async () =>{
     await component.ngOnInit();
+    await new Promise(resolve => setTimeout(resolve, 20));
     expect(component.dashboardInfos().length).toEqual(0);
     expect(component.isLoading()).toEqual(false);
     expect(component.errorMessage).toEqual('No appointments');
@@ -66,14 +91,16 @@ describe('Dashboard', () => {
   it('should display error message', async () => {
     await component.ngOnInit();
     fixture.detectChanges();
+    await new Promise(resolve => setTimeout(resolve, 20));
     let errorElement = fixture.nativeElement.querySelector('[data-testid="error-msg"]');
     expect(component.isLoading()).toEqual(false);
     expect(errorElement).toBeTruthy();
   })
 
-  it('should display template if data', () =>{
-    component.dashboardInfos.set([{ name:'Bart', email: 'mail@mail.com', visitType: 'CheckUp', date: new Date(), status: AppointmentStatus.Pending }]);
+  it('should display template if data', async () =>{
+    component.dashboardInfos.set([{ appointmentId: '228993', name:'Bart', email: 'mail@mail.com', visitType: 'CheckUp', date: new Date(), status: AppointmentStatus.Pending }]);
     fixture.detectChanges();
+    await new Promise(resolve => setTimeout(resolve, 20));
     let appointmentCard = fixture.nativeElement.querySelector('[data-testid="template"]');
     expect(appointmentCard).toBeTruthy();
   })
