@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { AppointmentService } from './appointment.service';
 import {Appointments} from '../models/appointment.types';
-import {of} from 'rxjs';
 import {HttpTestingController, provideHttpClientTesting} from '@angular/common/http/testing';
 import {environment} from '../../environments/environment.development';
 
