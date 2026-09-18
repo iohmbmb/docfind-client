@@ -20,12 +20,10 @@ export class AppointmentService {
     return this.http.post(`${environment.apiUrl}/create/appointment`, appointment);
   }
 
-  //TODO: test
   updateAppointment(id: string, appointment: Appointments): Observable<any> {
     return this.http.put(`${environment.apiUrl}/update/appointment/${id}`, appointment);
   }
 
-  //TODO: test
   deleteAppointment(id: string): Observable<any> {
     return this.http.delete(`${environment.apiUrl}/delete/appointment/${id}`);
   }
