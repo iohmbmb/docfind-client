@@ -1,4 +1,4 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 import { Dashboard } from './dashboard';
 import {of} from 'rxjs';
 import {AuthService} from '@shared/services/auth.service';
@@ -69,10 +69,9 @@ describe('Dashboard', () => {
   it('should have data', async () =>{
     mockAuthService.getId.mockReturnValue(of({ id: '8fb99128-de23-4463-818b-9e883de63a1c' }));
     mockUserService.getUser.mockReturnValue(of({ firstName: 'John', lastName: 'Doe', email: 'mail@mail.com'}));
-    //TODO: fix this test
     const today = new Date();
     today.setHours(10, 0, 0);
-    mockAppointmentService.getAppointmentsFor.mockReturnValue(of([{consultationType:'CheckUp', date: today.toLocaleString(), status: AppointmentStatus.Pending}]))
+    mockAppointmentService.getAppointmentsFor.mockReturnValue(of([{id: 'valid-id', consultationType:'CheckUp', scheduleTime: today, status: AppointmentStatus.Pending}]))
     await component.ngOnInit();
     await new Promise(resolve => setTimeout(resolve, 20));
     expect(component.dashboardInfos().length).not.toEqual(0);
@@ -95,7 +94,7 @@ describe('Dashboard', () => {
     let errorElement = fixture.nativeElement.querySelector('[data-testid="error-msg"]');
     expect(component.isLoading()).toEqual(false);
     expect(errorElement).toBeTruthy();
-  })
+  });
 
   it('should display template if data', async () =>{
     component.dashboardInfos.set([{ appointmentId: '228993', name:'Bart', email: 'mail@mail.com', visitType: 'CheckUp', date: new Date(), status: AppointmentStatus.Pending }]);
@@ -103,5 +102,6 @@ describe('Dashboard', () => {
     await new Promise(resolve => setTimeout(resolve, 20));
     let appointmentCard = fixture.nativeElement.querySelector('[data-testid="template"]');
     expect(appointmentCard).toBeTruthy();
-  })
+  });
+
 });

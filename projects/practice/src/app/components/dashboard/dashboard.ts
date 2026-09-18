@@ -37,7 +37,6 @@ export class Dashboard {
   errorMessage : string | null = null;
   isLoading = signal<boolean>(true);
 
-  //TODO: test
   async ngOnInit() {
     try{
       const doctor = await firstValueFrom(this.authService.getId());
@@ -116,6 +115,35 @@ export class Dashboard {
     } catch (err) {
       console.log(err);
     }
+  }
+
+  // Assuming dashboardInfos is a WritableSignal
+  filterAppointments(filter: string) {
+    const sortedInfos = [...this.dashboardInfos()];
+    sortedInfos.sort((a, b) => {
+      if (filter === 'name') {
+        return a.name.localeCompare(b.name);
+      }
+      if(filter === 'email') {
+        return a.email.localeCompare(b.email);
+      }
+      if(filter === 'visitType') {
+        if (a.visitType && b.visitType){
+          return a.visitType.localeCompare(b.visitType);
+        }
+      }
+      if(filter === 'date') {
+        return new Date(a.date).getTime() - new Date(b.date).getTime();
+      }
+      if(filter === 'status'){
+        if(a.status && b.status){
+          return a.status.localeCompare(b.status);
+        }
+      }
+
+      return 0;
+    });
+    this.dashboardInfos.set(sortedInfos);
   }
 
   protected readonly AppointmentStatus = AppointmentStatus;
