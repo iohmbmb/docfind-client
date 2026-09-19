@@ -31,8 +31,7 @@ export class Dashboard {
   private appointmentService = inject(AppointmentService);
   private authService = inject(AuthService);
   private userService = inject(UserService);
-  private appointments : Appointments[] = [];
-
+  appointments : Appointments[] = [];
   dashboardInfos = signal<Infos[]>([])
   errorMessage : string | null = null;
   isLoading = signal<boolean>(true);
@@ -78,7 +77,6 @@ export class Dashboard {
     setTimeout(() => feather.replace())
   }
 
-  //TODO: test
   async onConfirm(info: Infos){
     const appointment = this.appointments.find(appointment => appointment.id === info.appointmentId);
     if(appointment?.status)
@@ -92,7 +90,6 @@ export class Dashboard {
     }
   }
 
-  //TODO: test
   async onCancel(info: Infos){
     const appointment = this.appointments.find(appointment => appointment.id === info.appointmentId);
     if(appointment?.status)
@@ -105,7 +102,7 @@ export class Dashboard {
       console.log(err);
     }
   }
-  //TODO: test
+
   async onDelete(info: Infos){
     const appointment = this.appointments.find(appointment => appointment.id === info.appointmentId);
     try{
@@ -117,7 +114,6 @@ export class Dashboard {
     }
   }
 
-  // Assuming dashboardInfos is a WritableSignal
   filterAppointments(filter: string) {
     const sortedInfos = [...this.dashboardInfos()];
     sortedInfos.sort((a, b) => {

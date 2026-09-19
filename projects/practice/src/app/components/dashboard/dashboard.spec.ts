@@ -26,6 +26,8 @@ describe('Dashboard', () => {
   }
   let mockAppointmentService: {
     getAppointmentsFor: ReturnType<typeof vi.fn>;
+    updateAppointment: ReturnType<typeof vi.fn>;
+    deleteAppointment: ReturnType<typeof vi.fn>;
   }
 
   beforeEach(async () => {
@@ -39,7 +41,9 @@ describe('Dashboard', () => {
       getUser: vi.fn()
     }
     mockAppointmentService = {
-      getAppointmentsFor: vi.fn()
+      getAppointmentsFor: vi.fn(),
+      updateAppointment: vi.fn(),
+      deleteAppointment: vi.fn()
     }
     await TestBed.configureTestingModule({
       imports: [Dashboard],
@@ -103,5 +107,61 @@ describe('Dashboard', () => {
     let appointmentCard = fixture.nativeElement.querySelector('[data-testid="template"]');
     expect(appointmentCard).toBeTruthy();
   });
+
+  it('should confirm appointment', async () => {
+    const spyOnConfirm = vi.spyOn(component, 'onConfirm');
+    component.appointments = [
+      {id: '1', patientId: '1', doctorId: '2', scheduleTime: new Date(), status: AppointmentStatus.Pending},
+      {id: '2', patientId: '2', doctorId: '2', scheduleTime: new Date(), status: AppointmentStatus.Pending},
+      {id: '3', patientId: '4', doctorId: '2', scheduleTime: new Date(), status: AppointmentStatus.Pending},
+    ];
+    const info = {appointmentId: '1', name: 'Paul', email:'valid-mail', visitType:'valid-type', date: new Date(), status: AppointmentStatus.Pending};
+    mockAppointmentService.updateAppointment.mockReturnValue(of({}));
+    await component.onConfirm(info);
+    await new Promise(resolve => setTimeout(resolve, 20));
+    expect(spyOnConfirm).toHaveBeenCalledWith(info);
+    expect(info.status).toBe(AppointmentStatus.Confirmed);
+    expect(component.appointments[0].status).toBe(AppointmentStatus.Confirmed);
+  })
+
+  it('should cancel appointment', async () => {
+    const spyOnCancel = vi.spyOn(component, 'onCancel');
+    component.appointments = [
+      {id: '1', patientId: '1', doctorId: '2', scheduleTime: new Date(), status: AppointmentStatus.Pending},
+      {id: '2', patientId: '2', doctorId: '2', scheduleTime: new Date(), status: AppointmentStatus.Pending},
+      {id: '3', patientId: '4', doctorId: '2', scheduleTime: new Date(), status: AppointmentStatus.Pending},
+    ];
+    const info = {appointmentId: '1', name: 'Paul', email:'valid-mail', visitType:'valid-type', date: new Date(), status: AppointmentStatus.Pending};
+    mockAppointmentService.updateAppointment.mockReturnValue(of({}));
+    await component.onCancel(info);
+    await new Promise(resolve => setTimeout(resolve, 20));
+    expect(spyOnCancel).toHaveBeenCalledWith(info);
+    expect(info.status).toBe(AppointmentStatus.Cancelled);
+    expect(component.appointments[0].status).toBe(AppointmentStatus.Cancelled);
+  })
+
+  it('should delete appointment', async () => {
+    const spyOnDelete = vi.spyOn(component, 'onDelete');
+    component.appointments = [
+      {id: '1', patientId: '1', doctorId: '2', scheduleTime: new Date(), status: AppointmentStatus.Pending},
+      {id: '2', patientId: '2', doctorId: '2', scheduleTime: new Date(), status: AppointmentStatus.Pending},
+      {id: '3', patientId: '4', doctorId: '2', scheduleTime: new Date(), status: AppointmentStatus.Pending},
+    ];
+    component.dashboardInfos.set([
+      { appointmentId: '2', name:'Bart', email: 'mail@mail.com', visitType: 'CheckUp', date: new Date(), status: AppointmentStatus.Pending },
+      { appointmentId: '1', name:'Paul', email: 'valid-mail', visitType: 'valid-type', date: new Date(), status: AppointmentStatus.Pending }
+    ]);
+    const info = component.dashboardInfos()[1];
+    mockAppointmentService.deleteAppointment.mockReturnValue(of({}));
+    expect(component.dashboardInfos().length).toBe(2);
+    await component.onDelete(info);
+    await new Promise(resolve => setTimeout(resolve, 20));
+    expect(spyOnDelete).toHaveBeenCalledWith(info);
+    expect(component.dashboardInfos().length).toBe(1);
+  })
+
+  it('should filter appointment by a filter', async () => {
+    await new Promise(resolve => setTimeout(resolve, 20));
+  })
 
 });

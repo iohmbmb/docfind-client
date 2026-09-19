@@ -1,49 +1,82 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuites name="vitest tests" tests="17" failures="0" errors="0" time="0.748826789">
-    <testsuite name="projects/practice/src/app/components/dashboard/dashboard.spec.ts" timestamp="2026-09-13T12:01:04.758Z" hostname="aegis" tests="5" failures="0" errors="0" skipped="0" time="0.083730109">
-        <testcase classname="projects/practice/src/app/components/dashboard/dashboard.spec.ts" name="Dashboard &gt; should create" time="0.050850236">
+<testsuites name="vitest tests" tests="22" failures="0" errors="0" time="1.366398938">
+    <testsuite name="projects/practice/src/app/components/dashboard/dashboard.spec.ts" timestamp="2026-09-19T14:52:57.008Z" hostname="aegis" tests="9" failures="0" errors="0" skipped="0" time="0.356429611">
+        <testcase classname="projects/practice/src/app/components/dashboard/dashboard.spec.ts" name="Dashboard &gt; should create" time="0.080839781">
         </testcase>
-        <testcase classname="projects/practice/src/app/components/dashboard/dashboard.spec.ts" name="Dashboard &gt; should have data" time="0.008862204">
+        <testcase classname="projects/practice/src/app/components/dashboard/dashboard.spec.ts" name="Dashboard &gt; should have data" time="0.062140778">
         </testcase>
-        <testcase classname="projects/practice/src/app/components/dashboard/dashboard.spec.ts" name="Dashboard &gt; should catch an error" time="0.007077421">
+        <testcase classname="projects/practice/src/app/components/dashboard/dashboard.spec.ts" name="Dashboard &gt; should catch an error" time="0.028270081">
         </testcase>
-        <testcase classname="projects/practice/src/app/components/dashboard/dashboard.spec.ts" name="Dashboard &gt; should display error message" time="0.007864818">
+        <testcase classname="projects/practice/src/app/components/dashboard/dashboard.spec.ts" name="Dashboard &gt; should display error message" time="0.030188725">
         </testcase>
-        <testcase classname="projects/practice/src/app/components/dashboard/dashboard.spec.ts" name="Dashboard &gt; should display template if data" time="0.007439119">
+        <testcase classname="projects/practice/src/app/components/dashboard/dashboard.spec.ts" name="Dashboard &gt; should display template if data" time="0.036356297">
         </testcase>
-    </testsuite>
-    <testsuite name="projects/practice/src/app/components/home/home.spec.ts" timestamp="2026-09-13T12:01:04.759Z" hostname="aegis" tests="1" failures="0" errors="0" skipped="0" time="0.052301214">
-        <testcase classname="projects/practice/src/app/components/home/home.spec.ts" name="Home &gt; should create" time="0.050610681">
+        <testcase classname="projects/practice/src/app/components/dashboard/dashboard.spec.ts" name="Dashboard &gt; should confirm appointment" time="0.02971272">
         </testcase>
-    </testsuite>
-    <testsuite name="projects/practice/src/app/components/navbar/navbar.spec.ts" timestamp="2026-09-13T12:01:04.760Z" hostname="aegis" tests="5" failures="0" errors="0" skipped="0" time="0.111543531">
-        <testcase classname="projects/practice/src/app/components/navbar/navbar.spec.ts" name="Navbar &gt; should create" time="0.054922596">
+        <testcase classname="projects/practice/src/app/components/dashboard/dashboard.spec.ts" name="Dashboard &gt; should cancel appointment" time="0.027990679">
         </testcase>
-        <testcase classname="projects/practice/src/app/components/navbar/navbar.spec.ts" name="Navbar &gt; should click register button" time="0.021020311">
+        <testcase classname="projects/practice/src/app/components/dashboard/dashboard.spec.ts" name="Dashboard &gt; should delete appointment" time="0.029471311">
         </testcase>
-        <testcase classname="projects/practice/src/app/components/navbar/navbar.spec.ts" name="Navbar &gt; should display nav variant if in login page" time="0.011244722">
-        </testcase>
-        <testcase classname="projects/practice/src/app/components/navbar/navbar.spec.ts" name="Navbar &gt; should display nav variant if authenticated and click logout" time="0.012755633">
-        </testcase>
-        <testcase classname="projects/practice/src/app/components/navbar/navbar.spec.ts" name="Navbar &gt; should click settings if authenticated" time="0.009839621">
+        <testcase classname="projects/practice/src/app/components/dashboard/dashboard.spec.ts" name="Dashboard &gt; should filter appointment by a filter" time="0.028729373">
         </testcase>
     </testsuite>
-    <testsuite name="projects/practice/src/app/components/preferences-general/preferences-general.spec.ts" timestamp="2026-09-13T12:01:04.760Z" hostname="aegis" tests="1" failures="0" errors="0" skipped="0" time="0.225501721">
-        <testcase classname="projects/practice/src/app/components/preferences-general/preferences-general.spec.ts" name="PreferencesGeneral &gt; should create" time="0.223920656">
+    <testsuite name="projects/practice/src/app/components/home/home.spec.ts" timestamp="2026-09-19T14:52:57.010Z" hostname="aegis" tests="1" failures="0" errors="0" skipped="0" time="0.065312051">
+        <testcase classname="projects/practice/src/app/components/home/home.spec.ts" name="Home &gt; should create" time="0.063227813">
         </testcase>
     </testsuite>
-    <testsuite name="projects/practice/src/app/components/signup/signup.spec.ts" timestamp="2026-09-13T12:01:04.761Z" hostname="aegis" tests="4" failures="0" errors="0" skipped="0" time="0.209871204">
-        <testcase classname="projects/practice/src/app/components/signup/signup.spec.ts" name="SignupComponent &gt; should create" time="0.123249489">
+    <testsuite name="projects/practice/src/app/components/navbar/navbar.spec.ts" timestamp="2026-09-19T14:52:57.010Z" hostname="aegis" tests="5" failures="0" errors="0" skipped="0" time="0.12293027">
+        <testcase classname="projects/practice/src/app/components/navbar/navbar.spec.ts" name="Navbar &gt; should create" time="0.063623443">
         </testcase>
-        <testcase classname="projects/practice/src/app/components/signup/signup.spec.ts" name="SignupComponent &gt; should call onAddressInput" time="0.028769139">
+        <testcase classname="projects/practice/src/app/components/navbar/navbar.spec.ts" name="Navbar &gt; should click register button" time="0.022549296">
         </testcase>
-        <testcase classname="projects/practice/src/app/components/signup/signup.spec.ts" name="SignupComponent &gt; should select an address" time="0.026106317">
+        <testcase classname="projects/practice/src/app/components/navbar/navbar.spec.ts" name="Navbar &gt; should display nav variant if in login page" time="0.01114688">
         </testcase>
-        <testcase classname="projects/practice/src/app/components/signup/signup.spec.ts" name="SignupComponent &gt; should register doctor" time="0.029908104">
+        <testcase classname="projects/practice/src/app/components/navbar/navbar.spec.ts" name="Navbar &gt; should display nav variant if authenticated and click logout" time="0.013485051">
+        </testcase>
+        <testcase classname="projects/practice/src/app/components/navbar/navbar.spec.ts" name="Navbar &gt; should click settings if authenticated" time="0.01018843">
         </testcase>
     </testsuite>
-    <testsuite name="projects/practice/src/app/components/update-password/update-password.spec.ts" timestamp="2026-09-13T12:01:04.761Z" hostname="aegis" tests="1" failures="0" errors="0" skipped="0" time="0.06587901">
-        <testcase classname="projects/practice/src/app/components/update-password/update-password.spec.ts" name="UpdatePassword &gt; should create" time="0.06425275">
+    <testsuite name="projects/practice/src/app/components/preferences/preferences.spec.ts" timestamp="2026-09-19T14:52:57.011Z" hostname="aegis" tests="1" failures="0" errors="0" skipped="0" time="0.252972095">
+        <testcase classname="projects/practice/src/app/components/preferences/preferences.spec.ts" name="Preferences &gt; should create" time="0.251441328">
+            <system-err>
+Error loading doctor profile: HttpErrorResponse {
+  headers: HttpHeaders {
+    headers: Map(0) {},
+    normalizedNames: Map(0) {},
+    lazyInit: [90mundefined[39m,
+    lazyUpdate: [1mnull[22m
+  },
+  status: [33m0[39m,
+  statusText: [32m&apos;Unknown Error&apos;[39m,
+  url: [32m&apos;https://localhost:7173/api/auth/me&apos;[39m,
+  ok: [33mfalse[39m,
+  type: [90mundefined[39m,
+  redirected: [90mundefined[39m,
+  responseType: [90mundefined[39m,
+  name: [32m&apos;HttpErrorResponse&apos;[39m,
+  message: [32m&apos;Http failure response for https://localhost:7173/api/auth/me: 0 Unknown Error&apos;[39m,
+  error: ProgressEvent { isTrusted: [36m[Getter][39m }
+}
+
+            </system-err>
+        </testcase>
+    </testsuite>
+    <testsuite name="projects/practice/src/app/components/preferences-general/preferences-general.spec.ts" timestamp="2026-09-19T14:52:57.011Z" hostname="aegis" tests="1" failures="0" errors="0" skipped="0" time="0.244863004">
+        <testcase classname="projects/practice/src/app/components/preferences-general/preferences-general.spec.ts" name="PreferencesGeneral &gt; should create" time="0.243326455">
+        </testcase>
+    </testsuite>
+    <testsuite name="projects/practice/src/app/components/signup/signup.spec.ts" timestamp="2026-09-19T14:52:57.011Z" hostname="aegis" tests="4" failures="0" errors="0" skipped="0" time="0.251974321">
+        <testcase classname="projects/practice/src/app/components/signup/signup.spec.ts" name="SignupComponent &gt; should create" time="0.144833288">
+        </testcase>
+        <testcase classname="projects/practice/src/app/components/signup/signup.spec.ts" name="SignupComponent &gt; should call onAddressInput" time="0.036398318">
+        </testcase>
+        <testcase classname="projects/practice/src/app/components/signup/signup.spec.ts" name="SignupComponent &gt; should select an address" time="0.030946233">
+        </testcase>
+        <testcase classname="projects/practice/src/app/components/signup/signup.spec.ts" name="SignupComponent &gt; should register doctor" time="0.037875062">
+        </testcase>
+    </testsuite>
+    <testsuite name="projects/practice/src/app/components/update-password/update-password.spec.ts" timestamp="2026-09-19T14:52:57.012Z" hostname="aegis" tests="1" failures="0" errors="0" skipped="0" time="0.071917586">
+        <testcase classname="projects/practice/src/app/components/update-password/update-password.spec.ts" name="UpdatePassword &gt; should create" time="0.070333126">
         </testcase>
     </testsuite>
 </testsuites>
