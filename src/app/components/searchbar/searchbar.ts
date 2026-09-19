@@ -34,6 +34,8 @@ declare var feather: any
 
 export class SearchComponent {
 
+  private readonly DOCTOR_KEY = 'booking_doctor_state';
+
   constructor(private route: ActivatedRoute) {}
 
   showShadow = input(true);
@@ -206,6 +208,7 @@ export class SearchComponent {
     }))
     const workHours = await firstValueFrom(this.scheduleService.getWorkHours(doctor.id!))
     this.bookingStateService.updateDoctorWorkHours(workHours)
+    localStorage.setItem(this.DOCTOR_KEY, JSON.stringify(this.bookingStateService.getDoctorModel()));
     this.router.navigate(['/booking'])
   }
 }

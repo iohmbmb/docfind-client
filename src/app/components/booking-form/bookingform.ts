@@ -46,6 +46,7 @@ export class BookingFormComponent {
 
   ngOnInit() {
     this.appointment.patientId = this.bookingStateService.patientId();
+    this.appointment.doctorId = this.bookingStateService.getDoctorModel().id!;
     this.appointment.location = this.doctor.practiceAddress+', '
       + this.doctor.practiceSuburb+', '
       + this.doctor.practiceState+', '
