@@ -1,159 +1,193 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuites name="vitest tests" tests="96" failures="0" errors="0" time="3.025214318">
-    <testsuite name="src/app/app.spec.ts" timestamp="2026-09-13T12:01:00.864Z" hostname="aegis" tests="1" failures="0" errors="0" skipped="0" time="0.086841692">
-        <testcase classname="src/app/app.spec.ts" name="App &gt; should create the app" time="0.08433601">
+<testsuites name="vitest tests" tests="98" failures="0" errors="0" time="2.015640318">
+    <testsuite name="src/app/app.spec.ts" timestamp="2026-09-19T13:51:50.092Z" hostname="aegis" tests="1" failures="0" errors="0" skipped="0" time="0.02646484">
+        <testcase classname="src/app/app.spec.ts" name="App &gt; should create the app" time="0.026290989">
         </testcase>
     </testsuite>
-    <testsuite name="src/app/guards/auth-guard.spec.ts" timestamp="2026-09-13T12:01:00.865Z" hostname="aegis" tests="4" failures="0" errors="0" skipped="0" time="0.012731318">
-        <testcase classname="src/app/guards/auth-guard.spec.ts" name="authGuard &gt; should be created" time="0.000571436">
+    <testsuite name="src/app/guards/auth-guard.spec.ts" timestamp="2026-09-19T13:51:50.093Z" hostname="aegis" tests="4" failures="0" errors="0" skipped="0" time="0.009077499">
+        <testcase classname="src/app/guards/auth-guard.spec.ts" name="authGuard &gt; should be created" time="0.000592576">
         </testcase>
-        <testcase classname="src/app/guards/auth-guard.spec.ts" name="authGuard &gt; should deny navigation and redirect to login if no token or role exists" time="0.00457718">
+        <testcase classname="src/app/guards/auth-guard.spec.ts" name="authGuard &gt; should deny navigation and redirect to login if no token or role exists" time="0.003153773">
         </testcase>
-        <testcase classname="src/app/guards/auth-guard.spec.ts" name="authGuard &gt; should allow navigation if the user has the matching Patient role" time="0.00278305">
+        <testcase classname="src/app/guards/auth-guard.spec.ts" name="authGuard &gt; should allow navigation if the user has the matching Patient role" time="0.002718225">
         </testcase>
-        <testcase classname="src/app/guards/auth-guard.spec.ts" name="authGuard &gt; should deny navigation if the role or the token are invalid and redirect to login" time="0.004126252">
-        </testcase>
-    </testsuite>
-    <testsuite name="src/app/guards/booking-guard-guard.spec.ts" timestamp="2026-09-13T12:01:00.865Z" hostname="aegis" tests="3" failures="0" errors="0" skipped="0" time="0.006939259">
-        <testcase classname="src/app/guards/booking-guard-guard.spec.ts" name="bookingGuard &gt; should be created" time="0.000609168">
-        </testcase>
-        <testcase classname="src/app/guards/booking-guard-guard.spec.ts" name="bookingGuard &gt; should navigate if doctor is selected" time="0.003129839">
-        </testcase>
-        <testcase classname="src/app/guards/booking-guard-guard.spec.ts" name="bookingGuard &gt; should redirect if doctor is not selected" time="0.003039808">
+        <testcase classname="src/app/guards/auth-guard.spec.ts" name="authGuard &gt; should deny navigation if the role or the token are invalid and redirect to login" time="0.002386566">
         </testcase>
     </testsuite>
-    <testsuite name="src/app/guards/guest-guard.spec.ts" timestamp="2026-09-13T12:01:00.866Z" hostname="aegis" tests="4" failures="0" errors="0" skipped="0" time="0.024447926">
-        <testcase classname="src/app/guards/guest-guard.spec.ts" name="guestGuard &gt; should be created" time="0.001129026">
+    <testsuite name="src/app/guards/booking-guard-guard.spec.ts" timestamp="2026-09-19T13:51:50.094Z" hostname="aegis" tests="3" failures="0" errors="0" skipped="0" time="0.033052197">
+        <testcase classname="src/app/guards/booking-guard-guard.spec.ts" name="bookingGuard &gt; should be created" time="0.003525209">
         </testcase>
-        <testcase classname="src/app/guards/guest-guard.spec.ts" name="guestGuard &gt; should navigate to booking if user is logged in" time="0.00829753">
+        <testcase classname="src/app/guards/booking-guard-guard.spec.ts" name="bookingGuard &gt; should navigate if doctor is selected" time="0.019787943">
         </testcase>
-        <testcase classname="src/app/guards/guest-guard.spec.ts" name="guestGuard &gt; should navigate to dashboard if doctor is logged in" time="0.007137206">
-        </testcase>
-        <testcase classname="src/app/guards/guest-guard.spec.ts" name="guestGuard &gt; should not navigate if the user is not logged in" time="0.006340691">
+        <testcase classname="src/app/guards/booking-guard-guard.spec.ts" name="bookingGuard &gt; should redirect if doctor is not selected" time="0.007464174">
         </testcase>
     </testsuite>
-    <testsuite name="src/app/interceptors/auth-interceptor.spec.ts" timestamp="2026-09-13T12:01:00.866Z" hostname="aegis" tests="2" failures="0" errors="0" skipped="0" time="0.008677523">
-        <testcase classname="src/app/interceptors/auth-interceptor.spec.ts" name="authInterceptor &gt; should add the Authorization header if a token exists" time="0.005131553">
+    <testsuite name="src/app/guards/guest-guard.spec.ts" timestamp="2026-09-19T13:51:50.095Z" hostname="aegis" tests="4" failures="0" errors="0" skipped="0" time="0.010506214">
+        <testcase classname="src/app/guards/guest-guard.spec.ts" name="guestGuard &gt; should be created" time="0.000622503">
         </testcase>
-        <testcase classname="src/app/interceptors/auth-interceptor.spec.ts" name="authInterceptor &gt; should forward the request" time="0.00335681">
+        <testcase classname="src/app/guards/guest-guard.spec.ts" name="guestGuard &gt; should navigate to booking if user is logged in" time="0.00357309">
         </testcase>
-    </testsuite>
-    <testsuite name="src/app/services/appointment.service.spec.ts" timestamp="2026-09-13T12:01:00.867Z" hostname="aegis" tests="3" failures="0" errors="0" skipped="0" time="0.012825536">
-        <testcase classname="src/app/services/appointment.service.spec.ts" name="AppointmentService &gt; should be created" time="0.004145869">
+        <testcase classname="src/app/guards/guest-guard.spec.ts" name="guestGuard &gt; should navigate to dashboard if doctor is logged in" time="0.002913636">
         </testcase>
-        <testcase classname="src/app/services/appointment.service.spec.ts" name="AppointmentService &gt; should get appointments for user" time="0.004448395">
-        </testcase>
-        <testcase classname="src/app/services/appointment.service.spec.ts" name="AppointmentService &gt; should create an appointment" time="0.003900152">
+        <testcase classname="src/app/guards/guest-guard.spec.ts" name="guestGuard &gt; should not navigate if the user is not logged in" time="0.003091956">
         </testcase>
     </testsuite>
-    <testsuite name="src/app/services/auth.service.spec.ts" timestamp="2026-09-13T12:01:00.867Z" hostname="aegis" tests="7" failures="0" errors="0" skipped="0" time="0.063480392">
-        <testcase classname="src/app/services/auth.service.spec.ts" name="AuthService &gt; should be created" time="0.020273882">
+    <testsuite name="src/app/interceptors/auth-interceptor.spec.ts" timestamp="2026-09-19T13:51:50.095Z" hostname="aegis" tests="2" failures="0" errors="0" skipped="0" time="0.013047133">
+        <testcase classname="src/app/interceptors/auth-interceptor.spec.ts" name="authInterceptor &gt; should add the Authorization header if a token exists" time="0.006448153">
         </testcase>
-        <testcase classname="src/app/services/auth.service.spec.ts" name="AuthService &gt; should register a user" time="0.009022468">
-        </testcase>
-        <testcase classname="src/app/services/auth.service.spec.ts" name="AuthService &gt; should register a doctor" time="0.00533515">
-        </testcase>
-        <testcase classname="src/app/services/auth.service.spec.ts" name="AuthService &gt; should get id of user" time="0.004752974">
-        </testcase>
-        <testcase classname="src/app/services/auth.service.spec.ts" name="AuthService &gt; should handle login request" time="0.009151122">
-        </testcase>
-        <testcase classname="src/app/services/auth.service.spec.ts" name="AuthService &gt; should handle password updated" time="0.006690136">
-        </testcase>
-        <testcase classname="src/app/services/auth.service.spec.ts" name="AuthService &gt; should handle logout" time="0.006027255">
+        <testcase classname="src/app/interceptors/auth-interceptor.spec.ts" name="authInterceptor &gt; should forward the request" time="0.006364694">
         </testcase>
     </testsuite>
-    <testsuite name="src/app/services/booking-state-service.spec.ts" timestamp="2026-09-13T12:01:00.868Z" hostname="aegis" tests="4" failures="0" errors="0" skipped="0" time="0.05995935">
-        <testcase classname="src/app/services/booking-state-service.spec.ts" name="BookingStateService &gt; should be created" time="0.024974146">
+    <testsuite name="src/app/services/appointment.service.spec.ts" timestamp="2026-09-19T13:51:50.096Z" hostname="aegis" tests="5" failures="0" errors="0" skipped="0" time="0.014502708">
+        <testcase classname="src/app/services/appointment.service.spec.ts" name="AppointmentService &gt; should be created" time="0.0025469">
         </testcase>
-        <testcase classname="src/app/services/booking-state-service.spec.ts" name="BookingStateService &gt; should clear booking state" time="0.00573011">
+        <testcase classname="src/app/services/appointment.service.spec.ts" name="AppointmentService &gt; should get appointments for user" time="0.001951528">
         </testcase>
-        <testcase classname="src/app/services/booking-state-service.spec.ts" name="BookingStateService &gt; should update doctor working hours" time="0.024401939">
+        <testcase classname="src/app/services/appointment.service.spec.ts" name="AppointmentService &gt; should create an appointment" time="0.001960105">
         </testcase>
-        <testcase classname="src/app/services/booking-state-service.spec.ts" name="BookingStateService &gt; should convert day to day of week" time="0.002615121">
+        <testcase classname="src/app/services/appointment.service.spec.ts" name="AppointmentService &gt; should update an appointment" time="0.003683139">
         </testcase>
-    </testsuite>
-    <testsuite name="src/app/services/booking-wizard-service.spec.ts" timestamp="2026-09-13T12:01:00.869Z" hostname="aegis" tests="1" failures="0" errors="0" skipped="0" time="0.005233928">
-        <testcase classname="src/app/services/booking-wizard-service.spec.ts" name="BookingWizardService &gt; should be created" time="0.00497171">
+        <testcase classname="src/app/services/appointment.service.spec.ts" name="AppointmentService &gt; should delete an appointment" time="0.004002286">
         </testcase>
     </testsuite>
-    <testsuite name="src/app/services/mapbox.service.spec.ts" timestamp="2026-09-13T12:01:00.869Z" hostname="aegis" tests="3" failures="0" errors="0" skipped="0" time="0.018401794">
-        <testcase classname="src/app/services/mapbox.service.spec.ts" name="MapboxService &gt; should be created" time="0.006602078">
+    <testsuite name="src/app/services/auth.service.spec.ts" timestamp="2026-09-19T13:51:50.097Z" hostname="aegis" tests="7" failures="0" errors="0" skipped="0" time="0.051759226">
+        <testcase classname="src/app/services/auth.service.spec.ts" name="AuthService &gt; should be created" time="0.020006026">
         </testcase>
-        <testcase classname="src/app/services/mapbox.service.spec.ts" name="MapboxService &gt; should query address" time="0.006707027">
+        <testcase classname="src/app/services/auth.service.spec.ts" name="AuthService &gt; should register a user" time="0.010038245">
         </testcase>
-        <testcase classname="src/app/services/mapbox.service.spec.ts" name="MapboxService &gt; should query place and location" time="0.004645119">
+        <testcase classname="src/app/services/auth.service.spec.ts" name="AuthService &gt; should register a doctor" time="0.004338655">
         </testcase>
-    </testsuite>
-    <testsuite name="src/app/services/schedule.spec.ts" timestamp="2026-09-13T12:01:00.869Z" hostname="aegis" tests="4" failures="0" errors="0" skipped="0" time="0.04372311">
-        <testcase classname="src/app/services/schedule.spec.ts" name="Schedule &gt; should be created" time="0.023427206">
+        <testcase classname="src/app/services/auth.service.spec.ts" name="AuthService &gt; should get id of user" time="0.00363105">
         </testcase>
-        <testcase classname="src/app/services/schedule.spec.ts" name="Schedule &gt; should get unavailability period" time="0.008637216">
+        <testcase classname="src/app/services/auth.service.spec.ts" name="AuthService &gt; should handle login request" time="0.006627964">
         </testcase>
-        <testcase classname="src/app/services/schedule.spec.ts" name="Schedule &gt; should create / update work hours" time="0.004924821">
+        <testcase classname="src/app/services/auth.service.spec.ts" name="AuthService &gt; should handle password updated" time="0.002729407">
         </testcase>
-        <testcase classname="src/app/services/schedule.spec.ts" name="Schedule &gt; should create / update absence" time="0.003913468">
+        <testcase classname="src/app/services/auth.service.spec.ts" name="AuthService &gt; should handle logout" time="0.002251408">
         </testcase>
     </testsuite>
-    <testsuite name="src/app/services/search.service.spec.ts" timestamp="2026-09-13T12:01:00.870Z" hostname="aegis" tests="1" failures="0" errors="0" skipped="0" time="0.006949148">
-        <testcase classname="src/app/services/search.service.spec.ts" name="SearchService &gt; should be created" time="0.006672992">
+    <testsuite name="src/app/services/booking-state-service.spec.ts" timestamp="2026-09-19T13:51:50.098Z" hostname="aegis" tests="4" failures="0" errors="0" skipped="0" time="0.016847765">
+        <testcase classname="src/app/services/booking-state-service.spec.ts" name="BookingStateService &gt; should be created" time="0.008095192">
+        </testcase>
+        <testcase classname="src/app/services/booking-state-service.spec.ts" name="BookingStateService &gt; should clear booking state" time="0.002501423">
+        </testcase>
+        <testcase classname="src/app/services/booking-state-service.spec.ts" name="BookingStateService &gt; should update doctor working hours" time="0.00296822">
+        </testcase>
+        <testcase classname="src/app/services/booking-state-service.spec.ts" name="BookingStateService &gt; should convert day to day of week" time="0.003065996">
         </testcase>
     </testsuite>
-    <testsuite name="src/app/services/user.service.spec.ts" timestamp="2026-09-13T12:01:00.870Z" hostname="aegis" tests="4" failures="0" errors="0" skipped="0" time="0.028503815">
-        <testcase classname="src/app/services/user.service.spec.ts" name="UserService &gt; should be created" time="0.006358044">
-        </testcase>
-        <testcase classname="src/app/services/user.service.spec.ts" name="UserService &gt; should get users" time="0.007695376">
-        </testcase>
-        <testcase classname="src/app/services/user.service.spec.ts" name="UserService &gt; should get doctor by id" time="0.006378935">
-        </testcase>
-        <testcase classname="src/app/services/user.service.spec.ts" name="UserService &gt; should update doctor" time="0.007578123">
+    <testsuite name="src/app/services/booking-wizard-service.spec.ts" timestamp="2026-09-19T13:51:50.107Z" hostname="aegis" tests="1" failures="0" errors="0" skipped="0" time="0.004182638">
+        <testcase classname="src/app/services/booking-wizard-service.spec.ts" name="BookingWizardService &gt; should be created" time="0.004022103">
         </testcase>
     </testsuite>
-    <testsuite name="src/app/components/booking-form/bookingform.spec.ts" timestamp="2026-09-13T12:01:00.871Z" hostname="aegis" tests="7" failures="0" errors="0" skipped="0" time="0.162343502">
-        <testcase classname="src/app/components/booking-form/bookingform.spec.ts" name="Bookingform &gt; should create" time="0.066696003">
+    <testsuite name="src/app/services/mapbox.service.spec.ts" timestamp="2026-09-19T13:51:50.107Z" hostname="aegis" tests="3" failures="0" errors="0" skipped="0" time="0.016414462">
+        <testcase classname="src/app/services/mapbox.service.spec.ts" name="MapboxService &gt; should be created" time="0.004895833">
         </testcase>
-        <testcase classname="src/app/components/booking-form/bookingform.spec.ts" name="Bookingform &gt; should switch between components" time="0.026368085">
+        <testcase classname="src/app/services/mapbox.service.spec.ts" name="MapboxService &gt; should query address" time="0.006238165">
         </testcase>
-        <testcase classname="src/app/components/booking-form/bookingform.spec.ts" name="Bookingform &gt; should go back to the previous step" time="0.018899801">
-        </testcase>
-        <testcase classname="src/app/components/booking-form/bookingform.spec.ts" name="Bookingform &gt; should move to the next step" time="0.01449033">
-        </testcase>
-        <testcase classname="src/app/components/booking-form/bookingform.spec.ts" name="Bookingform &gt; should have the invisible class if isSelected is false" time="0.012394828">
-        </testcase>
-        <testcase classname="src/app/components/booking-form/bookingform.spec.ts" name="Bookingform &gt; should have the invisible class if index is 4" time="0.011292212">
-        </testcase>
-        <testcase classname="src/app/components/booking-form/bookingform.spec.ts" name="Bookingform &gt; should NOT have the invisible class if index is not 4 and isSelected true" time="0.010345924">
+        <testcase classname="src/app/services/mapbox.service.spec.ts" name="MapboxService &gt; should query place and location" time="0.00505727">
         </testcase>
     </testsuite>
-    <testsuite name="src/app/components/dashboard/dashboard.spec.ts" timestamp="2026-09-13T12:01:00.871Z" hostname="aegis" tests="6" failures="0" errors="0" skipped="0" time="0.212022943">
-        <testcase classname="src/app/components/dashboard/dashboard.spec.ts" name="DashboardComponent &gt; should create" time="0.099137402">
+    <testsuite name="src/app/services/schedule.spec.ts" timestamp="2026-09-19T13:51:50.108Z" hostname="aegis" tests="4" failures="0" errors="0" skipped="0" time="0.012664756">
+        <testcase classname="src/app/services/schedule.spec.ts" name="Schedule &gt; should be created" time="0.003506393">
         </testcase>
-        <testcase classname="src/app/components/dashboard/dashboard.spec.ts" name="DashboardComponent &gt; should handle conditional and multiply items for past booking" time="0.032131158">
+        <testcase classname="src/app/services/schedule.spec.ts" name="Schedule &gt; should get unavailability period" time="0.002906222">
         </testcase>
-        <testcase classname="src/app/components/dashboard/dashboard.spec.ts" name="DashboardComponent &gt; should handle conditional and multiply items for current booking" time="0.032603587">
+        <testcase classname="src/app/services/schedule.spec.ts" name="Schedule &gt; should create / update work hours" time="0.003097476">
         </testcase>
-        <testcase classname="src/app/components/dashboard/dashboard.spec.ts" name="DashboardComponent &gt; should successfully await and load appointments" time="0.020364585">
-        </testcase>
-        <testcase classname="src/app/components/dashboard/dashboard.spec.ts" name="DashboardComponent &gt; should have data in current booking" time="0.014715197">
-        </testcase>
-        <testcase classname="src/app/components/dashboard/dashboard.spec.ts" name="DashboardComponent &gt; should have data in past booking" time="0.009634211">
+        <testcase classname="src/app/services/schedule.spec.ts" name="Schedule &gt; should create / update absence" time="0.002958912">
         </testcase>
     </testsuite>
-    <testsuite name="src/app/components/home/home.spec.ts" timestamp="2026-09-13T12:01:00.872Z" hostname="aegis" tests="1" failures="0" errors="0" skipped="0" time="0.097658841">
-        <testcase classname="src/app/components/home/home.spec.ts" name="HomeComponent &gt; should create" time="0.096224365">
+    <testsuite name="src/app/services/search.service.spec.ts" timestamp="2026-09-19T13:51:50.109Z" hostname="aegis" tests="1" failures="0" errors="0" skipped="0" time="0.003382949">
+        <testcase classname="src/app/services/search.service.spec.ts" name="SearchService &gt; should be created" time="0.003261388">
         </testcase>
     </testsuite>
-    <testsuite name="src/app/components/login/login.spec.ts" timestamp="2026-09-13T12:01:00.872Z" hostname="aegis" tests="6" failures="0" errors="0" skipped="0" time="0.385508743">
-        <testcase classname="src/app/components/login/login.spec.ts" name="Login &gt; should create" time="0.125542558">
+    <testsuite name="src/app/services/user.service.spec.ts" timestamp="2026-09-19T13:51:50.109Z" hostname="aegis" tests="4" failures="0" errors="0" skipped="0" time="0.0359054">
+        <testcase classname="src/app/services/user.service.spec.ts" name="UserService &gt; should be created" time="0.02102348">
         </testcase>
-        <testcase classname="src/app/components/login/login.spec.ts" name="Login &gt; should update the component model when text is entered" time="0.037942353">
+        <testcase classname="src/app/services/user.service.spec.ts" name="UserService &gt; should get users" time="0.006139527">
         </testcase>
-        <testcase classname="src/app/components/login/login.spec.ts" name="Login &gt; should display an error message if there is one" time="0.027103072">
+        <testcase classname="src/app/services/user.service.spec.ts" name="UserService &gt; should get doctor by id" time="0.002822614">
         </testcase>
-        <testcase classname="src/app/components/login/login.spec.ts" name="Login &gt; should submit the form when the button is clicked" time="0.059911699">
+        <testcase classname="src/app/services/user.service.spec.ts" name="UserService &gt; should update doctor" time="0.003653282">
         </testcase>
-        <testcase classname="src/app/components/login/login.spec.ts" name="Login &gt; should log in the user" time="0.093472585">
+    </testsuite>
+    <testsuite name="src/app/components/booking-form/bookingform.spec.ts" timestamp="2026-09-19T13:51:50.110Z" hostname="aegis" tests="7" failures="0" errors="0" skipped="0" time="0.192679128">
+        <testcase classname="src/app/components/booking-form/bookingform.spec.ts" name="Bookingform &gt; should create" time="0.082918696">
         </testcase>
-        <testcase classname="src/app/components/login/login.spec.ts" name="Login &gt; should catch errors" time="0.031884109">
+        <testcase classname="src/app/components/booking-form/bookingform.spec.ts" name="Bookingform &gt; should switch between components" time="0.037542841">
+        </testcase>
+        <testcase classname="src/app/components/booking-form/bookingform.spec.ts" name="Bookingform &gt; should go back to the previous step" time="0.017968574">
+        </testcase>
+        <testcase classname="src/app/components/booking-form/bookingform.spec.ts" name="Bookingform &gt; should move to the next step" time="0.013551582">
+        </testcase>
+        <testcase classname="src/app/components/booking-form/bookingform.spec.ts" name="Bookingform &gt; should have the invisible class if isSelected is false" time="0.012830672">
+        </testcase>
+        <testcase classname="src/app/components/booking-form/bookingform.spec.ts" name="Bookingform &gt; should have the invisible class if index is 4" time="0.011562331">
+        </testcase>
+        <testcase classname="src/app/components/booking-form/bookingform.spec.ts" name="Bookingform &gt; should NOT have the invisible class if index is not 4 and isSelected true" time="0.013692639">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/app/components/dashboard/dashboard.spec.ts" timestamp="2026-09-19T13:51:50.111Z" hostname="aegis" tests="6" failures="0" errors="0" skipped="0" time="0.159080582">
+        <testcase classname="src/app/components/dashboard/dashboard.spec.ts" name="DashboardComponent &gt; should create" time="0.083587236">
+            <system-out>
+[33m1[39m
+
+            </system-out>
+        </testcase>
+        <testcase classname="src/app/components/dashboard/dashboard.spec.ts" name="DashboardComponent &gt; should handle conditional and multiply items for past booking" time="0.022395488">
+            <system-out>
+[33m1[39m
+
+            </system-out>
+        </testcase>
+        <testcase classname="src/app/components/dashboard/dashboard.spec.ts" name="DashboardComponent &gt; should handle conditional and multiply items for current booking" time="0.015448877">
+            <system-out>
+[33m1[39m
+
+            </system-out>
+        </testcase>
+        <testcase classname="src/app/components/dashboard/dashboard.spec.ts" name="DashboardComponent &gt; should successfully await and load appointments" time="0.014675317">
+            <system-out>
+[33m1[39m
+
+[33m2[39m
+
+            </system-out>
+        </testcase>
+        <testcase classname="src/app/components/dashboard/dashboard.spec.ts" name="DashboardComponent &gt; should have data in current booking" time="0.009982148">
+            <system-out>
+[33m1[39m
+
+[33m1[39m
+
+            </system-out>
+        </testcase>
+        <testcase classname="src/app/components/dashboard/dashboard.spec.ts" name="DashboardComponent &gt; should have data in past booking" time="0.010610803">
+            <system-out>
+[33m1[39m
+
+[33m2[39m
+
+            </system-out>
+        </testcase>
+    </testsuite>
+    <testsuite name="src/app/components/home/home.spec.ts" timestamp="2026-09-19T13:51:50.113Z" hostname="aegis" tests="1" failures="0" errors="0" skipped="0" time="0.044769593">
+        <testcase classname="src/app/components/home/home.spec.ts" name="HomeComponent &gt; should create" time="0.044614068">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/app/components/login/login.spec.ts" timestamp="2026-09-19T13:51:50.113Z" hostname="aegis" tests="6" failures="0" errors="0" skipped="0" time="0.188146665">
+        <testcase classname="src/app/components/login/login.spec.ts" name="Login &gt; should create" time="0.08085799">
+        </testcase>
+        <testcase classname="src/app/components/login/login.spec.ts" name="Login &gt; should update the component model when text is entered" time="0.01899746">
+        </testcase>
+        <testcase classname="src/app/components/login/login.spec.ts" name="Login &gt; should display an error message if there is one" time="0.018716226">
+        </testcase>
+        <testcase classname="src/app/components/login/login.spec.ts" name="Login &gt; should submit the form when the button is clicked" time="0.023353808">
+        </testcase>
+        <testcase classname="src/app/components/login/login.spec.ts" name="Login &gt; should log in the user" time="0.021222188">
+        </testcase>
+        <testcase classname="src/app/components/login/login.spec.ts" name="Login &gt; should catch errors" time="0.022827267">
             <system-err>
 HttpErrorResponse {
   headers: HttpHeaders {
@@ -177,60 +211,60 @@ HttpErrorResponse {
             </system-err>
         </testcase>
     </testsuite>
-    <testsuite name="src/app/components/navbar/navbar.spec.ts" timestamp="2026-09-13T12:01:00.873Z" hostname="aegis" tests="4" failures="0" errors="0" skipped="0" time="0.229022342">
-        <testcase classname="src/app/components/navbar/navbar.spec.ts" name="Navbar &gt; should create" time="0.142399646">
+    <testsuite name="src/app/components/navbar/navbar.spec.ts" timestamp="2026-09-19T13:51:50.114Z" hostname="aegis" tests="4" failures="0" errors="0" skipped="0" time="0.056056351">
+        <testcase classname="src/app/components/navbar/navbar.spec.ts" name="Navbar &gt; should create" time="0.011368182">
         </testcase>
-        <testcase classname="src/app/components/navbar/navbar.spec.ts" name="Navbar &gt; should logout and redirect to home" time="0.016524226">
+        <testcase classname="src/app/components/navbar/navbar.spec.ts" name="Navbar &gt; should logout and redirect to home" time="0.011734528">
         </testcase>
-        <testcase classname="src/app/components/navbar/navbar.spec.ts" name="Navbar &gt; should display a nav variant if logged in" time="0.025521807">
+        <testcase classname="src/app/components/navbar/navbar.spec.ts" name="Navbar &gt; should display a nav variant if logged in" time="0.015718569">
         </testcase>
-        <testcase classname="src/app/components/navbar/navbar.spec.ts" name="Navbar &gt; should click on the logout button if logged in" time="0.041571531">
-        </testcase>
-    </testsuite>
-    <testsuite name="src/app/components/searchbar/searchbar.spec.ts" timestamp="2026-09-13T12:01:00.874Z" hostname="aegis" tests="12" failures="0" errors="0" skipped="0" time="0.317248777">
-        <testcase classname="src/app/components/searchbar/searchbar.spec.ts" name="Searchbar &gt; should create" time="0.093127359">
-        </testcase>
-        <testcase classname="src/app/components/searchbar/searchbar.spec.ts" name="Searchbar &gt; should launch search when the form is submitted" time="0.021433788">
-        </testcase>
-        <testcase classname="src/app/components/searchbar/searchbar.spec.ts" name="Searchbar &gt; should set show specialties to true if focus or false if not" time="0.016897225">
-        </testcase>
-        <testcase classname="src/app/components/searchbar/searchbar.spec.ts" name="Searchbar &gt; should create a dropdown for specialties when input is focused" time="0.018681797">
-        </testcase>
-        <testcase classname="src/app/components/searchbar/searchbar.spec.ts" name="Searchbar &gt; should create a list of specialty buttons" time="0.014917122">
-        </testcase>
-        <testcase classname="src/app/components/searchbar/searchbar.spec.ts" name="Searchbar &gt; should select a specialty" time="0.013927622">
-        </testcase>
-        <testcase classname="src/app/components/searchbar/searchbar.spec.ts" name="Searchbar &gt; should write a location to the subject" time="0.021744788">
-        </testcase>
-        <testcase classname="src/app/components/searchbar/searchbar.spec.ts" name="Searchbar &gt; should call selectLocation with the correct location object when an option is selected" time="0.032334686">
-        </testcase>
-        <testcase classname="src/app/components/searchbar/searchbar.spec.ts" name="Searchbar &gt; should show the spinner if isLoading" time="0.023419822">
-        </testcase>
-        <testcase classname="src/app/components/searchbar/searchbar.spec.ts" name="Searchbar &gt; should display an error if isError" time="0.010955051">
-        </testcase>
-        <testcase classname="src/app/components/searchbar/searchbar.spec.ts" name="Searchbar &gt; should display a list of doctors if doctors() is not empty" time="0.012382063">
-        </testcase>
-        <testcase classname="src/app/components/searchbar/searchbar.spec.ts" name="Searchbar &gt; should click and call the book function" time="0.035708218">
+        <testcase classname="src/app/components/navbar/navbar.spec.ts" name="Navbar &gt; should click on the logout button if logged in" time="0.017048216">
         </testcase>
     </testsuite>
-    <testsuite name="src/app/components/signup/signup.spec.ts" timestamp="2026-09-13T12:01:00.875Z" hostname="aegis" tests="9" failures="0" errors="0" skipped="0" time="0.540891565">
-        <testcase classname="src/app/components/signup/signup.spec.ts" name="SignupComponent &gt; should create" time="0.112209386">
+    <testsuite name="src/app/components/searchbar/searchbar.spec.ts" timestamp="2026-09-19T13:51:50.115Z" hostname="aegis" tests="12" failures="0" errors="0" skipped="0" time="0.371194763">
+        <testcase classname="src/app/components/searchbar/searchbar.spec.ts" name="Searchbar &gt; should create" time="0.115796702">
         </testcase>
-        <testcase classname="src/app/components/signup/signup.spec.ts" name="SignupComponent &gt; should display email error message" time="0.054445038">
+        <testcase classname="src/app/components/searchbar/searchbar.spec.ts" name="Searchbar &gt; should launch search when the form is submitted" time="0.024852125">
         </testcase>
-        <testcase classname="src/app/components/signup/signup.spec.ts" name="SignupComponent &gt; should display password error messages" time="0.037038276">
+        <testcase classname="src/app/components/searchbar/searchbar.spec.ts" name="Searchbar &gt; should set show specialties to true if focus or false if not" time="0.017983604">
         </testcase>
-        <testcase classname="src/app/components/signup/signup.spec.ts" name="SignupComponent &gt; should update password rules indicator" time="0.047205098">
+        <testcase classname="src/app/components/searchbar/searchbar.spec.ts" name="Searchbar &gt; should create a dropdown for specialties when input is focused" time="0.019915214">
         </testcase>
-        <testcase classname="src/app/components/signup/signup.spec.ts" name="SignupComponent &gt; should display firstName error message" time="0.067298558">
+        <testcase classname="src/app/components/searchbar/searchbar.spec.ts" name="Searchbar &gt; should create a list of specialty buttons" time="0.016934499">
         </testcase>
-        <testcase classname="src/app/components/signup/signup.spec.ts" name="SignupComponent &gt; should display lastName error message" time="0.04057109">
+        <testcase classname="src/app/components/searchbar/searchbar.spec.ts" name="Searchbar &gt; should select a specialty" time="0.015449217">
         </testcase>
-        <testcase classname="src/app/components/signup/signup.spec.ts" name="SignupComponent &gt; should update submit button" time="0.037547974">
+        <testcase classname="src/app/components/searchbar/searchbar.spec.ts" name="Searchbar &gt; should write a location to the subject" time="0.022950802">
         </testcase>
-        <testcase classname="src/app/components/signup/signup.spec.ts" name="SignupComponent &gt; should submit the form" time="0.044210767">
+        <testcase classname="src/app/components/searchbar/searchbar.spec.ts" name="Searchbar &gt; should call selectLocation with the correct location object when an option is selected" time="0.038322673">
         </testcase>
-        <testcase classname="src/app/components/signup/signup.spec.ts" name="SignupComponent &gt; should submit the form and catch an error" time="0.096646898">
+        <testcase classname="src/app/components/searchbar/searchbar.spec.ts" name="Searchbar &gt; should show the spinner if isLoading" time="0.026869919">
+        </testcase>
+        <testcase classname="src/app/components/searchbar/searchbar.spec.ts" name="Searchbar &gt; should display an error if isError" time="0.012718037">
+        </testcase>
+        <testcase classname="src/app/components/searchbar/searchbar.spec.ts" name="Searchbar &gt; should display a list of doctors if doctors() is not empty" time="0.018290787">
+        </testcase>
+        <testcase classname="src/app/components/searchbar/searchbar.spec.ts" name="Searchbar &gt; should click and call the book function" time="0.039012183">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/app/components/signup/signup.spec.ts" timestamp="2026-09-19T13:51:50.116Z" hostname="aegis" tests="9" failures="0" errors="0" skipped="0" time="0.348149822">
+        <testcase classname="src/app/components/signup/signup.spec.ts" name="SignupComponent &gt; should create" time="0.095388222">
+        </testcase>
+        <testcase classname="src/app/components/signup/signup.spec.ts" name="SignupComponent &gt; should display email error message" time="0.039723044">
+        </testcase>
+        <testcase classname="src/app/components/signup/signup.spec.ts" name="SignupComponent &gt; should display password error messages" time="0.025349491">
+        </testcase>
+        <testcase classname="src/app/components/signup/signup.spec.ts" name="SignupComponent &gt; should update password rules indicator" time="0.046231061">
+        </testcase>
+        <testcase classname="src/app/components/signup/signup.spec.ts" name="SignupComponent &gt; should display firstName error message" time="0.031333281">
+        </testcase>
+        <testcase classname="src/app/components/signup/signup.spec.ts" name="SignupComponent &gt; should display lastName error message" time="0.02437573">
+        </testcase>
+        <testcase classname="src/app/components/signup/signup.spec.ts" name="SignupComponent &gt; should update submit button" time="0.015532756">
+        </testcase>
+        <testcase classname="src/app/components/signup/signup.spec.ts" name="SignupComponent &gt; should submit the form" time="0.02582329">
+        </testcase>
+        <testcase classname="src/app/components/signup/signup.spec.ts" name="SignupComponent &gt; should submit the form and catch an error" time="0.040708496">
             <system-err>
 HttpErrorResponse {
   headers: HttpHeaders {
@@ -254,34 +288,34 @@ HttpErrorResponse {
             </system-err>
         </testcase>
     </testsuite>
-    <testsuite name="src/app/components/booking-form/booking-summary/booking-summary.spec.ts" timestamp="2026-09-13T12:01:00.877Z" hostname="aegis" tests="1" failures="0" errors="0" skipped="0" time="0.131281665">
-        <testcase classname="src/app/components/booking-form/booking-summary/booking-summary.spec.ts" name="BookingSummary &gt; should create" time="0.128746677">
+    <testsuite name="src/app/components/booking-form/booking-summary/booking-summary.spec.ts" timestamp="2026-09-19T13:51:50.118Z" hostname="aegis" tests="1" failures="0" errors="0" skipped="0" time="0.04997753">
+        <testcase classname="src/app/components/booking-form/booking-summary/booking-summary.spec.ts" name="BookingSummary &gt; should create" time="0.049623968">
         </testcase>
     </testsuite>
-    <testsuite name="src/app/components/booking-form/fornew/for-new.component.spec.ts" timestamp="2026-09-13T12:01:00.877Z" hostname="aegis" tests="1" failures="0" errors="0" skipped="0" time="0.143536247">
-        <testcase classname="src/app/components/booking-form/fornew/for-new.component.spec.ts" name="ForNew &gt; should create" time="0.134452592">
+    <testsuite name="src/app/components/booking-form/fornew/for-new.component.spec.ts" timestamp="2026-09-19T13:51:50.118Z" hostname="aegis" tests="1" failures="0" errors="0" skipped="0" time="0.044042632">
+        <testcase classname="src/app/components/booking-form/fornew/for-new.component.spec.ts" name="ForNew &gt; should create" time="0.043874733">
         </testcase>
     </testsuite>
-    <testsuite name="src/app/components/booking-form/forwhat/for-what.component.spec.ts" timestamp="2026-09-13T12:01:00.877Z" hostname="aegis" tests="1" failures="0" errors="0" skipped="0" time="0.093213673">
-        <testcase classname="src/app/components/booking-form/forwhat/for-what.component.spec.ts" name="Forwhatform &gt; should create" time="0.090877552">
+    <testsuite name="src/app/components/booking-form/forwhat/for-what.component.spec.ts" timestamp="2026-09-19T13:51:50.118Z" hostname="aegis" tests="1" failures="0" errors="0" skipped="0" time="0.013295344">
+        <testcase classname="src/app/components/booking-form/forwhat/for-what.component.spec.ts" name="Forwhatform &gt; should create" time="0.013143416">
         </testcase>
     </testsuite>
-    <testsuite name="src/app/components/booking-form/forwhen/for-when.component.spec.ts" timestamp="2026-09-13T12:01:00.877Z" hostname="aegis" tests="6" failures="0" errors="0" skipped="0" time="0.230761047">
-        <testcase classname="src/app/components/booking-form/forwhen/for-when.component.spec.ts" name="Forwhenform &gt; should create" time="0.119631774">
+    <testsuite name="src/app/components/booking-form/forwhen/for-when.component.spec.ts" timestamp="2026-09-19T13:51:50.119Z" hostname="aegis" tests="6" failures="0" errors="0" skipped="0" time="0.294372561">
+        <testcase classname="src/app/components/booking-form/forwhen/for-when.component.spec.ts" name="Forwhenform &gt; should create" time="0.14305485">
         </testcase>
-        <testcase classname="src/app/components/booking-form/forwhen/for-when.component.spec.ts" name="Forwhenform &gt; can create expansion panel" time="0.026437447">
+        <testcase classname="src/app/components/booking-form/forwhen/for-when.component.spec.ts" name="Forwhenform &gt; can create expansion panel" time="0.035467978">
         </testcase>
-        <testcase classname="src/app/components/booking-form/forwhen/for-when.component.spec.ts" name="Forwhenform &gt; cannot create expansion panel" time="0.020666659">
+        <testcase classname="src/app/components/booking-form/forwhen/for-when.component.spec.ts" name="Forwhenform &gt; cannot create expansion panel" time="0.027087112">
         </testcase>
-        <testcase classname="src/app/components/booking-form/forwhen/for-when.component.spec.ts" name="Forwhenform &gt; should create multiple expansion panel" time="0.020574955">
+        <testcase classname="src/app/components/booking-form/forwhen/for-when.component.spec.ts" name="Forwhenform &gt; should create multiple expansion panel" time="0.022250352">
         </testcase>
-        <testcase classname="src/app/components/booking-form/forwhen/for-when.component.spec.ts" name="Forwhenform &gt; should have two expansion panel and 8 times" time="0.01957272">
+        <testcase classname="src/app/components/booking-form/forwhen/for-when.component.spec.ts" name="Forwhenform &gt; should have two expansion panel and 8 times" time="0.025883154">
         </testcase>
-        <testcase classname="src/app/components/booking-form/forwhen/for-when.component.spec.ts" name="Forwhenform &gt; should select an appointment time" time="0.022174515">
+        <testcase classname="src/app/components/booking-form/forwhen/for-when.component.spec.ts" name="Forwhenform &gt; should select an appointment time" time="0.040319808">
         </testcase>
     </testsuite>
-    <testsuite name="src/app/components/booking-form/forwho/for-who.component.spec.ts" timestamp="2026-09-13T12:01:00.878Z" hostname="aegis" tests="1" failures="0" errors="0" skipped="0" time="0.103010182">
-        <testcase classname="src/app/components/booking-form/forwho/for-who.component.spec.ts" name="Forwho &gt; should create" time="0.10249854">
+    <testsuite name="src/app/components/booking-form/forwho/for-who.component.spec.ts" timestamp="2026-09-19T13:51:50.119Z" hostname="aegis" tests="1" failures="0" errors="0" skipped="0" time="0.00606756">
+        <testcase classname="src/app/components/booking-form/forwho/for-who.component.spec.ts" name="Forwho &gt; should create" time="0.005907396">
         </testcase>
     </testsuite>
 </testsuites>

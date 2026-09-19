@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { AppointmentService } from './appointment.service';
 import {Appointments} from '../models/appointment.types';
-import {of} from 'rxjs';
 import {HttpTestingController, provideHttpClientTesting} from '@angular/common/http/testing';
 import {environment} from '../../environments/environment.development';
 
@@ -50,5 +49,29 @@ describe('AppointmentService', () => {
     expect(req.request.method).toBe('POST');
     expect(req.request.body).toEqual(appointment);
     req.flush(appointment);
+  })
+
+  it('should update an appointment', () =>{
+    const appointment : Appointments = {
+      id:'valid-id',
+      patientId: 'valid-patient-id',
+      doctorId: 'valid-doctor-id',
+      scheduleTime: new Date(),
+    }
+    service.updateAppointment('valid-id', appointment).subscribe(res => {
+      expect(res).toEqual(appointment);
+    });
+    const req = httpTestingController.expectOne(`${environment.apiUrl}/update/appointment/valid-id`);
+
+    expect(req.request.method).toBe('PUT');
+    expect(req.request.body).toEqual(appointment);
+    req.flush(appointment);
+  })
+
+  it('should delete an appointment', () =>{
+    service.deleteAppointment('valid-id').subscribe(res => {});
+    const req = httpTestingController.expectOne(`${environment.apiUrl}/delete/appointment/valid-id`);
+    expect(req.request.method).toBe('DELETE');
+    req.flush({});
   })
 });
