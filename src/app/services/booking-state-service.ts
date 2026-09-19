@@ -59,16 +59,6 @@ export class BookingStateService {
     effect(() => {
       localStorage.setItem(this.APPOINTMENT_KEY, JSON.stringify(this.appointmentModel()));
     });
-
-    effect(() => {
-      localStorage.setItem(this.DOCTOR_KEY, JSON.stringify(this.doctorModel()));
-    });
-
-    this.appointmentModel.update(model => ({
-      ...model,
-      doctorId: this.doctorModel().id!,
-      patientId: localStorage.getItem('user_id')!,
-    }))
   }
 
   getAppointmentModel() {

@@ -22,15 +22,12 @@ export class BookingWizardService {
     this.currentStepIndex.update(idx => idx + 1);
   }
 
-  public validate(){
-    // TODO: Validate the form
-  }
-
   public previousStep() {
     this.currentStepIndex.update(idx => idx - 1);
   }
 
   clearBookingState() {
+    this.currentStepIndex.set(0);
     localStorage.removeItem(this.WIZARD_KEY);
   }
 
