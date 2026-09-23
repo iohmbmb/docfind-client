@@ -4,17 +4,25 @@
     @if(past_bookings().length > 0) {
       @for (appointment of past_bookings(); track appointment) {
       <div data-testid="container-past-bookings" class="pt-8 border-b border-solid border-b-slate-300">
-        <div class="flex flex-row gap-9 p-2">
-          <div class="border rounded-full size-16 shrink-0 border-gray-300 bg-white flex justify-center items-center">
-            <i data-feather="user" stroke-width="1" width="40" height="40"></i>
-          </div>
-          <div class="flex flex-col justify-center items-start">
-            <div>{{'Dr. '+appointment.doctor_name}}</div>
-            <div>{{appointment.doctor_address}}</div>
+        <div class="flex flex-col gap-9 p-2">
+          <div class="flex flex-row gap-6">
+            <div class="border rounded-full size-16 shrink-0 border-gray-300 bg-white flex justify-center items-center">
+              <i data-feather="user" stroke-width="1" width="40" height="40"></i>
+            </div>
             <div class="flex flex-col justify-center items-start">
-              {{appointment.schedule | date: 'medium'}}
+              <div>{{'Dr. '+appointment.doctor_name}}</div>
+              <div>{{appointment.doctor_address}}</div>
+              <div class="flex flex-col justify-center items-start">
+                {{appointment.schedule | date: 'medium'}}
+              </div>
             </div>
           </div>
+
+          @if(appointment.status === AppointmentStatus.Cancelled){
+            <div class="flex flex-col gap-2">
+              <p> This appointment has been cancelled by the doctor.</p>
+            </div>
+          }
         </div>
       </div>
       }

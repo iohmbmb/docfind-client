@@ -11,6 +11,7 @@ export type AppointmentData = {
   schedule: Date;
   doctor_name: string;
   doctor_address: string;
+  status: AppointmentStatus | undefined;
 }
 
 @Component({
@@ -43,7 +44,8 @@ export class DashboardComponent {
            {
              schedule: appointment.scheduleTime,
              doctor_name: doctor.firstName+" "+doctor.lastName,
-             doctor_address: doctor.practiceAddress+', '+doctor.practiceSuburb+', '+doctor.practiceState+', '+doctor.practicePostcode
+             doctor_address: doctor.practiceAddress+', '+doctor.practiceSuburb+', '+doctor.practiceState+', '+doctor.practicePostcode,
+             status: appointment.status
            }]);
        } else {
          this.past_bookings.update(model => [
@@ -51,7 +53,8 @@ export class DashboardComponent {
            {
              schedule: appointment.scheduleTime,
              doctor_name: doctor.firstName+" "+doctor.lastName,
-             doctor_address: doctor.practiceAddress+', '+doctor.practiceSuburb+', '+doctor.practiceState+', '+doctor.practicePostcode
+             doctor_address: doctor.practiceAddress+', '+doctor.practiceSuburb+', '+doctor.practiceState+', '+doctor.practicePostcode,
+             status: appointment.status
            }
          ]);
        }
@@ -59,4 +62,6 @@ export class DashboardComponent {
    }
    console.log(this.current_bookings().length);
   }
+
+  protected readonly AppointmentStatus = AppointmentStatus;
 }
