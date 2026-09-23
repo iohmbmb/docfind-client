@@ -99,7 +99,10 @@
                 "input": "projects/practice/public"
               }
             ],
-            "styles": ["projects/practice/src/styles.css"]
+            "styles": [
+              "projects/practice/src/material-theme.scss",
+              "projects/practice/src/styles.css"
+            ]
           },
           "configurations": {
             "production": {

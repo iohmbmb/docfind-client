@@ -6,6 +6,7 @@ import {Appointments, AppointmentStatus} from '@shared/models/appointment.types'
 import {UserService} from '@shared/services/user.service';
 import {DatePipe} from '@angular/common';
 import {MatTooltip} from '@angular/material/tooltip';
+import {MatProgressSpinner} from '@angular/material/progress-spinner';
 
 declare var feather : any;
 
@@ -22,7 +23,8 @@ type Infos = {
   selector: 'app-dashboard',
   imports: [
     DatePipe,
-    MatTooltip
+    MatTooltip,
+    MatProgressSpinner,
   ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
@@ -65,6 +67,7 @@ export class Dashboard {
         this.errorMessage = 'No appointments';
       }
       this.isLoading.set(false);
+      console.log(this.isLoading(), "is loading")
     }
     catch (err) {
       this.errorMessage = 'No appointments';
