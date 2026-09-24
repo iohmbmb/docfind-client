@@ -30,4 +30,5 @@ export interface DoctorRegisterRequest {
   specialty: PracticeSpecialty;
   longitude: number;
   latitude: number;
+  isMock: boolean;
 }

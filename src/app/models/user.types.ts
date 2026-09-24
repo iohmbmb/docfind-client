@@ -8,5 +8,6 @@ export interface User {
   passwordHash?: string;
   firstName: string;
   lastName: string;
+  imagePath?: string;
   role?: UserRole;
 }

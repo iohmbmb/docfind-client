@@ -3,4 +3,5 @@ export interface UnavailabilityPeriod {
   doctorId?: string;
   startDate: string | null;
   endDate: string | null;
+  isMock: boolean;
 }

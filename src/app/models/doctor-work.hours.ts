@@ -4,7 +4,8 @@ export interface DoctorWorkHours {
   doctorId?: string,
   day: DayOfWeek,
   startTime: string,
-  endTime: string
+  endTime: string,
+  isMock: boolean
 }
 
 export enum DayOfWeek {

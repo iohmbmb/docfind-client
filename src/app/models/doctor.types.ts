@@ -19,4 +19,5 @@ export interface Doctor extends User {
   latitude?: number;
   longitude?: number;
   consultationType?: ConsultationType;
+  isMock?: boolean;
 }
