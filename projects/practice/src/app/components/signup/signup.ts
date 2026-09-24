@@ -75,8 +75,8 @@ export class SignupComponent {
     status: Availability.Available,
     preference: LocationPreference.Hybrid,
     longitude: 0.0,
-    latitude: 0.0
-
+    latitude: 0.0,
+    isMock: false
   });
 
   public signupForm = form(this.signupModel, (schemaPath) => {
