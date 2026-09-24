@@ -5,7 +5,7 @@ import {MapboxService} from '@shared/services/mapbox.service';
 import {MatAutocomplete, MatAutocompleteTrigger, MatOption} from '@angular/material/autocomplete';
 import {MatInput} from '@angular/material/input';
 import {form, FormField, submit} from '@angular/forms/signals';
-import {debounceTime, distinctUntilChanged, firstValueFrom, Observable, of, Subject, switchMap} from 'rxjs';
+import {debounceTime, distinctUntilChanged, firstValueFrom, of, Subject, switchMap} from 'rxjs';
 import {SearchService} from '@shared/services/search.service';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -13,8 +13,21 @@ import {Doctor} from '@shared/models/doctor.types';
 import {BookingStateService} from '@shared/services/booking-state-service';
 import {ScheduleService} from '@shared/services/schedule';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {DoctorWorkHours} from '@shared/models/doctor-work.hours';
 
 declare var feather: any
+
+type DocInfo = {
+  id: string,
+  firstname: string,
+  lastname: string,
+  image: string | undefined,
+  practiceAddress: string,
+  practiceSuburb: string,
+  practiceState: string,
+  practicePostcode: string,
+  workDays: DoctorWorkHours[]
+}
 
 @Component({
   selector: 'app-searchbar',
@@ -47,6 +60,7 @@ export class SearchComponent {
   private destroyRef = inject(DestroyRef);
   specialties = Object.values(PracticeSpecialty)
   doctors = signal<Doctor[]>([])
+  docInfos  = signal<DocInfo[]>([]);
   isLoading = signal<boolean>(false);
   isError = signal<boolean>(false);
   locations = signal<any[]>([]);
@@ -148,9 +162,29 @@ export class SearchComponent {
           latitude
         )
       );
-      this.doctors.set(doctors)
+      // This is O(n) and bad for performance if we grow
+      // TODO: might need to find a better way to do this
+      for(let i=0; i < doctors.length; i++){
+        const workHours = await firstValueFrom(this.scheduleService.getWorkHours(doctors[i].id!))
+        this.docInfos.update(model => [
+          ...model,
+          {
+            id : doctors[i].id!,
+            firstname : doctors[i].firstName,
+            lastname : doctors[i].lastName,
+            image: doctors[i].imagePath,
+            practiceAddress : doctors[i].practiceAddress,
+            practiceSuburb : doctors[i].practiceSuburb,
+            practiceState : doctors[i].practiceState,
+            practicePostcode : doctors[i].practicePostcode,
+            workDays : workHours
+          },
+        ]);
+      }
+      this.doctors.set(doctors);
     } catch (err) {
       this.errorMessage.set("No doctors found.");
+      console.log(err)
       this.isError.set(true);
     } finally {
       setTimeout(() => {
@@ -188,27 +222,30 @@ export class SearchComponent {
     return value.replace(/([A-Z])/g, ' $1').trim();
   }
 
-  async book(doctor: Doctor){
-    this.bookingStateService.updateDoctorModel(({
-      id: doctor.id,
-      email: doctor.email,
-      firstName: doctor.firstName,
-      lastName: doctor.lastName,
-      practiceName: doctor.practiceName,
-      practiceAddress: doctor.practiceAddress,
-      practiceSuburb: doctor.practiceSuburb,
-      practiceState: doctor.practiceState,
-      practicePostcode: doctor.practicePostcode,
-      practicePhone: doctor.practicePhone,
-      hourlyRate: doctor.hourlyRate,
-      status: doctor.status,
-      preference: doctor.preference,
-      specialty: doctor.specialty,
-      consultationType: doctor.consultationType
-    }))
-    const workHours = await firstValueFrom(this.scheduleService.getWorkHours(doctor.id!))
-    this.bookingStateService.updateDoctorWorkHours(workHours)
-    localStorage.setItem(this.DOCTOR_KEY, JSON.stringify(this.bookingStateService.getDoctorModel()));
-    this.router.navigate(['/booking'])
+  async book(docId: string){
+    let doctor = this.doctors().find(doc => doc.id == docId);
+    if(doctor != undefined) {
+      this.bookingStateService.updateDoctorModel(({
+        id: doctor.id,
+        email: doctor.email,
+        firstName: doctor.firstName,
+        lastName: doctor.lastName,
+        practiceName: doctor.practiceName,
+        practiceAddress: doctor.practiceAddress,
+        practiceSuburb: doctor.practiceSuburb,
+        practiceState: doctor.practiceState,
+        practicePostcode: doctor.practicePostcode,
+        practicePhone: doctor.practicePhone,
+        hourlyRate: doctor.hourlyRate,
+        status: doctor.status,
+        preference: doctor.preference,
+        specialty: doctor.specialty,
+        consultationType: doctor.consultationType
+      }))
+      const workHours = await firstValueFrom(this.scheduleService.getWorkHours(doctor.id!))
+      this.bookingStateService.updateDoctorWorkHours(workHours)
+      localStorage.setItem(this.DOCTOR_KEY, JSON.stringify(this.bookingStateService.getDoctorModel()));
+      this.router.navigate(['/booking'])
+    }
   }
 }

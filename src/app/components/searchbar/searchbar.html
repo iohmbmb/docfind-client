@@ -73,17 +73,17 @@
 } @else{
   @if (this.doctors().length > 0){
     <div data-testid="doctor-list" class="w-full flex flex-col items-center justify-center px-4 py-12 gap-6">
-    @for (doctor of this.doctors(); track doctor.id) {
+    @for (doctor of this.docInfos(); track doctor.id) {
         <button
           data-testid="doctor-button"
-          (click)="book(doctor)"
+          (click)="book(doctor.id)"
           class="w-full md:w-xl border border-slate-300 p-2 shadow-sm rounded-lg cursor-pointer hover:shadow-md transition">
           <div class="flex flex-row gap-9 p-2">
             <div class="border rounded-full size-16 shrink-0 border-gray-300 bg-white flex justify-center items-center">
-              <i data-feather="user" stroke-width="1" width="40" height="40"></i>
+              <img src="{{doctor.image}}"/>
             </div>
             <div class="flex flex-col justify-center items-start">
-              <div>{{'Dr. '+doctor.firstName+' '+doctor.lastName}}</div>
+              <div>{{doctor.firstname+' '+doctor.lastname}}</div>
               <div>{{doctor.practiceAddress+', '
               +doctor.practiceSuburb+', '
               +doctor.practiceState+', '
@@ -93,9 +93,14 @@
               <i data-feather="chevron-right" stroke-width="2"></i>
             </div>
           </div>
-          <div class="flex flex-row border-t border-slate-300 pt-2">
-            <input class="pl-2" type="text" placeholder="Tue, 9 sep">
-            <div>List of buttons</div>
+          <div class="flex border-t border-slate-300 pt-2">
+            <div class="flex w-full flex-row gap-4">
+              @for (workDay of doctor.workDays; track workDay) {
+                <button class="min-w-0 flex-1 border rounded-lg border-slate-300 hover:border-slate-500 cursor-pointer">
+                  {{workDay.day}}
+                </button>
+              }
+            </div>
           </div>
         </button>
     }
