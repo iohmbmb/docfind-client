@@ -76,7 +76,8 @@ export class PreferencesGeneral implements  AfterViewInit {
     workDays: [{
       day: DayOfWeek.Monday,
       startTime: '09:00',
-      endTime: '5:00'
+      endTime: '5:00',
+      isMock: false
     }],
   });
 
@@ -174,7 +175,8 @@ export class PreferencesGeneral implements  AfterViewInit {
         if(model.status === Availability.Away){
           const absencePeriod:UnavailabilityPeriod = {
             startDate: formatDate(startDate, 'yyyy-MM-dd', 'en-US'),
-            endDate: formatDate(endDate, 'yyyy-MM-dd', 'en-US')
+            endDate: formatDate(endDate, 'yyyy-MM-dd', 'en-US'),
+            isMock: false
           }
           await firstValueFrom(this.scheduleService.createUpdateAbsence(this.doctor_id, absencePeriod))
         }
@@ -236,7 +238,8 @@ export class PreferencesGeneral implements  AfterViewInit {
         {
           day: nextDay as DayOfWeek,
           startTime: '09:00',
-          endTime: '17:00'
+          endTime: '17:00',
+          isMock: false
         }
       ]
     }));
@@ -256,6 +259,7 @@ export class PreferencesGeneral implements  AfterViewInit {
       day: hour?.day ?? DayOfWeek.Monday,
       startTime: hour?.startTime ?? '09:00',
       endTime: hour?.endTime ?? '17:00',
+      isMock: false
     };
   }
 
@@ -274,6 +278,7 @@ export class PreferencesGeneral implements  AfterViewInit {
       preference: model.preference,
       status: model.status,
       specialty: model.specialty,
+      isMock: false
     }
   }
 
@@ -282,6 +287,7 @@ export class PreferencesGeneral implements  AfterViewInit {
       day: wh.day,
       startTime: wh.startTime,
       endTime: wh.endTime,
+      isMock: false
     }));
   }
 }
