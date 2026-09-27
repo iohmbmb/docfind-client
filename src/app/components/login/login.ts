@@ -1,5 +1,5 @@
 import {Component, inject, signal} from '@angular/core';
-import {Router, RouterLink} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import {LoginRequest} from '../../models/login.types';
@@ -20,12 +20,18 @@ import {firstValueFrom} from 'rxjs';
 export class LoginComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  private returnUrl: string = '/dashboard';
 
   public credentials: LoginRequest = { email: '', password: ''};
   public rememberMe = signal<boolean>(false);
 
   public errorMessage = signal<string>('')
   public isLoading = signal<boolean>(false);
+
+  ngOnInit() {
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
+  }
 
   public async onSubmit() {
     this.isLoading.set(true);
@@ -38,7 +44,7 @@ export class LoginComponent {
         if (this.rememberMe()) {
           localStorage.setItem('remember_user_email', this.credentials.email);
         }
-        await this.router.navigate(['/bookings']);
+        await this.router.navigateByUrl(this.returnUrl);
       }
       localStorage.setItem('user_id', me.id);
     }

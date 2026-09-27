@@ -2,7 +2,7 @@ import {Component, computed, inject, signal} from '@angular/core';
 import {form, FormField, pattern, required, submit} from '@angular/forms/signals';
 import {FormsModule, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
-import {Router, RouterLink} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {UserRole} from '../../models/user.types';
 import {firstValueFrom} from 'rxjs';
 import {UserRegisterRequest} from '@shared/models/register.types';
@@ -17,6 +17,12 @@ export class SignupComponent {
 
   private authService = inject(AuthService);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  private returnUrl: string = '/dashboard';
+
+  ngOnInit() {
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
+  }
 
   public signupModel = signal<UserRegisterRequest>({
     email: '',
@@ -72,9 +78,13 @@ export class SignupComponent {
 
       try {
         await firstValueFrom(this.authService.registerUser(registrationPayload));
-
+        const loginPayload = {
+          email: registrationPayload.email,
+          password: registrationPayload.password
+        };
+        await firstValueFrom(this.authService.loginRequest(loginPayload)); // auto login after registration
         this.isLoading.set(false);
-        await this.router.navigate(['/bookings']);
+        await this.router.navigateByUrl(this.returnUrl);
       }
       catch (err) {
         this.isLoading.set(false);

@@ -7,9 +7,7 @@ export const guestGuard: CanActivateFn = (route, state) => {
   const userRole = localStorage.getItem('user_role');
 
   if (isAuthenticated) {
-    if (userRole === 'Patient') {
-      router.navigate(['/booking']);
-    } else {
+    if (userRole === 'Patient' || userRole === 'Doctor') {
       router.navigate(['/dashboard']);
     }
     return false;
