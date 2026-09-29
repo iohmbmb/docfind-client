@@ -74,13 +74,48 @@
   @if (this.doctors().length > 0){
     <div data-testid="doctor-list" class="w-full flex flex-col items-center justify-center px-4 py-12 gap-6">
     @for (doctor of this.docInfos(); track doctor.id) {
+      @if(doctor.isUnavailable){
+        <button
+          class="w-full md:w-xl border border-slate-300 p-2 shadow-sm rounded-lg bg-gray-200 cursor-not-allowed">
+          <div class="flex flex-row gap-9 p-2">
+            <div class="border rounded-full size-16 shrink-0 border-gray-100 bg-white flex justify-center items-center">
+              <img
+                src="{{doctor.image}}"
+                alt="Doctor Image",
+                class="rounded-full"
+              />
+            </div>
+            <div class="flex flex-col justify-center items-start">
+              <div>{{doctor.firstname+' '+doctor.lastname}}</div>
+              <div>{{doctor.practiceAddress+', '
+              +doctor.practiceSuburb+', '
+              +doctor.practiceState+', '
+              +doctor.practicePostcode}}</div>
+            </div>
+            <div class="ml-auto">
+              <i data-feather="chevron-right" stroke-width="2"></i>
+            </div>
+          </div>
+          <div class="flex border-t border-slate-300 pt-2">
+            <div class="flex w-full justify-center flex-row gap-4">
+              <div class="items-center text-center">
+                Unavailable until {{doctor.endUnavailabilityDate}}
+              </div>
+            </div>
+          </div>
+        </button>
+      } @else{
         <button
           data-testid="doctor-button"
           (click)="book(doctor.id)"
           class="w-full md:w-xl border border-slate-300 p-2 shadow-sm rounded-lg cursor-pointer hover:shadow-md transition">
           <div class="flex flex-row gap-9 p-2">
-            <div class="border rounded-full size-16 shrink-0 border-gray-300 bg-white flex justify-center items-center">
-              <img src="{{doctor.image}}"/>
+            <div class="border rounded-full size-16 shrink-0 border-gray-100 bg-white flex justify-center items-center">
+              <img
+                src="{{doctor.image}}"
+                alt="Doctor Image"
+                class="rounded-full"
+              />
             </div>
             <div class="flex flex-col justify-center items-start">
               <div>{{doctor.firstname+' '+doctor.lastname}}</div>
@@ -97,12 +132,13 @@
             <div class="flex w-full flex-row gap-4">
               @for (workDay of doctor.workDays; track workDay) {
                 <button class="min-w-0 flex-1 border rounded-lg border-slate-300 hover:border-slate-500 cursor-pointer">
-                  {{workDay.day}}
+                  {{workDay.day}} {{workDay.startTime}} - {{workDay.endTime}}
                 </button>
               }
             </div>
           </div>
         </button>
+      }
     }
     </div>
   }

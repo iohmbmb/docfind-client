@@ -14,6 +14,7 @@ import {BookingStateService} from '@shared/services/booking-state-service';
 import {ScheduleService} from '@shared/services/schedule';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {DoctorWorkHours} from '@shared/models/doctor-work.hours';
+import {DatePipe} from '@angular/common';
 
 declare var feather: any
 
@@ -26,7 +27,9 @@ type DocInfo = {
   practiceSuburb: string,
   practiceState: string,
   practicePostcode: string,
-  workDays: DoctorWorkHours[]
+  workDays: DoctorWorkHours[],
+  isUnavailable: boolean | undefined,
+  endUnavailabilityDate: string | null
 }
 
 @Component({
@@ -39,7 +42,7 @@ type DocInfo = {
     MatOption,
     FormField,
     FormsModule,
-    MatProgressSpinner
+    MatProgressSpinner,
   ],
   templateUrl: './searchbar.html',
   styleUrl: './searchbar.css',
@@ -166,20 +169,44 @@ export class SearchComponent {
       // TODO: might need to find a better way to do this
       for(let i=0; i < doctors.length; i++){
         const workHours = await firstValueFrom(this.scheduleService.getWorkHours(doctors[i].id!))
-        this.docInfos.update(model => [
-          ...model,
-          {
-            id : doctors[i].id!,
-            firstname : doctors[i].firstName,
-            lastname : doctors[i].lastName,
-            image: doctors[i].imagePath,
-            practiceAddress : doctors[i].practiceAddress,
-            practiceSuburb : doctors[i].practiceSuburb,
-            practiceState : doctors[i].practiceState,
-            practicePostcode : doctors[i].practicePostcode,
-            workDays : workHours
-          },
-        ]);
+        const period = await firstValueFrom(this.scheduleService.getAbsence(doctors[i].id!))
+        if(period != null){
+          this.docInfos.update(model => [
+            ...model,
+            {
+              id : doctors[i].id!,
+              firstname : doctors[i].firstName,
+              lastname : doctors[i].lastName,
+              image: doctors[i].imagePath,
+              practiceAddress : doctors[i].practiceAddress,
+              practiceSuburb : doctors[i].practiceSuburb,
+              practiceState : doctors[i].practiceState,
+              practicePostcode : doctors[i].practicePostcode,
+              workDays : workHours,
+              isUnavailable : doctors[i].isUnavailable,
+              endUnavailabilityDate : period.endDate
+            },
+          ]);
+        }
+        else {
+          this.docInfos.update(model => [
+            ...model,
+            {
+              id : doctors[i].id!,
+              firstname : doctors[i].firstName,
+              lastname : doctors[i].lastName,
+              image: doctors[i].imagePath,
+              practiceAddress : doctors[i].practiceAddress,
+              practiceSuburb : doctors[i].practiceSuburb,
+              practiceState : doctors[i].practiceState,
+              practicePostcode : doctors[i].practicePostcode,
+              workDays : workHours,
+              isUnavailable : doctors[i].isUnavailable,
+              endUnavailabilityDate : ""
+            },
+          ]);
+
+        }
       }
       this.doctors.set(doctors);
     } catch (err) {
