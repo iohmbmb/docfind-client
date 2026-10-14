@@ -6,6 +6,7 @@ import {ForWhen} from './forwhen/for-when.component';
 import {BookingWizardService} from '@shared/services/booking-wizard-service';
 import {BookingStateService} from '@shared/services/booking-state-service';
 import {BookingSummary} from './booking-summary/booking-summary';
+import {Utils} from '@shared/services/utils';
 
 declare var feather: any
 
@@ -37,6 +38,8 @@ const STEPS_CONFIG: WizardStep[] = [
 })
 export class BookingFormComponent {
 
+  constructor(public utils: Utils) {}
+
   public bookingStateService = inject(BookingStateService);
   public bookingWizardService = inject(BookingWizardService);
 
@@ -57,8 +60,5 @@ export class BookingFormComponent {
     feather.replace();
   }
 
-  formatSpecialty(value: string): string {
-    return value.replace(/([A-Z])/g, ' $1').trim();
-  }
   protected readonly STEPS_CONFIG = STEPS_CONFIG;
 }

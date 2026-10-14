@@ -20,6 +20,7 @@ import {UserRole} from '@shared/models/user.types';
 import {form, FormField, submit} from '@angular/forms/signals';
 import {DoctorProfileForm} from '@shared/models/doctor-profile-form';
 import {firstValueFrom} from 'rxjs';
+import {Utils} from '@shared/services/utils';
 
 declare var feather : any;
 
@@ -38,6 +39,7 @@ declare var feather : any;
 })
 
 export class PreferencesGeneral implements  AfterViewInit {
+  constructor(public utils: Utils) {}
   authService = inject(AuthService)
   userService = inject(UserService)
   scheduleService = inject(ScheduleService)
@@ -187,10 +189,6 @@ export class PreferencesGeneral implements  AfterViewInit {
         console.error('Error updating doctor profile:', err);
       }
     })
-  }
-
-  formatSpecialty(value: string): string {
-    return value.replace(/([A-Z])/g, ' $1').trim();
   }
 
   readonly isAway= computed(() =>

@@ -73,7 +73,7 @@
               class="w-full h-10 text-sm border border-slate-300 rounded-sm bg-white px-3 focus:outline-indigo-500 transition cursor-pointer">
         @for (location of locations; track location) {
           <option [ngValue]="location">
-            {{ formatSpecialty(location) }}
+            {{ this.utils.formatSpecialty(location) }}
           </option>
         }
       </select>
@@ -148,7 +148,7 @@
             class="w-full h-10 text-sm border border-slate-300 rounded-sm bg-white px-3 focus:outline-indigo-500 transition cursor-pointer">
       @for (status of statuses; track status) {
         <option [ngValue]="status">
-          {{ formatSpecialty(status) }}
+          {{ this.utils.formatSpecialty(status) }}
         </option>
       }
     </select>
@@ -186,7 +186,7 @@
         class="w-full h-10 text-sm font-normal border border-slate-300 rounded-sm bg-white text-black px-3 focus:outline-indigo-500 transition cursor-pointer">
         @for (specialty of specialties; track specialty) {
           <option [ngValue]="specialty">
-            {{ formatSpecialty(specialty) }}
+            {{ this.utils.formatSpecialty(specialty) }}
         }></select>
     </div>
   </div>

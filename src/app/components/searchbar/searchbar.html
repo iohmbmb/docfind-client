@@ -24,7 +24,7 @@
               (mousedown)="selectSpecialty(specialty)"
               class="w-full text-left px-3 py-2 hover:bg-slate-100"
             >
-              {{ formatSpecialty(specialty) }}
+              {{ this.utils.formatSpecialty(specialty) }}
             </button>
           }
         </div>
@@ -41,7 +41,7 @@
     >
     <mat-autocomplete #addressAuto="matAutocomplete"
                       (optionSelected)="selectLocation($event.option.value)">
-      @for (location of this.locations(); track location.id) {
+      @for (location of locations; track location.id) {
         <mat-option [value]="location">
           {{ location?.properties?.full_address }}
         </mat-option>
@@ -54,7 +54,7 @@
   </div>
 </form>
 
-@if(this.isLoading()) {
+@if(this.searchForm().pending()) {
   <div data-testid="loading-spinner" class="w-full flex justify-center px-4 py-8 md:p-8">
     <div class="w-full md:w-xl p-2">
       <div class="flex flex-row gap-9 p-2 justify-center">
@@ -62,18 +62,18 @@
       </div>
     </div>
   </div>
-} @else if(this.isError()) {
+} @else if(this.error) {
   <div data-testid="search-error" class="w-full flex justify-center px-4 py-8 md:p-8">
     <div class="w-full md:w-xl p-2">
       <div class="flex flex-row gap-9 p-2 justify-center">
-        <div>{{errorMessage()}}</div>
+        <div>{{this.error.message}}</div>
       </div>
     </div>
   </div>
 } @else{
-  @if (this.doctors().length > 0){
+  @if (this.doctors.length > 0){
     <div data-testid="doctor-list" class="w-full flex flex-col items-center justify-center px-4 py-12 gap-6">
-    @for (doctor of this.docInfos(); track doctor.id) {
+    @for (doctor of this.doctorsInfo; track doctor.id) {
       @if(doctor.isUnavailable){
         <button
           class="w-full md:w-xl border border-slate-300 p-2 shadow-sm rounded-lg bg-gray-200 cursor-not-allowed">

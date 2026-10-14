@@ -56,7 +56,7 @@
             <span class="text-md font-semibold">{{doctor.firstName }}</span>
             <span class="text-md font-semibold">{{ doctor.lastName }}</span>
           </div>
-          <p class="text-sm font-normal">{{formatSpecialty(doctor.specialty)}}</p>
+          <p class="text-sm font-normal">{{this.utils.formatSpecialty(doctor.specialty)}}</p>
           <p class="m-4 text-sm font-normal">{{doctor.practiceAddress+', '
           +doctor.practiceSuburb+', '
           +doctor.practiceState+', '

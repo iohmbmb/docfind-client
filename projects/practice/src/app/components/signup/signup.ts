@@ -12,6 +12,7 @@ import {AuthService} from '@shared/services/auth.service';
 import {MatAutocomplete, MatAutocompleteTrigger, MatOption} from '@angular/material/autocomplete';
 import {MapboxService} from '@shared/services/mapbox.service';
 import {MatInput} from '@angular/material/input';
+import {Utils} from '@shared/services/utils';
 
 @Component({
   selector: 'app-signup',
@@ -31,6 +32,7 @@ import {MatInput} from '@angular/material/input';
   }
 })
 export class SignupComponent {
+  constructor(public utils: Utils){}
   private authService = inject(AuthService);
   private mapboxService = inject(MapboxService);
   private router = inject(Router);
@@ -136,9 +138,5 @@ export class SignupComponent {
         this.isLoading.set(false);
       }
     });
-  }
-
-  formatSpecialty(value: string): string {
-    return value.replace(/([A-Z])/g, ' $1').trim();
   }
 }

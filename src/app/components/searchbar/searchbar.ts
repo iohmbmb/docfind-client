@@ -1,11 +1,11 @@
-import {Component, computed, DestroyRef, inject, input, Input, signal, Signal} from '@angular/core';
+import {Component, computed, DestroyRef, inject, input, Input, signal, Signal, WritableSignal} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {PracticeSpecialty} from '@shared/models/practice-specialty';
 import {MapboxService} from '@shared/services/mapbox.service';
 import {MatAutocomplete, MatAutocompleteTrigger, MatOption} from '@angular/material/autocomplete';
 import {MatInput} from '@angular/material/input';
 import {form, FormField, submit} from '@angular/forms/signals';
-import {debounceTime, distinctUntilChanged, firstValueFrom, of, Subject, switchMap} from 'rxjs';
+import {async, debounceTime, distinctUntilChanged, firstValueFrom, of, Subject, switchMap} from 'rxjs';
 import {SearchService} from '@shared/services/search.service';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -15,22 +15,10 @@ import {ScheduleService} from '@shared/services/schedule';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {DoctorWorkHours} from '@shared/models/doctor-work.hours';
 import {DatePipe} from '@angular/common';
+import {Utils} from '@shared/services/utils';
+import {SearchStateService} from '@shared/services/search-state-service';
 
 declare var feather: any
-
-type DocInfo = {
-  id: string,
-  firstname: string,
-  lastname: string,
-  image: string | undefined,
-  practiceAddress: string,
-  practiceSuburb: string,
-  practiceState: string,
-  practicePostcode: string,
-  workDays: DoctorWorkHours[],
-  isUnavailable: boolean | undefined,
-  endUnavailabilityDate: string | null
-}
 
 @Component({
   selector: 'app-searchbar',
@@ -51,83 +39,39 @@ type DocInfo = {
 export class SearchComponent {
 
   private readonly DOCTOR_KEY = 'booking_doctor_state';
-
-  constructor(private route: ActivatedRoute) {}
+  private state = inject(SearchStateService);
+  private scheduleService = inject(ScheduleService);
+  private bookingStateService = inject(BookingStateService);
 
   showShadow = input(true);
-  private mapBoxService = inject(MapboxService)
-  private router = inject(Router)
-  private bookingStateService = inject(BookingStateService);
-  private searchService = inject(SearchService)
-  private scheduleService = inject(ScheduleService);
-  private destroyRef = inject(DestroyRef);
   specialties = Object.values(PracticeSpecialty)
-  doctors = signal<Doctor[]>([])
-  docInfos  = signal<DocInfo[]>([]);
-  isLoading = signal<boolean>(false);
-  isError = signal<boolean>(false);
-  locations = signal<any[]>([]);
   searchSubject = new Subject<string>();
-  errorMessage = signal<string>('')
   showSpecialties = signal<boolean>(false);
+  searchForm = form(this.state.getSearchSignal());
+  locations = this.state.getLocations();
+  doctors = this.state.getDoctors();
+  doctorsInfo = this.state.getDocInfos();
+  error = this.state.getError();
 
-  searchModel = signal({
-    specialty: '',
-    address: '',
-    longitude: 0,
-    latitude: 0
-  })
+  constructor(private router: Router, private route: ActivatedRoute, public utils: Utils) {}
 
-  // TODO: Rework entirely this logic
   ngOnInit() {
-    this.searchSubject.pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-      switchMap(value => {
-        if (!value) {
-          return of({ features: [] });
-        }
-        return this.mapBoxService.queryPlaceAndLocality(value);
-      }),
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe(result => {
-      this.locations.set(result.features);
-    });
-
-    this.route.queryParams.subscribe(params => {
-      if (
-        params['specialty'] &&
-        params['longitude'] &&
-        params['latitude']
-      ) {
-        this.searchModel.update(model => ({
-          ...model,
-          specialty: params['specialty'],
-          address: params['address']
-        }))
-        this.executeSearch(
-          params['specialty'],
-          Number(params['longitude']),
-          Number(params['latitude'])
-        );
-      }
-    });
+    this.state.getLocationWith(this.searchSubject);
+    this.state.executeSearchOn(this.route)
   }
 
   ngAfterViewInit() {
     feather.replace();
   }
 
-  searchForm = form(this.searchModel)
-
   onLocationInput(value: string){
     this.searchSubject.next(value);
+    console.log("locations: ", this.locations)
   }
 
   selectLocation(feature: any){
     const context = feature?.properties?.context;
-    this.searchModel.update(model => ({
-      ...model,
+    this.state.updateSearchModel(({
       address: context?.place?.name ?? '',
       longitude: feature?.geometry?.coordinates[0],
       latitude: feature?.geometry?.coordinates[1]
@@ -136,88 +80,15 @@ export class SearchComponent {
 
   search() {
     submit(this.searchForm, async () => {
-      const model = this.searchModel();
-
-      this.router.navigate(['/search'], {
+      await this.router.navigate(['/search'], {
         queryParams: {
-          specialty: model.specialty,
-          address: model.address,
-          longitude: model.longitude,
-          latitude: model.latitude
+          specialty: this.state.getSearchModel().specialty,
+          address: this.state.getSearchModel().address,
+          longitude: this.state.getSearchModel().longitude,
+          latitude: this.state.getSearchModel().latitude
         }
       });
     });
-  }
-
-  async executeSearch(
-    specialty: PracticeSpecialty,
-    longitude: number,
-    latitude: number
-  ) {
-    this.isLoading.set(true);
-    this.isError.set(false);
-
-    try {
-      const doctors = await firstValueFrom(
-        this.searchService.getDoctors(
-          specialty,
-          longitude,
-          latitude
-        )
-      );
-      // This is O(n) and bad for performance if we grow
-      // TODO: might need to find a better way to do this
-      for(let i=0; i < doctors.length; i++){
-        const workHours = await firstValueFrom(this.scheduleService.getWorkHours(doctors[i].id!))
-        const period = await firstValueFrom(this.scheduleService.getAbsence(doctors[i].id!))
-        if(period != null){
-          this.docInfos.update(model => [
-            ...model,
-            {
-              id : doctors[i].id!,
-              firstname : doctors[i].firstName,
-              lastname : doctors[i].lastName,
-              image: doctors[i].imagePath,
-              practiceAddress : doctors[i].practiceAddress,
-              practiceSuburb : doctors[i].practiceSuburb,
-              practiceState : doctors[i].practiceState,
-              practicePostcode : doctors[i].practicePostcode,
-              workDays : workHours,
-              isUnavailable : doctors[i].isUnavailable,
-              endUnavailabilityDate : period.endDate
-            },
-          ]);
-        }
-        else {
-          this.docInfos.update(model => [
-            ...model,
-            {
-              id : doctors[i].id!,
-              firstname : doctors[i].firstName,
-              lastname : doctors[i].lastName,
-              image: doctors[i].imagePath,
-              practiceAddress : doctors[i].practiceAddress,
-              practiceSuburb : doctors[i].practiceSuburb,
-              practiceState : doctors[i].practiceState,
-              practicePostcode : doctors[i].practicePostcode,
-              workDays : workHours,
-              isUnavailable : doctors[i].isUnavailable,
-              endUnavailabilityDate : ""
-            },
-          ]);
-
-        }
-      }
-      this.doctors.set(doctors);
-    } catch (err) {
-      this.errorMessage.set("No doctors found.");
-      console.log(err)
-      this.isError.set(true);
-    } finally {
-      setTimeout(() => {
-        this.isLoading.set(false);
-      }, 1000);
-    }
   }
 
   selectSpecialty(specialty: string) {
@@ -227,13 +98,11 @@ export class SearchComponent {
 
   filteredSpecialties = computed(() => {
     const value = this.searchForm.specialty().value()?.toLowerCase() ?? '';
-
     if (!value) {
       return this.specialties;
     }
-
     return this.specialties.filter(specialty =>
-      this.formatSpecialty(specialty)
+      this.utils.formatSpecialty(specialty)
         .toLowerCase()
         .includes(value)
     );
@@ -245,12 +114,8 @@ export class SearchComponent {
     }, 150);
   }
 
-  formatSpecialty(value: string): string {
-    return value.replace(/([A-Z])/g, ' $1').trim();
-  }
-
   async book(docId: string){
-    let doctor = this.doctors().find(doc => doc.id == docId);
+    let doctor = this.state.getDoctors().find(doc => doc.id == docId);
     if(doctor != undefined) {
       this.bookingStateService.updateDoctorModel(({
         id: doctor.id,

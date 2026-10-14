@@ -1,7 +1,7 @@
 import {Injectable, signal} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {PracticeSpecialty} from '@shared/models/practice-specialty';
-import {Observable, Subject} from 'rxjs';
+import {catchError, Observable, Subject, throwError} from 'rxjs';
 import {Doctor} from '@shared/models/doctor.types';
 import {environment} from '../../environments/environment.development';
 
@@ -19,6 +19,11 @@ export class SearchService {
           longitude: longitude,
           latitude: latitude
         }
-      });
+      },).pipe(
+      catchError(() => {
+        console.error('Failed to fetch doctors');
+        return throwError(() => new Error('Failed to fetch doctors'));
+      })
+    )
   }
 }

@@ -134,7 +134,7 @@
           <option value="" disabled selected>Choose your medical field...</option>
           @for (specialty of specialties; track specialty) {
             <option [ngValue]="specialty">
-              {{ this.formatSpecialty(specialty) }}
+              {{ this.utils.formatSpecialty(specialty) }}
             </option>
           }
         </select>
