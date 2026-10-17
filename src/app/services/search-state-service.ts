@@ -38,13 +38,15 @@ export class SearchStateService {
   private error : Error | null = null;
   docInfos  = signal<DocInfo[]>([]);
   doctors = signal<Doctor[]>([])
+  isLoading = signal<boolean>(false);
 
   getError(){
     return this.error;
   }
 
   getLocations(){
-    return this.locations(); // issue here, why it doesn't send back anything
+    console.log("search locations:", this.locations());
+    return this.locations();
   }
 
   getDoctors(){
@@ -110,7 +112,7 @@ export class SearchStateService {
     longitude: number,
     latitude: number
   ) {
-
+    this.isLoading.set(true);
     try {
       const doctors = await firstValueFrom(
         this.searchService.getDoctors(
@@ -121,55 +123,51 @@ export class SearchStateService {
           tap({
             error: (err) => this.error = err
           }),
-          catchError(err => of([])),
+          catchError(() => of([])),
         )
       );
-      // This is O(n) and bad for performance if we grow
-      // TODO: might need to find a better way to do this
-      for(let i=0; i < doctors.length; i++){
-        const workHours = await firstValueFrom(this.scheduleService.getWorkHours(doctors[i].id!))
-        const period = await firstValueFrom(this.scheduleService.getAbsence(doctors[i].id!))
-        if(period != null){
-          this.docInfos.update(model => [
-            ...model,
-            {
-              id : doctors[i].id!,
-              firstname : doctors[i].firstName,
-              lastname : doctors[i].lastName,
-              image: doctors[i].imagePath,
-              practiceAddress : doctors[i].practiceAddress,
-              practiceSuburb : doctors[i].practiceSuburb,
-              practiceState : doctors[i].practiceState,
-              practicePostcode : doctors[i].practicePostcode,
-              workDays : workHours,
-              isUnavailable : doctors[i].isUnavailable,
-              endUnavailabilityDate : period.endDate
-            },
-          ]);
-        }
-        else {
-          this.docInfos.update(model => [
-            ...model,
-            {
-              id : doctors[i].id!,
-              firstname : doctors[i].firstName,
-              lastname : doctors[i].lastName,
-              image: doctors[i].imagePath,
-              practiceAddress : doctors[i].practiceAddress,
-              practiceSuburb : doctors[i].practiceSuburb,
-              practiceState : doctors[i].practiceState,
-              practicePostcode : doctors[i].practicePostcode,
-              workDays : workHours,
-              isUnavailable : doctors[i].isUnavailable,
-              endUnavailabilityDate : ""
-            },
-          ]);
+      const workHoursPromise = Promise.all(doctors.map((doctor) =>
+        firstValueFrom(this.scheduleService.getWorkHours(doctor.id!)
+        )));
 
-        }
-      }
+      const periodPromise = Promise.all(doctors.map((doctor) =>
+        firstValueFrom(this.scheduleService.getAbsence(doctor.id!)
+        )));
+
+      const [workHours, period] = await Promise.all([
+        workHoursPromise,
+        periodPromise
+      ]);
+
+      this.docInfos.update(model => [
+        ...model,
+        ...doctors.map((doctor, i) => (
+          {
+            id : doctor.id!,
+            firstname : doctor.firstName,
+            lastname : doctor.lastName,
+            image: doctor.imagePath,
+            practiceAddress : doctor.practiceAddress,
+            practiceSuburb : doctor.practiceSuburb,
+            practiceState : doctor.practiceState,
+            practicePostcode : doctor.practicePostcode,
+            workDays : workHours[i],
+            isUnavailable : doctor.isUnavailable,
+            endUnavailabilityDate : period[i]?.endDate ?? ""
+          }))
+      ]);
+
       this.doctors.set(doctors);
     } catch (err) {
-      console.error('Failed to fetch doctors', err);
+      console.error('Error: ', err);
+    } finally {
+      setTimeout(() => this.isLoading.set(false), 1000)
     }
+  }
+
+  clearSearchState(){
+    this.locations.update(() => []);
+    this.doctors.update(() => []);
+    this.docInfos.update(() => []);
   }
 }

@@ -39,19 +39,15 @@ declare var feather: any
 export class SearchComponent {
 
   private readonly DOCTOR_KEY = 'booking_doctor_state';
-  private state = inject(SearchStateService);
   private scheduleService = inject(ScheduleService);
   private bookingStateService = inject(BookingStateService);
 
+  state = inject(SearchStateService);
   showShadow = input(true);
   specialties = Object.values(PracticeSpecialty)
   searchSubject = new Subject<string>();
   showSpecialties = signal<boolean>(false);
   searchForm = form(this.state.getSearchSignal());
-  locations = this.state.getLocations();
-  doctors = this.state.getDoctors();
-  doctorsInfo = this.state.getDocInfos();
-  error = this.state.getError();
 
   constructor(private router: Router, private route: ActivatedRoute, public utils: Utils) {}
 
@@ -64,9 +60,14 @@ export class SearchComponent {
     feather.replace();
   }
 
+  ngOnDestroy() {
+    this.state.clearSearchState();
+    this.searchForm.address().value.set('');
+    this.searchForm.specialty().value.set('');
+  }
+
   onLocationInput(value: string){
     this.searchSubject.next(value);
-    console.log("locations: ", this.locations)
   }
 
   selectLocation(feature: any){
