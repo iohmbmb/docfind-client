@@ -13,6 +13,7 @@ import {MatAutocomplete, MatAutocompleteTrigger, MatOption} from '@angular/mater
 import {MapboxService} from '@shared/services/mapbox.service';
 import {MatInput} from '@angular/material/input';
 import {Utils} from '@shared/services/utils';
+import { Demobar } from '../demobar/demobar';
 
 @Component({
   selector: 'app-signup',
@@ -23,7 +24,8 @@ import {Utils} from '@shared/services/utils';
     MatAutocompleteTrigger,
     MatAutocomplete,
     MatOption,
-    MatInput
+    MatInput,
+    Demobar
   ],
   templateUrl: './signup.html',
   styleUrl: './signup.css',

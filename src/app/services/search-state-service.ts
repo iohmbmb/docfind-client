@@ -123,15 +123,25 @@ export class SearchStateService {
           tap({
             error: (err) => this.error = err
           }),
-          catchError(() => of([])),
+          catchError(() => of([]))
         )
       );
       const workHoursPromise = Promise.all(doctors.map((doctor) =>
-        firstValueFrom(this.scheduleService.getWorkHours(doctor.id!)
+        firstValueFrom(this.scheduleService.getWorkHours(doctor.id!).pipe(
+          tap({
+            error: (err) => this.error = err
+          }),
+          catchError(() => of([]))
+          )
         )));
 
       const periodPromise = Promise.all(doctors.map((doctor) =>
-        firstValueFrom(this.scheduleService.getAbsence(doctor.id!)
+        firstValueFrom(this.scheduleService.getAbsence(doctor.id!).pipe(
+          tap({
+            error: (err) => this.error = err
+          }),
+          catchError(() => of(null))
+          )
         )));
 
       const [workHours, period] = await Promise.all([

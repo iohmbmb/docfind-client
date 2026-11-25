@@ -1,10 +1,11 @@
 import {Component, inject} from '@angular/core';
 import {AuthService} from '@shared/services/auth.service';
 import {Router} from '@angular/router';
+import { Demobar } from '../demobar/demobar';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [Demobar],
   templateUrl: './home.html',
   styleUrl: './home.css',
   host: {

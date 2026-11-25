@@ -2,10 +2,12 @@ import {Component, inject, signal} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {AppointmentService} from '@shared/services/appointment.service';
 import {BookingStateService} from '@shared/services/booking-state-service';
-import {firstValueFrom} from 'rxjs';
+import {catchError, firstValueFrom, of, tap} from 'rxjs';
 import {DatePipe} from '@angular/common';
 import {UserService} from '@shared/services/user.service';
 import {Appointments, AppointmentStatus} from '@shared/models/appointment.types';
+import {Doctor} from '@shared/models/doctor.types';
+import { Demobar } from '../demobar/demobar';
 
 export type AppointmentData = {
   schedule: Date;
@@ -18,7 +20,8 @@ export type AppointmentData = {
   selector: 'app-bookings',
   imports: [
     RouterLink,
-    DatePipe
+    DatePipe,
+    Demobar
   ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
@@ -34,33 +37,50 @@ export class DashboardComponent {
  async ngOnInit() {
    const now = new Date();
    if(this.bookingStateService.patientId() != null){
-     this.results = await firstValueFrom(this.appointmentService.getAppointmentsFor(this.bookingStateService.patientId()));
-     for(let appointment of this.results){
-       let doctor = await firstValueFrom(this.doctorService.getDoctor(appointment.doctorId))
+
+     const appointments = await firstValueFrom(this.appointmentService.getAppointmentsFor(this.bookingStateService.patientId())
+        .pipe(
+          tap({
+            error: (err) => console.error('Error fetching appointments:', err)}),
+         catchError(() => of([]))
+       ));
+
+     const doctor = await Promise.all(appointments.map(async (appointments) => {
+       return firstValueFrom(this.doctorService.getDoctor(appointments.doctorId)).catch(err => {console.error(err); return {firstName:null, lastName:null, practiceAddress:null, practiceSuburb:null, practiceState:null, practicePostcode:null}});
+     }))
+
+     const past_bookings = appointments
+       .map((appointment, i) => ({appointment, doctor: doctor[i]}))
+       .filter(({appointment}) => {
        const scheduledTime = new Date(appointment.scheduleTime);
-       if( scheduledTime > now && appointment.status != AppointmentStatus.Cancelled){
-         this.current_bookings.update(model => [
-           ...model,
-           {
-             schedule: appointment.scheduleTime,
-             doctor_name: doctor.firstName+" "+doctor.lastName,
-             doctor_address: doctor.practiceAddress+', '+doctor.practiceSuburb+', '+doctor.practiceState+', '+doctor.practicePostcode,
-             status: appointment.status
-           }]);
-       } else {
-         this.past_bookings.update(model => [
-           ...model,
-           {
-             schedule: appointment.scheduleTime,
-             doctor_name: doctor.firstName+" "+doctor.lastName,
-             doctor_address: doctor.practiceAddress+', '+doctor.practiceSuburb+', '+doctor.practiceState+', '+doctor.practicePostcode,
-             status: appointment.status
-           }
-         ]);
-       }
-     }
+       return  scheduledTime < now || appointment.status == AppointmentStatus.Cancelled}).map(({appointment, doctor}) => ({
+         schedule: appointment.scheduleTime,
+         doctor_name: doctor.firstName+" "+doctor.lastName,
+         doctor_address: doctor.practiceAddress+', '+doctor.practiceSuburb+', '+doctor.practiceState+', '+doctor.practicePostcode,
+         status: appointment.status
+       }));
+
+     this.past_bookings.update(model => [
+       ...model,
+       ...past_bookings,
+     ]);
+
+     const current_bookings = appointments
+       .map((appointment, i) => ({appointment, doctor: doctor[i]}))
+       .filter(({appointment}) => {
+         const scheduledTime = new Date(appointment.scheduleTime);
+         return  scheduledTime > now && appointment.status != AppointmentStatus.Cancelled}).map(({appointment, doctor}) => ({
+         schedule: appointment.scheduleTime,
+         doctor_name: doctor.firstName+" "+doctor.lastName,
+         doctor_address: doctor.practiceAddress+', '+doctor.practiceSuburb+', '+doctor.practiceState+', '+doctor.practicePostcode,
+         status: appointment.status
+       }));
+
+     this.current_bookings.update(model => [
+       ...model,
+       ...current_bookings,
+     ]);
    }
-   console.log(this.current_bookings().length);
   }
 
   protected readonly AppointmentStatus = AppointmentStatus;

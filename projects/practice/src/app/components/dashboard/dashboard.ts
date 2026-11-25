@@ -7,6 +7,7 @@ import {UserService} from '@shared/services/user.service';
 import {DatePipe} from '@angular/common';
 import {MatTooltip} from '@angular/material/tooltip';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
+import { Demobar } from '../demobar/demobar';
 
 declare var feather : any;
 
@@ -25,6 +26,7 @@ type Infos = {
     DatePipe,
     MatTooltip,
     MatProgressSpinner,
+    Demobar
   ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
@@ -41,7 +43,7 @@ export class Dashboard {
   async ngOnInit() {
     try{
       const doctor = await firstValueFrom(this.authService.getId());
-      this.appointments = await firstValueFrom(this.appointmentService.getAppointmentsFor(doctor.id));
+      this.appointments = await firstValueFrom(this.appointmentService.getAppointmentsFor(doctor.id!));
       if(this.appointments.length > 0){
         for(const appointment of this.appointments){
           try{

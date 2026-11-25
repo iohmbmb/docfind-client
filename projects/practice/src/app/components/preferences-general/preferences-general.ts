@@ -53,7 +53,7 @@ export class PreferencesGeneral implements  AfterViewInit {
 
   readonly days = Object.values(DayOfWeek)
 
-  doctor_id : string = '';
+  doctor_id : string | null = '';
   error_message = signal<string>('')
 
   public doctorProfileModel = signal<DoctorProfileForm>({
@@ -92,7 +92,7 @@ export class PreferencesGeneral implements  AfterViewInit {
       this.doctor_id = doctorId.id;
 
       const doctor = await firstValueFrom(
-        this.userService.getDoctor(doctorId.id)
+        this.userService.getDoctor(doctorId.id!)
       );
 
       this.doctorProfileModel.update(model => ({
@@ -113,7 +113,7 @@ export class PreferencesGeneral implements  AfterViewInit {
       }));
 
       const workHours = await firstValueFrom(
-        this.scheduleService.getWorkHours(this.doctor_id)
+        this.scheduleService.getWorkHours(this.doctor_id!)
       );
 
       this.doctorProfileModel.update(model => ({
@@ -123,7 +123,7 @@ export class PreferencesGeneral implements  AfterViewInit {
 
       if (doctor.status === Availability.Away) {
         const period = await firstValueFrom(
-          this.scheduleService.getAbsence(this.doctor_id)
+          this.scheduleService.getAbsence(this.doctor_id!)
         );
 
         if (period.startDate && period.endDate) {
@@ -170,8 +170,8 @@ export class PreferencesGeneral implements  AfterViewInit {
 
       try {
         await Promise.all([
-          firstValueFrom(this.userService.updateDoctor(this.doctor_id, updatedDoc)),
-          firstValueFrom(this.scheduleService.createUpdateWorkHours(this.doctor_id, workHours)),
+          firstValueFrom(this.userService.updateDoctor(this.doctor_id!, updatedDoc)),
+          firstValueFrom(this.scheduleService.createUpdateWorkHours(this.doctor_id!, workHours)),
         ])
 
         if(model.status === Availability.Away){
@@ -180,7 +180,7 @@ export class PreferencesGeneral implements  AfterViewInit {
             endDate: formatDate(endDate, 'yyyy-MM-dd', 'en-US'),
             isMock: false
           }
-          await firstValueFrom(this.scheduleService.createUpdateAbsence(this.doctor_id, absencePeriod))
+          await firstValueFrom(this.scheduleService.createUpdateAbsence(this.doctor_id!, absencePeriod))
         }
         this.snackBar.open('Changes saved', '', {duration: 2000});
       }

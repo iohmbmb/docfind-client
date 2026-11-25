@@ -1,3 +1,3 @@
 export interface Identity {
-  id: string;
+  id: string | null;
 }

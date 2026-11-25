@@ -3,12 +3,14 @@ import {AuthService} from '@shared/services/auth.service';
 import {Router, RouterLink} from '@angular/router';
 import {LoginRequest} from '@shared/models/login.types';
 import {FormsModule} from '@angular/forms';
+import { Demobar } from '../demobar/demobar';
 
 @Component({
   selector: 'app-login',
   imports: [
     FormsModule,
-    RouterLink
+    RouterLink,
+    Demobar
   ],
   templateUrl: './login.html',
   styleUrl: './login.css',

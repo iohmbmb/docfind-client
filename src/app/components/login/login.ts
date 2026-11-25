@@ -4,7 +4,9 @@ import { FormsModule } from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import {LoginRequest} from '../../models/login.types';
 import {CommonModule} from '@angular/common';
-import {firstValueFrom} from 'rxjs';
+import {catchError, firstValueFrom, identity, of, tap} from 'rxjs';
+import {Identity} from '@shared/models/identity.types';
+import { Demobar } from '../demobar/demobar';
 
 @Component({
   selector: 'login-component',
@@ -12,7 +14,8 @@ import {firstValueFrom} from 'rxjs';
   imports: [
     RouterLink,
     FormsModule,
-    CommonModule
+    CommonModule,
+    Demobar
   ],
   templateUrl: './login.html',
   styleUrl: './login.css',
@@ -37,8 +40,14 @@ export class LoginComponent {
     this.isLoading.set(true);
     this.errorMessage.set('');
     try {
-      const response = await firstValueFrom(this.authService.loginRequest(this.credentials));
-      const me = await firstValueFrom(this.authService.getId())
+      const responsePromise = firstValueFrom(this.authService.loginRequest(this.credentials)).catch(err => {console.error(err); return of(false)});
+      const mePromise = firstValueFrom(this.authService.getId()).catch(
+        err => {
+          console.error(err);
+          var id : Identity = {id:null};
+          return id
+        })
+      const [response, me] = await Promise.all([responsePromise, mePromise]);
       if(response){
         this.isLoading.set(false);
         if (this.rememberMe()) {
@@ -46,7 +55,9 @@ export class LoginComponent {
         }
         await this.router.navigateByUrl(this.returnUrl);
       }
-      localStorage.setItem('user_id', me.id);
+      if(me?.id != null){
+        localStorage.setItem('user_id', me.id);
+      }
     }
     catch (err) {
       this.isLoading.set(false);

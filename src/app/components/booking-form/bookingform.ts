@@ -7,6 +7,7 @@ import {BookingWizardService} from '@shared/services/booking-wizard-service';
 import {BookingStateService} from '@shared/services/booking-state-service';
 import {BookingSummary} from './booking-summary/booking-summary';
 import {Utils} from '@shared/services/utils';
+import { Demobar } from '../demobar/demobar';
 
 declare var feather: any
 
@@ -27,6 +28,7 @@ const STEPS_CONFIG: WizardStep[] = [
 @Component({
   selector: 'app-booking-form',
   imports: [
+    Demobar,
     ForWho,
     ForNew,
     ForWhat,

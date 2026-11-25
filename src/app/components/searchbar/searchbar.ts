@@ -17,6 +17,7 @@ import {DoctorWorkHours} from '@shared/models/doctor-work.hours';
 import {DatePipe} from '@angular/common';
 import {Utils} from '@shared/services/utils';
 import {SearchStateService} from '@shared/services/search-state-service';
+import { Demobar } from '../demobar/demobar';
 
 declare var feather: any
 
@@ -31,6 +32,7 @@ declare var feather: any
     FormField,
     FormsModule,
     MatProgressSpinner,
+    Demobar
   ],
   templateUrl: './searchbar.html',
   styleUrl: './searchbar.css',

@@ -6,10 +6,11 @@ import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {UserRole} from '../../models/user.types';
 import {firstValueFrom} from 'rxjs';
 import {UserRegisterRequest} from '@shared/models/register.types';
+import { Demobar } from '../demobar/demobar';
 
 @Component({
   selector: 'app-signup',
-  imports: [FormField, FormsModule, RouterLink],
+  imports: [FormField, FormsModule, RouterLink, Demobar],
   templateUrl: './signup.html',
   styleUrl: './signup.css',
 })
